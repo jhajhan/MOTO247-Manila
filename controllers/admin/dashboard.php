@@ -2,6 +2,12 @@
     require_once('../../config/db.php');
 
    // may validation dapat dine if naka-login si admin or not
+   if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
+     // If the user is not logged in as an admin, redirect to the login page
+     header('Location: ../../login.php');
+     exit();
+     // dapat ma reredirect si customer sa customer dashboard tas admin sa admin dashboard
+ }
    
    function getTotalSales() {
         global $conn;

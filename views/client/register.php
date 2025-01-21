@@ -23,16 +23,24 @@ include('includes/header.php'); ?>
                     <div class="card-body">
                         <form action="code.php" method="POST">
                             <div class="form-group mb-3">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" id="name" class="form-control" required>
+                                <label for="name">Username</label>
+                                <input type="text" name="username" id="username" class="form-control" required>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="phone">Phone Number</label>
-                                <input type="text" name="phone" id="phone" class="form-control" required>
+                                <label for="name">Name</label>
+                                <input type="text" name="full_name" id="full_name" class="form-control" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="phone">Contact Number</label>
+                                <input type="text" name="contact_no" id="contact_no" class="form-control" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="email">Email</label>
                                 <input type="email" name="email" id="email" class="form-control" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="name">Address</label>
+                                <input type="text" name="address" id="address" class="form-control" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="password">Password</label>

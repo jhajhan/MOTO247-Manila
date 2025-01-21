@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include('F:\xampp\htdocs\MOTO247-Manila\views\authentication.php'); // ✅ Correct path
+include('authentication.php'); // ✅ Correct path
 include('F:\xampp\htdocs\MOTO247-Manila\views\includes\header.php'); 
 
 $page_title = "Home Page";

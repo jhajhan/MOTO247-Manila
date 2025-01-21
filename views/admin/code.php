@@ -126,5 +126,5 @@ if (mysqli_num_rows($check_existing) > 0) {
 
 
     
- }
+}
 ?>

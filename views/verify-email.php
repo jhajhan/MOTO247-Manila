@@ -1,6 +1,7 @@
 <?php
 session_start();
-include('dbcon.php');
+include(__DIR__ . '/../../config/db.php');
+
 if(isset($_GET['token']))
 {
     $token = $_GET['token'];

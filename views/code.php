@@ -1,6 +1,7 @@
 <?php
 session_start();
-include('dbcon.php');
+include('F:\xampp\htdocs\MOTO247-Manila\config\db.php');
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -9,7 +10,9 @@ use PHPMailer\PHPMailer\Exception;
 function sendmail_verify($username, $email, $verify_token)
 {
 
-    require 'vendor/autoload.php';
+    require __DIR__ . '/../vendor/autoload.php';
+
+
     $mail = new PHPMailer(true);
     try {
         // // Server settings
@@ -52,7 +55,9 @@ function sendmail_verify($username, $email, $verify_token)
 }
 
 // Load Composer's autoloader
-require 'vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
+
+
 
 // Check if the form is submitted
 if (isset($_POST['register_btn'])) {
@@ -84,11 +89,11 @@ if (isset($_POST['register_btn'])) {
     // echo "Email sent successfully";
 
     // Hash the password
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-// Check if the email or username already exists in the database
-$check_email_query = "SELECT email, username FROM user WHERE email = '$email' OR username = '$username' LIMIT 1";
-$check_existing = mysqli_query($con, $check_email_query);
+        // Check if the email or username already exists in the database
+        $check_email_query = "SELECT email, username FROM user WHERE email = '$email' OR username = '$username' LIMIT 1";
+        $check_existing = mysqli_query($conn, $check_email_query);
 
 if (mysqli_num_rows($check_existing) > 0) {
     // Fetch the result to check which one exists
@@ -104,8 +109,8 @@ if (mysqli_num_rows($check_existing) > 0) {
 } else {
     // Insert user data into the database
     $query = "INSERT INTO user (username, password, full_name, contact_no, email, address, verify_token) 
-              VALUES ('$username', '$hashed_password', '$full_name', '$contact_no', '$email', '$address', '$verify_token')";
-    $query_run = mysqli_query($con, $query);
+              VALUES ('$username', '$password', '$full_name', '$contact_no', '$email', '$address', '$verify_token')";
+    $query_run = mysqli_query($conn, $query);
 
     if ($query_run) {
         sendmail_verify($full_name, $email, $verify_token);

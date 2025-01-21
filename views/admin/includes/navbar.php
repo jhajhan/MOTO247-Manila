@@ -14,7 +14,7 @@
                   <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="dashboard.php">Dashboard</a>
+                  <a class="nav-link" href="admin_dashboard.php">Dashboard</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -31,7 +31,7 @@
               <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <?php if(!isset($_SESSION['authenticated'])): ?>
                 <li class="nav-item">
-                  <a class="nav-link" href="login.php">Login</a>
+                  <a class="nav-link" href="index.php">Login</a>
                 </li>
                 <?php endif; ?>
 

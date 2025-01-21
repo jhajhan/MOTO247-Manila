@@ -8,8 +8,8 @@ if(isset($_SESSION['authenticated'])){
 }
 
 
-include('includes/header.php'); ?>
-<?php include('includes/navbar.php'); ?>
+include('F:\xampp\htdocs\MOTO247-Manila\views\includes\header.php'); ?>
+<?php include('F:\xampp\htdocs\MOTO247-Manila\views\includes\navbar.php'); ?>
 
 <div class="py-5">
     <div class="container">
@@ -54,4 +54,4 @@ include('includes/header.php'); ?>
     </div>
 </div>
 
-<?php include('includes/footer.php'); ?>
+<?php include('F:\xampp\htdocs\MOTO247-Manila\views\includes\footer.php'); ?>

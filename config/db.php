@@ -14,6 +14,9 @@ $dbname = $_ENV['DB_NAME'];
 
 global $conn;
 
+
+
+
 $conn = new mysqli($host, $username, $password, $dbname);
 
 

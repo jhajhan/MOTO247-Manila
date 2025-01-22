@@ -1,7 +1,7 @@
 <?php
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Get the requested URI
-$method - $_SERVER['REQUEST_METHOD'];
+$method = $_SERVER['REQUEST_METHOD'];
 
 // Helper function for instantiating and calling controllers
 function handleController($controllerPath, $controllerClass, $method, $params = null) {
@@ -36,8 +36,8 @@ switch ($uri) {
 
     case '/admin/product-service': 
         if ($method == 'GET') {
+            $data = json_decode(file_get_contents('php://input'), true);
             handleController('admin/product_service', 'Product_Service', 'index');
-
         } else if ($method == 'POST') {
             $data = json_decode(file_get_contents('php://input'), true);
             handleController('admin/product_service', 'Product_Service', 'addProduct', $data);
@@ -57,7 +57,20 @@ switch ($uri) {
         break;
 
     case '/admin/sales':
-        handleController('admin/sales', 'Sales', 'index');
+        
+        if ($method == 'GET') {
+            handleController('admin/sales', 'Sales', 'index');
+        } else if ($method == 'POST') {
+            $data = json_decode(file_get_contents('php://input'), true);
+            handleController('admin/sales', 'Sales', 'addPhysicalSale', $data);
+        } else if ($method == 'PUT') {
+            $data = json_decode(file_get_contents('php://input'), true);
+            handleController('admin/sales', 'Sales', 'updateOrderStatus', $data);
+        } else if ($method == 'DELETE') {
+            $data = json_decode(file_get_contents('php://input'), true);
+            handleController('admin/sales', 'Sales', 'deleteOrder', $data);
+        }
+
         break;
 
     case '/admin/settings':

@@ -2,6 +2,23 @@ $(document).ready(function() {
 
     fetchProducts();
 
+    $('#apply-filters').on('click', function() {
+        const type = $('#filter-type').val();
+        const stock = $('#filter-stock').val();
+        const min_price = $('#filter-min-price').val();
+        const max_price = $('#filter-max-price').val();
+
+        filters = {
+            type: type,
+            stock: stock,
+            min_price: min_price,
+            max_price: max_price
+
+        }
+
+        fetchProducts(filters)
+    })
+
     $('#add-product-form').on('submit', function(event) {
         event.preventDefault();
 
@@ -28,10 +45,11 @@ $(document).ready(function() {
     })
 
 
-    function fetchProducts() {
+    function fetchProducts(filters = {}) {
         $.ajax({
             url: '/admin/product_service',
             method: 'GET',
+            data: filters,
             success: function(data) {
                 const tableBody = $('#products-services tbody');
                 tableBody.empty(); // clear existing data

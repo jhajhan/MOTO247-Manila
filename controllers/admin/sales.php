@@ -5,17 +5,108 @@
 
         function index() {
 
+            $payment_method = isset($_GET['payment_method']) && ($_GET['payment_method']) != 'All' ? $_GET['payment_method'] : '';
+            $payment_status = isset($_GET['payment_status']) && ($_GET['payment_status']) != 'All' ? $_GET['payment_status'] : '';
+            $status = isset($_GET['status']) && ($_GET['status']) != 'All' ? $_GET['status'] : '';
+
+
+            $physical_sales = $this -> getPhysicalSales($payment_method, $payment_status, $status);
+
+            $response = [
+                'physical_sales' => $physical_sales
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
         }
         
-        function getOnlineOrders() {
+        function getPhysicalSales ($payment_method, $payment_status, $status) {
             global $conn;
-            $query = "SELECT * FROM orders WHERE order_type = 'online'";
-            $result = mysqli_query($conn, $query);
-            $online_orders = [];
-            while ($row = mysqli_fetch_assoc($result)) {
-                $online_orders[] = $row;
+            $query = "SELECT o.order_id, c.name AS customer_name, o.date_ordered AS date, o.payment_method, o.payment_status, o.status, o.total_amount, p.name AS product_name, oi.quantity AS quantity  -- Quantity from the order_items table
+                    FROM orders o 
+                    JOIN customers c ON o.customer_id = c.customer_id
+                    JOIN order_items oi ON oi.order_id = o.order_id
+                    JOIN products p ON p.product_id = oi.product_id";
+
+                    if ($payment_method != '') {
+                        $query .= " WHERE o.payment_method = ?";
+                    }
+
+                    if ($payment_status != '') {
+                        if ($payment_method != '') {
+                            $query .= " AND o.payment_status = ?";
+                        } else {
+                            $query .= " WHERE o.payment_status = ?";
+                        }
+                    }
+
+                    if ($status != '') {
+                        if ($payment_method != '' || $payment_status != '') {
+                            $query .= " AND o.status = ?";
+                        } else {
+                            $query .= " WHERE o.status = ?";
+                        }
+                    }
+
+                    $params = [];
+                    $types ='';
+
+                    if ($payment_method != '') {
+                        $params[] = $payment_method;
+                        $types .= 's';
+                    }
+
+                    if ($payment_status != '') {
+                        $params[] = $payment_status;
+                        $types .= 's';
+                    }
+
+                    if ($status != '') {
+                        $params[] = $status;
+                        $types .= 's';
+                    }
+
+                   
+            if ($payment_method != '' || $payment_status != '' || $status != '') {
+                        $query .= "WHERE o.order_type = 'physical'
+                        ORDER BY o.date_ordered, oi.order_item_id";
+                    } 
+
+                    $stmt = $conn->prepare($query);
+                    
+                    if ($types != '') {
+                        $stmt->bind_param($types, ...$params);
+                    }
+
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    $physical_sales = [];
+
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $physical_sales[] = $row;
+                    }
+                    return $physical_sales;
             }
-            return $online_orders;
+
+            
+        function getOnlineSales () { // apply filter din dine
+            global $conn;
+            $query = "SELECT o.order_id, c.name AS customer_name, o.date_ordered AS date, o.payment_method, o.payment_status, o.status, o.total_amount, p.name AS product_name, oi.quantity AS quantity  -- Quantity from the order_items table
+                    FROM orders o 
+                    JOIN customers c ON o.customer_id = c.customer_id
+                    JOIN order_items oi ON oi.order_id = o.order_id
+                    JOIN products p ON p.product_id = oi.product_id
+                    WHERE o.order_type = 'online'
+                    ORDER BY o.date_ordered, oi.order_item_id;";
+                    
+                    $result = mysqli_query($conn, $query);
+                    $online_sales = [];
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $online_sales[] = $row;
+                    }
+                    return $online_sales;
         }
     
         function getOnlineOrdersByStatus () {
@@ -33,44 +124,56 @@
             return $online_orders_status;
         }
     
-        function updateOrderStatus () {
+        function editOrder($data) {
             global $conn;
-            $status = '';
-            $query = 'UPDATE orders SET status = ? WHERE id = ?';
+            $order_id = $data['order_id'];
+            $payment_method = $data['payment_method'];
+            $payment_status = $data['payment_status'];
+            $status = $data['status'];
+
+            $query = "UPDATE orders SET payment_method = ?, payment_status = ?, status = ? WHERE order_id = ?";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param('si', $status, $id);
+            $stmt->bind_param('si', $status, $order_id);
             $stmt->execute();
         }
     
-        function getPaymentMethod () {
+        function addSale ($data) {
             global $conn;
-            $query = "SELECT payment_method, COUNT(*) as NumberOfOrders FROM orders WHERE order_type = 'online' GROUP BY payment_method";
-            $result = mysqli_query($conn, $query);
-            $payment_method = [];
-            while ($row = mysqli_fetch_assoc($result)) {
-                $payment_method[] = $row;
-            }
-            return $payment_method;
-        }
-    
-        function addPhysicalSale () {
-            global $conn;
-            $query = "INSERT INTO orders (order_type, status, payment_method, total_amount, date_ordered) VALUES (?, ?, ?, ?, ?)";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param('ssds', $order_type, $status, $payment_method, $total_amount, $date_ordered);
+
+            $customer_name = $data['customer_name'];
+            $products = $data['products'];
+            $date = $data['date'];
+            $payment_method = $data['payment_method'];
+            $payment_status = $data['payment_status'];
+            $status = $data['status'];
+            $total_amount = $data['total_amount'];
+
+            $customer_query = "INSERT INTO customers (name) VALUES (?)";
+            $stmt = $conn->prepare($customer_query);
+            $stmt->bind_param('s', $customer_name);
             $stmt->execute();
+            $customer_id = $stmt->insert_id;
+
+            $order_query = "INSERT INTO orders (customer_id, date, payment_method, payment_status, status, total_amount) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($order_query);
+            $stmt->bind_param('isssi', $customer_id, $date, $payment_method, $payment_status, $status, $total_amount);
+            $stmt->execute();
+
+            $order_id = $stmt->insert_id;
+
+            foreach ($products as $product) {
+                $product_id = $product['product_id'];
+                $quantity = $product['quantity'];
+                $price = $product['price'];
+
+                $order_item_query = "INSERT INTO order_item (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
+                $stmt = $conn->prepare($order_item_query);
+                $stmt->bind_param('iiid', $order_id, $product_id, $quantity, $price);
+                $stmt->execute();
+            }
+            
         }
     
-        function getPhysicalSales() {
-            global $conn;
-            $query = "SELECT * FROM orders WHERE order_type = 'physical'";
-            $result = mysqli_query($conn, $query);
-            $physical_sales = [];
-            while ($row = mysqli_fetch_assoc($result)) {
-                $physical_sales[] = $row;
-            }
-            return $physical_sales;
-        }
     
         function getTopProducts () {
             global $conn;

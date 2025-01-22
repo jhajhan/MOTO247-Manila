@@ -18,13 +18,22 @@ $dbname = $_ENV['DB_NAME'];
 // $dbname = 'moto247_manila';
 
 
-$conn = new mysqli($host, $username, $password, $dbname);
+
+$conn = new mysqli($host, $username, $password, $dbname, 4000);
+$conn->ssl_set(NULL, NULL, '/isrgrootx1.pem', NULL, NULL);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
+    
 } else {
     echo "Connected successfully";
 }
+
+
+// $query = 'SELECT * FROM product';
+// $result = mysqli_query($conn, $query);
+// $ex = mysqli_fetch_assoc($result);
+// echo $ex['name'];
 
 
 // ?>

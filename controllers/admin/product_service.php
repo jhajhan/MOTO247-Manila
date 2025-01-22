@@ -1,25 +1,105 @@
 <?php
     require_once(__DIR__ . '/../../config/db.php');
-
+    
     class Product_Service {
 
 
 
         function index() {
-            
+            global $conn;
+
+            $type = isset($_GET['type']) && ($_GET['type']) != 'All' ? $_GET['type'] : '';
+            $stock = isset($_GET['stock']) && ($_GET['stock']) != 'All' ? $_GET['stock'] : '';
+            $min_price = isset($_GET['min_price']) ? $_GET['min_price'] : '';
+            $max_price = isset($_GET['max_price']) ? $_GET['max_price'] : '';
+
+
+
+            $products_services = $this -> getProductsAndServices($type, $stock, $min_price, $max_price);
+
+            $response = [
+                'products_services' => $products_services
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($response);    
         }
 
 
-        function getProductsAndServices () {
+        function getProductsAndServices ($type, $stock, $min_price, $max_price) {
             global $conn;
+
+            if (!$conn) {
+                throw new Exception("Database connection is not initialized.");
+            }
+
             $query = 'SELECT * FROM product';
+
+
+
+            if ($type != '') {
+                $query .= " WHERE type = ?";
+            }
+
+            if ($stock != '') {
+                if ($type != '') {
+                    $query .= " AND stock = ?";
+                } else {
+                    $query .= " WHERE stock = ?";
+                }
+            }
+
+            if ($min_price != '') {
+                if ($type != '' || $stock != '') {
+                    $query .= " AND Price >= ?";
+                } else {
+                    $query .= " WHERE price >= ?";
+                }
+            }
+
+            if ($max_price != '') {
+                if ($type != '' || $stock != '' || $min_price != '') {
+                    $query .= " AND Price <= ?";
+                } else {
+                    $query .= " WHERE price <= ?";
+                }
+            }
+
+            $params = [];
+            $types = '';
+
+            if ($type != '') {
+                $params[] = $type;
+                $types .= 's';
+            }
+
+            if ($stock != '') {
+                $params[] = $stock;
+                $types .= 'd';
+            }
+
+            if ($min_price != '') {
+                $params[] = $min_price;
+                $types .= 'd';
+            }
+
+            if ($max_price != '') {
+                $params[] = $max_price;
+                $types .= 'd';
+            }
+            
             $stmt = $conn->prepare($query);
+            
+            if ($types != '') {
+                $stmt->bind_param($types, ...$params);
+            }
+            
             $stmt->execute();
             $result = $stmt->get_result();
             $products = [];
 
             while ($row = $result->fetch_assoc()) {
-                $products = $row;
+                $products[] = $row;
             }
 
             return $products;
@@ -55,15 +135,17 @@
         }
     
         // Add a new product/service
-        public function addProduct() {
+        public function addProduct($data) {
             global $conn;
 
             // Retrieve data from the AJAX request
-            $name = $_POST['name'];
-            $price = $_POST['price'];
-            $type = $_POST['type'];
+            $name = $data['name'];
+            $price = $data['price'];
+            $type = $data['type'];
+            $stock = $data['stock'];
+            $description = $data['description'];
 
-            $query = "INSERT INTO products (name, price, type) VALUES ('$name', '$price', '$type')";
+            $query = "INSERT INTO products (name, price, type, stock, description) VALUES ('$name', '$price', '$type', '$stock', '$description')";
             $result = mysqli_query($conn, $query);
 
             if ($result) {
@@ -74,16 +156,18 @@
         }
 
         // Edit an existing product/service
-        public function editProduct() {
+        public function editProduct($data) {
             global $conn;
 
             // Retrieve data from the AJAX request
-            $id = $_POST['id'];
-            $name = $_POST['name'];
-            $price = $_POST['price'];
-            $type = $_POST['type'];
+            $id = $data['id'];
+            $name = $data['name'];
+            $price = $data['price'];
+            $type = $data['type'];
+            $stock = $data['stock'];
+            $description = $data['description'];
 
-            $query = "UPDATE products SET name='$name', price='$price', type='$type' WHERE id='$id'";
+            $query = "UPDATE products SET name='$name', price='$price', type='$type', stock = '$stock', description='$description' WHERE id='$id'";
             $result = mysqli_query($conn, $query);
 
             if ($result) {
@@ -94,11 +178,11 @@
         }
 
         // Delete a product/service
-        public function deleteProduct() {
+        public function deleteProduct($data) {
             global $conn;
 
             // Retrieve product ID from the AJAX request
-            $id = $_POST['id'];
+            $id = $data['id'];
 
             $query = "DELETE FROM products WHERE id='$id'";
             $result = mysqli_query($conn, $query);

@@ -21,12 +21,40 @@ switch ($uri) {
         require_once __DIR__ . '/../views/client/home.php';
         break;
 
-    case '/register':
-        require_once __DIR__ . '/../views/client/register.php';
-        break;
 
     case '/products':
         handleController('admin/product_service', 'Product_Service', 'getProducts');
+        break;
+
+
+    // Authentication Routes
+
+    case '/register':
+        if ($method == 'POST') {
+            $data = json_decode(file_get_contents('php://input'), true);
+            handleController('authentication/authentication', 'Authentication', 'register', $data);
+        }
+        break;
+
+    case '/login':
+        if ($method == 'POST') {
+            $data = json_decode(file_get_contents('php://input'), true);
+            handleController('authentication/authentication', 'Authentication', 'login', $data);
+        }
+        break;
+
+    case '/logout':
+        handleController('authentication/authentication', 'Authentication', 'logout');
+        break;
+
+    case '/verify-email':
+        if ($method == 'GET') {
+            if (isset($_GET['token'])) {
+                $token = $_GET['token'];
+                handleController('authentication/authentication', 'Authentication', 'verifyEmail', $token);
+            }
+        }
+
         break;
 
     // Admin Routes

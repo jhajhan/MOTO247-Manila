@@ -8,6 +8,11 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
 
+    use Dotenv\Dotenv;
+
+    $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+    $dotenv->load();
+
 
 
 
@@ -50,8 +55,8 @@
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'rjhoncarlos30@gmail.com';
-                $mail->Password = 'wedr geug bmcz qrie';
+                $mail->Username = $_ENV['EMAIL_USER'];
+                $mail->Password = $_ENV['EMAIL_PASS'];
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
 

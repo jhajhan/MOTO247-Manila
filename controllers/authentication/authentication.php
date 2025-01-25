@@ -23,14 +23,30 @@
             $stmt->bind_param('sssssss', $email, $username, $password, $full_name, $role, $created_at, $token);
             
             if ($stmt->execute()) {
-                
+                $this->sendVerificationEmail($email, $token);
+                echo json_encode(['message' => 'User registered successfully']);
+            } else {
+                echo json_encode(['message' => 'Failed to register user']);
             }
 
 
             
         }
 
-        function sendVerificationEmail () {
+        function sendVerificationEmail ($email, $token) {
+            // using smtp
+            
+
+
+
+        }
+
+        function login ($data) {
+
+        }
+
+        function verifyEmail ($token) {
+            
 
         }
     }

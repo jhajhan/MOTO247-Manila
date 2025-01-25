@@ -18,7 +18,7 @@
 
     class Authentication {
         function register($data) {
-            global $conn;
+            global $conn; // db connection
 
 
             $email = htmlspecialchars($data['email']);

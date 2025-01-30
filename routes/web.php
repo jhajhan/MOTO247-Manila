@@ -81,9 +81,16 @@ switch ($uri) {
 
 
     case '/admin/reports-analytics':
+
+        $data = json_decode(file_get_contents('php://input'), true);
+        if ($data) {
+            handleController('admin/reports_analytics', 'Reports_Analytics', 'getAnalytics', $data);
+            break;
+        }
         handleController('admin/reports_analytics', 'Reports_Analytics', 'index');
         break;
 
+        
     case '/admin/sales':
         
         if ($method == 'GET') {

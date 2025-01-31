@@ -44,15 +44,18 @@ $(document).ready(function () {
                 "prod_qty": qty,
                 "scope": "add"
             },
-            datatype: "datatype",
             success: function(response){
                 if(response == 201)
                 {
-                   
+                   alertify.success('Item added to cart');
+                }
+                else if(response == 'existing')
+                {
+                    alertify.success("Product already in cart");
                 }
                 else if(response == 401)
                 {
-                    alert("Please login to add to cart");
+                    alertify.success("Please login to add to cart");
                 }
                
             }

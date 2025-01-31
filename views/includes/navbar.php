@@ -23,8 +23,8 @@
                     Shop
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="products.php">Products</a></li>
-                    <li><a class="dropdown-item" href="services.php">Services</a></li>
+                    <li><a class="dropdown-item" href="/MOTO247-Manila/views/products.php">Products</a></li>
+                    <li><a class="dropdown-item" href="/MOTO247-Manila/views/services.php">Services</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#">Cart</a></li>
                   </ul>
@@ -33,10 +33,10 @@
               <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <?php if(!isset($_SESSION['authenticated'])): ?>
                   <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
+                    <a class="nav-link" href="/MOTO247-Manila/views/login.php">Login</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="register.php">Registration</a>
+                    <a class="nav-link" href="/MOTO247-Manila/views/register.php">Registration</a>
                   </li>
                 <?php endif; ?>
 

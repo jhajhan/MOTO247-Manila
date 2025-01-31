@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('F:\xampp\htdocs\MOTO247-Manila\views\includes\header.php');
 include('F:\xampp\htdocs\MOTO247-Manila\includes\user_function.php');
 include('F:\xampp\htdocs\MOTO247-Manila\views\includes\navbar.php');
@@ -39,8 +40,7 @@ if(isset($_GET['id'])) { // Changed from 'product' to 'id'
                 
                 <div class="row mt-3">
                     <div class="col-md-6">
-                     <button class="btn btn-primary px-4 addToCart-btn" value="<?= $product['id'];?>"> <i class="fa fa-shopping-cart me-2"></i>Add to Cart
-                        </button>
+                     <button class="btn btn-primary px-4 addToCart-btn" value='<?= $product['id'];?>'>  Add to Cart </button>
                     </div>
                 </div>
 

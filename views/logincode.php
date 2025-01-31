@@ -24,6 +24,7 @@ if (isset($_POST['login_now_btn'])) {
                 // Set session variables for the authenticated user
                 $_SESSION['authenticated'] = true;
                 $_SESSION['auth_user'] = [
+                    'user_id' => $row['user_id'],
                     'username' => $row['full_name'],
                     'contact' => $row['contact_no'],
                     'email' => $row['email']

@@ -8,7 +8,7 @@
         private $type;
         private $stock;
         private $image;
-
+        private $status;
 
 
     }

@@ -12,7 +12,7 @@ if(isset($_GET['id'])) { // Changed from 'product' to 'id'
     if($product) {
         // Display product details
         ?>
-      <div class="container product_qty">
+      <div class="container service_qty">
             <div class ="row">
                  <div class="col-md-5">
            
@@ -29,9 +29,6 @@ if(isset($_GET['id'])) { // Changed from 'product' to 'id'
         
                 <p>Price: <span class="text-success fw-bold"><?= $product['price'] ?></span></p>
                    
-                </div>
-                <div class="col-md-6">
-                    <p>Stock: <?= $product['stock'] ?></p>
                 </div>
                      <div class="input-group mb-3" style="width: 130px;">
                         <button class="input-group-text decrement-btn">-</button>

@@ -3,8 +3,8 @@
     Class Cart {
         private $id;
         private $user_id;
-        private $prod_id;
-        private $prod_qty;
+        private $product_id;
+        private $product_qty;
         private $created_at;
 
         

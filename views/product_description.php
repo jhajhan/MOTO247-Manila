@@ -29,9 +29,9 @@ if(isset($_GET['id'])) { // Changed from 'product' to 'id'
                 <p>Price: <span class="text-success fw-bold"><?= $product['price'] ?></span></p>
                    
                 </div>
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <p>Stock: <?= $product['stock'] ?></p>
-                </div>
+                </div> -->
                      <div class="input-group mb-3" style="width: 130px;">
                         <button class="input-group-text decrement-btn">-</button>
                         <input type="text" class="form-control text-center input-qty bg-white" disabled  value="1">
@@ -40,7 +40,7 @@ if(isset($_GET['id'])) { // Changed from 'product' to 'id'
                 
                 <div class="row mt-3">
                     <div class="col-md-6">
-                     <button class="btn btn-primary px-4 addToCart-btn" value='<?= $product['id'];?>'>  Add to Cart </button>
+                    <button class="btn btn-primary px-4 addToCart-btn" data-id="<?= $product['prod_id']; ?>">Add to Cart</button>
                     </div>
                 </div>
 

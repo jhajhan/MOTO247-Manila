@@ -11,10 +11,11 @@
    
    class Dashboard {
 
-     function index() {
+     function index($data) {
           require_once __DIR__ . '/reports_analytics.php';
           $totalSales = $this -> getTotalSales();
-          $gross_profit = $this -> getGrossProfit();
+          $daily_proft = $this -> getDailyProfit($data);
+          $monthly_profit = $tis -> getMonthlyProfit($data);
           $total_orders = $this -> getTotalOrders();
           $total_products_services = $this -> getTotalProductsServices();
           $sales_trend = $this -> salesTrend();
@@ -23,11 +24,12 @@
           // Return the data as a JSON response
           $response = [
                'totalSales' => $totalSales,
-               'grossProfit' => $grossProfit,
-               'totalOrders' => $totalOrders,
-               'totalProductsServices' => $totalProductsServices,
-               'salesTrend' => $salesTrend,
-               'recentOrders' => $recentOrders
+               'dailyProfit' => $daily_proft,
+               'monthlyProfit' => $monthly_profit,
+               'totalOrders' => $total_orders,
+               'totalProductsServices' => $total_products_services,
+               'salesTrend' => $sales_trend,
+               'recentOrders' => $recent_orders
                ];
 
           // Send JSON response
@@ -43,20 +45,44 @@
           return $total['total_sales'];      
      }
 
-     function getTotalCOGS () {
+     function getDailyProfit($data) {
+          $date = $data['date'] ?? date('Y-m-d');
+
           global $conn;
-          $query = "SELECT SUM(oi.quantity - p.cost_price) as total_cogs
-                    FROM order_item oi
-                    JOIN product p ON (p.product_id = oi.product_id)";
-          $result = mysqli_query($conn, $query);
-          $total = mysqli_fetch_assoc($result);
-          return $total['total_cogs'];
+          $query = 'SELECT SUM(o.total_amount) as total_sales
+                    SUM(oi.quantity * p.price) as total_cogs
+                    FROM orders o
+                    JOIN order_item oi ON o.order_id = oi.order_id
+                    JOIN product p ON oi.product_id = p.product_id
+                    WHERE date_ordered = ?';
+
+          $stmt = mysqli_prepare($conn,$query);
+          $stmt->bind_param('s', $date);
+          $stmt->execute();
+          $result = $stmt->get_result();
+          $data = mysqli_fetch_assoc($result);
+
+          return (float)$data['total_sales'] - (float)$data['total_cogs'];
      }
 
-     function getGrossProfit () {
-          $total_sales = $this -> getTotalSales();
-          $total_cogs = $this -> getTotalCOGS();
-          return $total_sales - $total_cogs;
+     function getMonthlyProfit($data) {
+          $month = $data['month'] ?? date('Y-m');
+
+          global $conn;
+          $query = 'SELECT SUM(o.total_amount) as total_sales
+                    SUM(oi.quantity * p.price) as total_cogs
+                    FROM orders o
+                    JOIN order_item oi ON o.order_id = oi.order_id
+                    JOIN product p ON oi.product_id = p.product_id
+                    WHERE MONTH(date_ordered) = ?';
+
+          $stmt = mysqli_prepare($conn,$query);
+          $stmt->bind_param('s', $month);
+          $stmt->execute();
+          $result = $stmt->get_result();
+          $data = mysqli_fetch_assoc($result);
+
+          return (float)$data['total_sales'] - (float)$data['total_cogs'];
      }
   
      function getTotalOrders() {

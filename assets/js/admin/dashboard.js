@@ -8,10 +8,12 @@ function fetchDashboardData() {
         url: '/admin/dashboard',
         method: GET,
         success: function(data) {
-            $('#total-sales').text(data.totalSales);
-            $('#gross-profit').text(data.totalCustomers);
-            $('#total-products').text(data.totalProducts);
-            $('#total-orders').text(data.totalOrders);
+            $('#total-sales').html(data.totalSales);
+            $('#total-profit-monthly').html(data.monthlyProfit);
+            $('#total-profit-daily').html(data.dailyProfit);
+            $('#total-products-services').html(data.totalProductsServices);
+            $('#total-orders').html(data.totalOrders);
+
             displaySalesTrend(data.salesTrend);
             displayRecentOrders(data.recentOrders);
         },
@@ -22,7 +24,7 @@ function fetchDashboardData() {
 }
 
 function displaySalesTrend(data) {
-    const ctx = document.getElementById('sales-trend').getContext('2d');
+    const ctx = document.getElementById('salesTrendChart').getContext('2d');
     const chart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -36,7 +38,7 @@ function displaySalesTrend(data) {
 }
 
 function displayRecentOrders() {
-    const tableBody = $('#recent-orders tbody');
+    const tableBody = $('.tableBody tbody');
     tableBody.empty();
 
     data.forEach(order => {

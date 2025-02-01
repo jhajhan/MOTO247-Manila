@@ -8,8 +8,11 @@
         function index() {
             global $conn;
 
-            $type = isset($_GET['type']) && ($_GET['type']) != 'All' ? $_GET['type'] : '';
-            $stock = isset($_GET['stock']) && ($_GET['stock']) != 'All' ? $_GET['stock'] : '';
+            $type = isset($_GET['type']) && ($_GET['type']) != 'all' ? strtolower($_GET['type']) : '';
+
+            // echo $type;
+
+            $stock = isset($_GET['stock']) && ($_GET['stock']) != 'all' ? $_GET['stock'] : '';
             $min_price = isset($_GET['min_price']) ? $_GET['min_price'] : '';
             $max_price = isset($_GET['max_price']) ? $_GET['max_price'] : '';
 
@@ -43,9 +46,18 @@
 
             if ($stock != '') {
                 if ($type != '') {
-                    $query .= " AND stock = ?";
+                    if ($stock == 'inStock'){
+                        $query .= " AND stock > ?";
+                    } else {
+                         $query .= " AND stock = ?";
+                    }
+
                 } else {
-                    $query .= " WHERE stock = ?";
+                    if ($stock == 'inStock') {
+                        $query .= " WHERE stock > ?";
+                    } else {
+                        $query .= " WHERE stock = ?";
+                    }
                 }
             }
 
@@ -74,7 +86,7 @@
             }
 
             if ($stock != '') {
-                $params[] = $stock;
+                $params[] = '0';
                 $types .= 'd';
             }
 
@@ -87,8 +99,11 @@
                 $params[] = $max_price;
                 $types .= 'd';
             }
+
+            // echo $query;
             
             $stmt = $conn->prepare($query);
+
             
             if ($types != '') {
                 $stmt->bind_param($types, ...$params);
@@ -141,12 +156,17 @@
             // Retrieve data from the AJAX request
             $name = $data['name'];
             $price = $data['price'];
+            $unit_price = $data['unit_price'];
             $type = $data['type'];
             $stock = $data['stock'];
             $description = $data['description'];
+            $img = $data['img'];
 
-            $query = "INSERT INTO products (name, price, type, stock, description) VALUES ('$name', '$price', '$type', '$stock', '$description')";
-            $result = mysqli_query($conn, $query);
+            $query = "INSERT INTO product (name, price, unit_price, type, stock, description, image) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $query);
+            $stmt->bind_param('sddsdss', $name, $price, $unit_price, $type, $stock, $description, $img);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
             if ($result) {
                 echo json_encode(['success' => true, 'message' => 'Product added successfully']);
@@ -167,7 +187,7 @@
             $stock = $data['stock'];
             $description = $data['description'];
 
-            $query = "UPDATE products SET name='$name', price='$price', type='$type', stock = '$stock', description='$description' WHERE id='$id'";
+            $query = "UPDATE product SET name='$name', price='$price', type='$type', stock = '$stock', description='$description' WHERE prod_id='$id'";
             $result = mysqli_query($conn, $query);
 
             if ($result) {
@@ -184,7 +204,7 @@
             // Retrieve product ID from the AJAX request
             $id = $data['id'];
 
-            $query = "DELETE FROM products WHERE id='$id'";
+            $query = "DELETE FROM product WHERE prod_id='$id'";
             $result = mysqli_query($conn, $query);
 
             if ($result) {

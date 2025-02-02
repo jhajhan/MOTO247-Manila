@@ -25,10 +25,15 @@
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/MOTO247-Manila/views/products.php">Products</a></li>
                     <li><a class="dropdown-item" href="/MOTO247-Manila/views/services.php">Services</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Cart</a></li>
+                    <!-- <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Cart</a></li> -->
                   </ul>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/MOTO247-Manila/views/cart.php">Cart</a>
+                </li>
+
               </ul>
               <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <?php if(!isset($_SESSION['authenticated'])): ?>

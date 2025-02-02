@@ -22,7 +22,7 @@ function getByIDProduct($id) {
     return $query_run = mysqli_query($conn, $query);
 }
 
-
+// Service Functions
 
 function getAllActiveService() {
     global $conn;
@@ -41,6 +41,43 @@ function getByIDService($id) {
     $query = "SELECT * FROM Product WHERE prod_id = $id";  // Hardcoded 'products' table name
     return $query_run = mysqli_query($conn, $query);
 }
+
+//Cart Functions
+
+function getCartItems() {
+    global $conn;
+
+    // Ensure the user is authenticated before proceeding
+    // if (!isset($_SESSION['auth_user']['user_id'])) {
+    //     $_SESSION['message'] = "You need to log in first to access the cart.";        
+    //     header("Location: login.php"); // Redirect to login page
+    //     exit(); // Stop further execution
+    // }
+
+    $user_id = $_SESSION['auth_user']['user_id']; // Get the logged-in user's ID
+
+    // SQL query to retrieve cart items along with product details
+    $query = "SELECT c.id AS cid, c.prod_id, c.prod_qty, p.prod_id AS pid, p.name, p.image, p.price 
+              FROM cart c, product p 
+              WHERE c.prod_id = p.prod_id AND c.user_id = '$user_id'
+              ORDER BY c.id DESC";
+
+    return $query_run = mysqli_query($conn, $query);
+    // Prepare the SQL statement to prevent SQL injection
+    // $stmt = mysqli_prepare($conn, $query);
+
+    // // Bind the user_id parameter to the query (expects an integer)
+    // mysqli_stmt_bind_param($stmt, "i", $user_id);
+
+    // // Execute the query
+    // mysqli_stmt_execute($stmt);
+
+    // Return the result set from the executed query
+//     return mysqli_stmt_get_result($stmt);
+}
+
+
+
 
 function redirect($url, $message) {
     $_SESSION['message'] = $message;

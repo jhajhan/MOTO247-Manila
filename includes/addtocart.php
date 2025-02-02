@@ -31,10 +31,40 @@ if(isset($_SESSION['authenticated'])) {
                     }
                 }
                 break;
-
+                case "update":
+                    if (isset($_POST['prod_id']) && isset($_POST['prod_qty'])) {
+                        $prod_id = $_POST['prod_id'];
+                        $prod_qty = $_POST['prod_qty'];
+                        $user_id = $_SESSION['auth_user']['user_id'];
+                
+                        // Debugging: Check received data
+                        error_log("Update Request - Product ID: $prod_id, Quantity: $prod_qty, User ID: $user_id");
+                
+                        // Check if the item is already in the cart
+                        $check_existing_cart = "SELECT * FROM cart WHERE user_id = '$user_id' AND prod_id = '$prod_id'";
+                        $check_existing_cart_run = mysqli_query($conn, $check_existing_cart);
+                
+                        if (mysqli_num_rows($check_existing_cart_run) > 0) {
+                            $update_query = "UPDATE cart SET prod_qty = '$prod_qty' WHERE prod_id = '$prod_id' AND user_id = '$user_id'";
+                            $update_query_run = mysqli_query($conn, $update_query);
+                
+                            // if ($update_query_run) {
+                            //     // echo 200; // Success
+                            // } else {
+                            //     echo "SQL Error: " . mysqli_error($conn); // Debugging SQL Errors
+                            // }
+                        } else {
+                            echo "Item not found in cart"; // Fix: Handle case where item is not found
+                        }
+                    } else {
+                        echo "Missing prod_id or prod_qty"; // Handle missing data
+                    }
+                    break;
+                
             default: 
-                echo 500; // Invalid scope
-        }   
+            
+                break;
+        }
     } else {
         echo "Scope not set"; // Fix: Return error if 'scope' is missing
     }

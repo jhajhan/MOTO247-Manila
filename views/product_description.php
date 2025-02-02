@@ -32,7 +32,7 @@ if(isset($_GET['id'])) { // Changed from 'product' to 'id'
                 <!-- <div class="col-md-6">
                     <p>Stock: <?= $product['stock'] ?></p>
                 </div> -->
-                     <div class="input-group mb-3" style="width: 130px;">
+                    <div class="input-group mb-3" style="width: 130px;">
                         <button class="input-group-text decrement-btn">-</button>
                         <input type="text" class="form-control text-center input-qty bg-white" disabled  value="1">
                          <button class="input-group-text increment-btn">+</button>

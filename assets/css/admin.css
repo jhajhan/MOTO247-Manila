@@ -578,34 +578,98 @@ canvas {
 }
 
 /*------------------------------------------------------------------ dashboard responsiveness-----------------------------------------------*/
+/*goods*/
+@media screen and (min-width: 951px) and (max-width: 1279px) {
+    .topbar {
+        left: 0;
+        width: 100%;
+    }
 
-@media screen and (max-width: 1200px) {
+    .main {
+        width: 100%;
+        left: 0;
+    }
+
+    .toggle {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+    }
+    .search {
+        width: 50%; 
+        margin: 0;
+    }
     .cardBox {
-        grid-template-columns: repeat(3, 1fr); 
+        grid-template-columns: repeat(4, 1fr); 
+    }
+    .details {
+        flex-direction: column;
+    }
+
+    .chart {
+        width: 100%; 
+    }
+
+    .charts {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        gap: 20px; 
     }
 }
 
-@media screen and (max-width: 992px) {
-    .main {
-        width: calc(100% - 70px);
-        left: 70px;
-    }
-
+/*GOODS*/
+@media screen and (min-width: 769px) and (max-width: 950px) {
     .topbar {
-        left: 70px;
-        width: calc(100% - 70px);
+        left: 0;
+        width: 100%;
     }
 
+    .main {
+        width: 100%;
+        left: 0;
+    }
+
+    .toggle {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+    }
+
+    .search {
+        width: 100%; 
+        margin: 0;
+    }
     .cardBox {
-        grid-template-columns: repeat(2, 1fr); 
+        grid-template-columns: repeat(3, 1fr); 
     }
 
     .search {
         width: 300px; 
     }
+
+    .details {
+        flex-direction: column;
+    }
+
+    .chart {
+        width: 100%; 
+    }
+
+    .charts {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        gap: 20px; 
+    }
+
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 481px) and (max-width: 768px) {
     .topbar {
         left: 0;
         width: 100%;
@@ -627,8 +691,18 @@ canvas {
         margin: 0;
     }
 
+    .generate-report-dashboard {
+        text-align: center;
+        margin-right: 0;
+    }
+
+    .generate-btn-dashboard {
+        font-size: 15px;
+        padding: 8px 10px;
+    }
+
     .cardBox {
-        grid-template-columns: 1fr; 
+        grid-template-columns: repeat(1, 1fr); 
     }
 
     .details {
@@ -638,9 +712,22 @@ canvas {
     .chart {
         width: 100%; 
     }
+
+    .charts {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        gap: 20px; 
+    }
+
+    .cardHeader {
+        font-size: 15px;
+    }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 480px) {
     .user img {
         width: 30px;
         height: 30px;
@@ -664,19 +751,23 @@ canvas {
         padding: 15px;
     }
 
-    .details .tableContainer {
-        max-height: 300px;
-    }
-
-    .details .tableContainer tbody {
-        max-height: 250px;
-    }
-
     .chart canvas {
-        height: 300px !important;
+        height: 150px !important;
+    }
+
+    .charts {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        gap: 20px; 
+    }
+    
+    .cardHeader {
+        font-size: 10px;
     }
 }
-
 /*------------------------------------------------------------------products and services style------------------------------------------------*/
 .productHeader {
     margin-top: 0px;
@@ -951,18 +1042,81 @@ canvas {
 }
 
 /*----------------------------------------------------- products and services responsiveness-------------------------------------------*/
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .productHeader h2 {
+        font-size: 1.2rem; 
+    }
 
-@media screen and (max-width: 1024px) {
+    #products-services {
+        padding: 10px; 
+    }
+
     .filter-section {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: column; 
+        gap: 10px; 
     }
 
     .filter-section select,
-    .filter-section input,
+    .filter-section input {
+        width: 100%; 
+    }
+
     #addProductServiceBtn,
     #filterBtn {
-        width: 100%;
+        width: 100%; 
+        height: 40px; 
+    }
+
+    .product-table tbody {
+        max-height: 400px; 
+    }
+
+    .modal-content {
+        width: 90%; 
+    }
+
+    .product-table {
+        overflow-x: auto;  
+        display: block;    
+        max-width: 100%;  
+    }
+
+    .product-table th,
+    .product-table td {
+        max-width: 150px;  
+        word-wrap: break-word; 
+    }
+
+    .product-table tbody {
+        max-height: 400px; 
+        overflow-y: auto;  
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .productHeader h2 {
+        font-size: 1.4rem; 
+    }
+
+    #products-services {
+        padding: 15px; 
+    }
+
+    .filter-section {
+        flex-wrap: wrap; 
+    }
+
+    .filter-section select,
+    .filter-section input {
+        width: 48%; 
+    }
+
+    #addProductServiceBtn,
+    #filterBtn {
+        width: 48%; 
+        height: 40px;
     }
 
     .modal-content {
@@ -970,93 +1124,65 @@ canvas {
     }
 }
 
-@media screen and (max-width: 768px) {
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
     .productHeader h2 {
-        font-size: 1.3rem;
-    }
-
-    .filter-section {
-        flex-direction: column;
-        gap: 10px;
+        font-size: 1.5rem; 
     }
 
     .filter-section select,
     .filter-section input {
-        width: 100%;
-    }
-
-    .product-table thead {
-        font-size: 14px;
-    }
-
-    .product-table td {
-        padding: 8px;
-        font-size: 14px;
-    }
-
-    .modal-content {
-        width: 90%;
-    }
-
-    .modal-content h3 {
-        font-size: 1.3rem;
-    }
-
-    .modal-content input,
-    .modal-content select,
-    .modal-content textarea {
-        font-size: 14px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .productHeader {
-        margin-bottom: 15px;
-    }
-
-    .productHeader h2 {
-        font-size: 1.1rem;
-        letter-spacing: 1px;
-    }
-
-    .filter-section {
-        flex-direction: column;
-    }
-
-    .filter-section label {
-        font-size: 15px;
-    }
-
-    .filter-section select,
-    .filter-section input {
-        width: 100%;
-        font-size: 14px;
+        width: 200px; 
     }
 
     #addProductServiceBtn,
     #filterBtn {
-        width: 100%;
-        font-size: 14px;
+        width: 200px; 
     }
 
-    .product-table td {
-        font-size: 13px;
-        padding: 6px;
+    .product-table {
+        padding: 20px; 
+    }
+
+    .product-table tbody {
+        max-height: 600px; 
     }
 
     .modal-content {
-        width: 95%;
-        padding: 20px;
+        width: 70%; 
+    }
+}
+
+
+@media only screen and (min-width: 992px) {
+    .productHeader h2 {
+        font-size: 1.6rem; 
     }
 
-    .modal-content h3 {
-        font-size: 1.2rem;
+    .filter-section {
+        justify-content: flex-start; 
     }
 
-    .modal-content button {
-        font-size: 14px;
-        padding: 8px;
+    .filter-section select,
+    .filter-section input {
+        width: 250px; 
     }
+
+    #addProductServiceBtn,
+    #filterBtn {
+        width: auto; 
+        padding: 5px 5px; 
+        height: 33px;
+    }
+
+    .product-table {
+        padding: 25px; 
+    }
+
+    .modal-content {
+        width: 50%; 
+    }
+    
 }
 
 /*------------------------------------------------------------------- sales management style ----------------------------------------*/
@@ -1749,6 +1875,33 @@ canvas {
     }
 }
 
+@media (max-width: 1100px) {
+    #charts-container {
+        grid-template-columns: 1fr; 
+        gap: 20px;
+    }
+
+    .chart-section h3 {
+        font-size: 17px;
+    }
+
+    #topProductsTable {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    #topSellingTable {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    #generate-report-btn-reports {
+        width: auto;
+        padding: 10px 15px;
+        font-size: 15px;
+    }
+}
+
 
 @media (min-width: 1200px) {
     #reports-analytics {
@@ -1761,6 +1914,8 @@ canvas {
     }
 
     .chart-section h3 {
+        width: 100%;
+        height: auto;
         font-size: 18px;
     }
 
@@ -1768,7 +1923,6 @@ canvas {
         width: 30%;
         margin-top: 30px;
     }
-
 
     #topSellingTable {
         width: 100%;

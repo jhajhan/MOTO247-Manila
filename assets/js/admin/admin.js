@@ -50,52 +50,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /*----------------------------------------------------------------dashboard charts----------------------------------------------------*/
 // sales trend
-const ctxLine = document.getElementById('salesTrendChart').getContext('2d');
-const salesTrendChart = new Chart(ctxLine, {
-    type: 'line',
-    data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        datasets: [{
-            label: 'Earnings (₱)',
-            data: [1500, 2000, 1800, 2200, 2400, 3000, 2800, 3200, 3500, 4000, 3800, 4200],
-            borderColor: '#4CAF50',
-            backgroundColor: 'rgba(76, 175, 80, 0.2)',
-            borderWidth: 2,
-            tension: 0.3,
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-        },
-    },
-});
+// const ctxLine = document.getElementById('salesTrendChart').getContext('2d');
+// const salesTrendChart = new Chart(ctxLine, {
+//     type: 'line',
+//     data: {
+//         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+//         datasets: [{
+//             label: 'Earnings (₱)',
+//             data: [1500, 2000, 1800, 2200, 2400, 3000, 2800, 3200, 3500, 4000, 3800, 4200],
+//             borderColor: '#4CAF50',
+//             backgroundColor: 'rgba(76, 175, 80, 0.2)',
+//             borderWidth: 2,
+//             tension: 0.3,
+//         }]
+//     },
+//     options: {
+//         responsive: true,
+//         plugins: {
+//             legend: {
+//                 position: 'top',
+//             },
+//         },
+//     },
+// });
 
 // payment method
-const ctxPie = document.getElementById('paymentBreakdownChart').getContext('2d');
-const paymentBreakdownChart = new Chart(ctxPie, {
-    type: 'pie',
-    data: {
-        labels: ['GCash', 'Cash'],
-        datasets: [{
-            data: [45, 25],
-            backgroundColor: ['#36A2EB', '#4CAF50'],
-            hoverOffset: 10,
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-        },
-        aspectRatio: 1.3, 
-    },
-});
+// const ctxPie = document.getElementById('paymentBreakdownChart').getContext('2d');
+// const paymentBreakdownChart = new Chart(ctxPie, {
+//     type: 'pie',
+//     data: {
+//         labels: ['GCash', 'Cash'],
+//         datasets: [{
+//             data: [45, 25],
+//             backgroundColor: ['#36A2EB', '#4CAF50'],
+//             hoverOffset: 10,
+//         }]
+//     },
+//     options: {
+//         responsive: true,
+//         plugins: {
+//             legend: {
+//                 position: 'top',
+//             },
+//         },
+//         aspectRatio: 1.3, 
+//     },
+// });
 
 
 /*--------------------------------------------------------------------products and services crud------------------------------------------*/
@@ -515,300 +515,300 @@ const paymentBreakdownChart = new Chart(ctxPie, {
 // ];
 
 // creating and styling the add products/services dropdown
-function createProductDropdown() {
-    const productListContainer = document.getElementById("product-list-container");
+// function createProductDropdown() {
+//     const productListContainer = document.getElementById("product-list-container");
 
-    const listItem = document.createElement("li");
+//     const listItem = document.createElement("li");
 
-    const selectElement = document.createElement("select");
-    const defaultOption = document.createElement("option");
-    defaultOption.value = "";
-    defaultOption.textContent = "Select a Product/Service";
-    selectElement.appendChild(defaultOption);
+//     const selectElement = document.createElement("select");
+//     const defaultOption = document.createElement("option");
+//     defaultOption.value = "";
+//     defaultOption.textContent = "Select a Product/Service";
+//     selectElement.appendChild(defaultOption);
 
-    availableProducts.forEach(product => {
-        const option = document.createElement("option");
-        option.value = product;
-        option.textContent = product;
-        selectElement.appendChild(option);
-    });
+//     availableProducts.forEach(product => {
+//         const option = document.createElement("option");
+//         option.value = product;
+//         option.textContent = product;
+//         selectElement.appendChild(option);
+//     });
 
-    selectElement.style.width = "75%";
-    selectElement.style.padding = "5px";
-    selectElement.style.fontSize = "14px";
-    selectElement.style.border = "1px solid #ccc";
-    selectElement.style.borderRadius = "3px";
+//     selectElement.style.width = "75%";
+//     selectElement.style.padding = "5px";
+//     selectElement.style.fontSize = "14px";
+//     selectElement.style.border = "1px solid #ccc";
+//     selectElement.style.borderRadius = "3px";
 
-    const removeButton = document.createElement("button");
-    removeButton.textContent = "Remove";
-    removeButton.style.marginLeft = "10px";
-    removeButton.style.backgroundColor = "#f44336";
-    removeButton.style.color = "white";
-    removeButton.style.borderRadius = "5px";
-    removeButton.style.cursor = "pointer";
-    removeButton.style.padding = "5px";
-    removeButton.style.width = "20%";
+//     const removeButton = document.createElement("button");
+//     removeButton.textContent = "Remove";
+//     removeButton.style.marginLeft = "10px";
+//     removeButton.style.backgroundColor = "#f44336";
+//     removeButton.style.color = "white";
+//     removeButton.style.borderRadius = "5px";
+//     removeButton.style.cursor = "pointer";
+//     removeButton.style.padding = "5px";
+//     removeButton.style.width = "20%";
     
-    removeButton.addEventListener("mouseover", function () {
-        removeButton.style.backgroundColor = "#d32f2f";
-    });
-    removeButton.addEventListener("mouseout", function () {
-        removeButton.style.backgroundColor = "#f44336"; 
-    });
+//     removeButton.addEventListener("mouseover", function () {
+//         removeButton.style.backgroundColor = "#d32f2f";
+//     });
+//     removeButton.addEventListener("mouseout", function () {
+//         removeButton.style.backgroundColor = "#f44336"; 
+//     });
 
-    removeButton.addEventListener("click", function () {
-        listItem.remove();
-    });
+//     removeButton.addEventListener("click", function () {
+//         listItem.remove();
+//     });
 
-    listItem.appendChild(selectElement);
-    listItem.appendChild(removeButton);
+//     listItem.appendChild(selectElement);
+//     listItem.appendChild(removeButton);
 
-    productListContainer.appendChild(listItem);
-}
+//     productListContainer.appendChild(listItem);
+// }
 
-// for adding products (dropdown)
-document.getElementById("add-product").addEventListener("click", function () {
-    createProductDropdown();
-});
+// // for adding products (dropdown)
+// document.getElementById("add-product").addEventListener("click", function () {
+//     createProductDropdown();
+// });
 
-// for adding new physical order
-document.getElementById("add-physical-form").addEventListener("submit", function (e) {
-    e.preventDefault();
+// // for adding new physical order
+// document.getElementById("add-physical-form").addEventListener("submit", function (e) {
+//     e.preventDefault();
 
-    const selectedProducts = [];
-    const productSelectElements = document.querySelectorAll("#product-list-container select");
+//     const selectedProducts = [];
+//     const productSelectElements = document.querySelectorAll("#product-list-container select");
 
-    productSelectElements.forEach(select => {
-        const selectedProduct = select.value;
-        if (selectedProduct) {
-            selectedProducts.push(selectedProduct);
-        }
-    });
+//     productSelectElements.forEach(select => {
+//         const selectedProduct = select.value;
+//         if (selectedProduct) {
+//             selectedProducts.push(selectedProduct);
+//         }
+//     });
 
-    const newOrder = {
-        id: physicalSalesData.length + 1,
-        customerId: document.getElementById("physical-customer-id").value,
-        name: document.getElementById("physical-customer-name").value,
-        products: selectedProducts,
-        orderDate: document.getElementById("physical-order-date").value,
-        paymentMethod: document.getElementById("physical-payment").value,
-        paymentStatus: document.getElementById("physical-payment-status").value,
-        status: document.getElementById("physical-status").value,
-    };
+//     const newOrder = {
+//         id: physicalSalesData.length + 1,
+//         customerId: document.getElementById("physical-customer-id").value,
+//         name: document.getElementById("physical-customer-name").value,
+//         products: selectedProducts,
+//         orderDate: document.getElementById("physical-order-date").value,
+//         paymentMethod: document.getElementById("physical-payment").value,
+//         paymentStatus: document.getElementById("physical-payment-status").value,
+//         status: document.getElementById("physical-status").value,
+//     };
 
-    physicalSalesData.push(newOrder);
-    populatePhysicalSalesTable();
-    addPhysicalOrderModal.style.display = "none";
-});
+//     physicalSalesData.push(newOrder);
+//     populatePhysicalSalesTable();
+//     addPhysicalOrderModal.style.display = "none";
+// });
 
-// initialize table
-// populateOnlineSalesTable();
-// populatePhysicalSalesTable();
+// // initialize table
+// // populateOnlineSalesTable();
+// // populatePhysicalSalesTable();
 
-// close add modal
-closeAddModalBtn.addEventListener("click", function () {
-    addPhysicalOrderModal.style.display = "none";
-});
+// // close add modal
+// closeAddModalBtn.addEventListener("click", function () {
+//     addPhysicalOrderModal.style.display = "none";
+// });
 
-// close edit modal
-closeEditModal.addEventListener("click", function () {
-    editModal.style.display = "none";
-});
+// // close edit modal
+// closeEditModal.addEventListener("click", function () {
+//     editModal.style.display = "none";
+// });
 
-// cancel add order 
-cancelAddOrderBtn.addEventListener('click', () => {
-    addPhysicalOrderModal.style.display = 'none';
-});
+// // cancel add order 
+// cancelAddOrderBtn.addEventListener('click', () => {
+//     addPhysicalOrderModal.style.display = 'none';
+// });
 
-// cancel edit order 
-cancelEditOrderBtn.addEventListener('click', () => {
-    editModal.style.display = 'none';
-});
+// // cancel edit order 
+// cancelEditOrderBtn.addEventListener('click', () => {
+//     editModal.style.display = 'none';
+// });
 
-// show online sales by default
-onlineSalesSection.style.display = "block";
-physicalSalesSection.style.display = "none";
-toggleSalesBtn.textContent = "Switch to Physical Sales";
-
-
-/*-----------------------------------------------------------------------------------------------------------report and analytics---------------------------------------------------------------*/
-let salesChart, earningsChart, salesComparisonChart, payBreakdownChart, orderStatusChart;
-
-function initializeCharts() {
-    // sales chart
-    const salesCtx = document.getElementById("salesChart").getContext("2d");
-    salesChart = new Chart(salesCtx, {
-        type: "bar",
-        data: { labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"], datasets: [{ label: "Sales", data: [100, 200, 150, 140, 160, 170, 150], backgroundColor: "blue" }] },
-    });
-
-    // earnings chart
-    const earningsCtx = document.getElementById("earningsChart").getContext("2d");
-    earningsChart = new Chart(earningsCtx, {
-        type: "line",
-        data: {
-            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            datasets: [{ label: "Earnings", data: [1200, 1500, 1100, 1800, 2000, 1700, 1600, 1900, 2100, 2300, 2200, 2500], borderColor: "green", fill: false }],
-        },
-    });
-
-    // sales comparison
-    const comparisonCtx = document.getElementById("salesComparisonChart").getContext("2d");
-    salesComparisonChart = new Chart(comparisonCtx, {
-        type: "bar",
-        data: {
-            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            datasets: [
-                { label: "Online Sales", data: [300, 400, 350], backgroundColor: "orange" },
-                { label: "Physical Sales", data: [200, 300, 250], backgroundColor: "purple" },
-            ],
-        },
-    });
-
-    // payment breakdown
-    const payBreakdownCtx = document.getElementById("payBreakdownChart").getContext("2d");
-    payBreakdownChart = new Chart(payBreakdownCtx, {
-        type: "pie",
-        data: {
-            labels: ["GCash", "Cash"],
-            datasets: [
-                {
-                    label: "Payments",
-                    data: [5000, 3000],
-                    backgroundColor: ["cyan", "orange"],
-                    hoverOffset: 4,
-                },
-            ],
-        },
-        options: {
-            plugins: {
-                legend: {
-                    position: "top",
-                },
-            },
-            aspectRatio: 1.8, 
-        },
-    });
-
-    // order status
-    const orderStatusCtx = document.getElementById("orderStatusChart").getContext("2d");
-    orderStatusChart = new Chart(orderStatusCtx, {
-        type: "doughnut",
-        data: {
-            labels: ["Pending", "Ready for Pickup", "Picked Up", "Received", "Completed"],
-            datasets: [
-                {
-                    label: "Orders",
-                    data: [30, 20, 10, 15, 25],
-                    backgroundColor: ["red", "blue", "green", "purple", "orange"],
-                },
-            ],
-        },
-        options: {
-            plugins: {
-                legend: {
-                    display: true, 
-                },
-            },
-            cutout: '50%',
-            maintainAspectRatio: false, 
-        },
-    });
-
-}
-
-// for sales report
-function updateSalesChart() {
-    const chartType = document.getElementById("chartType").value;
-    let labels, data;
-    if (chartType === "daily") {
-        labels = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"];
-        data = [100, 200, 150];
-    } else if (chartType === "weekly") {
-        labels = ["Week 1", "Week 2", "Week 3", "Week 4"];
-        data = [500, 600, 550, 700];
-    } else if (chartType === "monthly") {
-        labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        data = [1200, 1500, 1100, 1500, 1300, 1345, 1254, 1234, 1234, 1289, 1554, 2222];
-    }
-    salesChart.data.labels = labels;
-    salesChart.data.datasets[0].data = data;
-    salesChart.update();
-}
+// // show online sales by default
+// onlineSalesSection.style.display = "block";
+// physicalSalesSection.style.display = "none";
+// toggleSalesBtn.textContent = "Switch to Physical Sales";
 
 
-const topSellingData = [
-    { product: "Product 1", service: "Service A", quantitySold: 150 },
-    { product: "Product 2", service: "Service B", quantitySold: 120 },
-    { product: "Product 3", service: "Service C", quantitySold: 100 },
-    { product: "Product 4", service: "Service D", quantitySold: 90 },
-    { product: "Product 5", service: "Service E", quantitySold: 80 },
-];
+// /*-----------------------------------------------------------------------------------------------------------report and analytics---------------------------------------------------------------*/
+// let salesChart, earningsChart, salesComparisonChart, payBreakdownChart, orderStatusChart;
 
-// initialize the charts
-window.onload = function () {
-    initializeCharts();
-    populateTopSellingTable();
-};
+// function initializeCharts() {
+//     // sales chart
+//     const salesCtx = document.getElementById("salesChart").getContext("2d");
+//     salesChart = new Chart(salesCtx, {
+//         type: "bar",
+//         data: { labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"], datasets: [{ label: "Sales", data: [100, 200, 150, 140, 160, 170, 150], backgroundColor: "blue" }] },
+//     });
+
+//     // earnings chart
+//     const earningsCtx = document.getElementById("earningsChart").getContext("2d");
+//     earningsChart = new Chart(earningsCtx, {
+//         type: "line",
+//         data: {
+//             labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+//             datasets: [{ label: "Earnings", data: [1200, 1500, 1100, 1800, 2000, 1700, 1600, 1900, 2100, 2300, 2200, 2500], borderColor: "green", fill: false }],
+//         },
+//     });
+
+//     // sales comparison
+//     // const comparisonCtx = document.getElementById("salesComparisonChart").getContext("2d");
+//     // salesComparisonChart = new Chart(comparisonCtx, {
+//     //     type: "bar",
+//     //     data: {
+//     //         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+//     //         datasets: [
+//     //             { label: "Online Sales", data: [300, 400, 350], backgroundColor: "orange" },
+//     //             { label: "Physical Sales", data: [200, 300, 250], backgroundColor: "purple" },
+//     //         ],
+//     //     },
+//     // });
+
+//     // payment breakdown
+//     const payBreakdownCtx = document.getElementById("payBreakdownChart").getContext("2d");
+//     payBreakdownChart = new Chart(payBreakdownCtx, {
+//         type: "pie",
+//         data: {
+//             labels: ["GCash", "Cash"],
+//             datasets: [
+//                 {
+//                     label: "Payments",
+//                     data: [5000, 3000],
+//                     backgroundColor: ["cyan", "orange"],
+//                     hoverOffset: 4,
+//                 },
+//             ],
+//         },
+//         options: {
+//             plugins: {
+//                 legend: {
+//                     position: "top",
+//                 },
+//             },
+//             aspectRatio: 1.8, 
+//         },
+//     });
+
+//     // order status
+//     const orderStatusCtx = document.getElementById("orderStatusChart").getContext("2d");
+//     orderStatusChart = new Chart(orderStatusCtx, {
+//         type: "doughnut",
+//         data: {
+//             labels: ["Pending", "Ready for Pickup", "Picked Up", "Received", "Completed"],
+//             datasets: [
+//                 {
+//                     label: "Orders",
+//                     data: [30, 20, 10, 15, 25],
+//                     backgroundColor: ["red", "blue", "green", "purple", "orange"],
+//                 },
+//             ],
+//         },
+//         options: {
+//             plugins: {
+//                 legend: {
+//                     display: true, 
+//                 },
+//             },
+//             cutout: '50%',
+//             maintainAspectRatio: false, 
+//         },
+//     });
+
+// }
+
+// // for sales report
+// function updateSalesChart() {
+//     const chartType = document.getElementById("chartType").value;
+//     let labels, data;
+//     if (chartType === "daily") {
+//         labels = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"];
+//         data = [100, 200, 150];
+//     } else if (chartType === "weekly") {
+//         labels = ["Week 1", "Week 2", "Week 3", "Week 4"];
+//         data = [500, 600, 550, 700];
+//     } else if (chartType === "monthly") {
+//         labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+//         data = [1200, 1500, 1100, 1500, 1300, 1345, 1254, 1234, 1234, 1289, 1554, 2222];
+//     }
+//     salesChart.data.labels = labels;
+//     salesChart.data.datasets[0].data = data;
+//     salesChart.update();
+// }
 
 
-/*-----------------------------------------------------------------------------------------settings-----------------------------------------------------------------------------*/
-const navLinks = document.querySelectorAll('#settings-nav a');
-const sections = document.querySelectorAll('.section-content');
+// const topSellingData = [
+//     { product: "Product 1", service: "Service A", quantitySold: 150 },
+//     { product: "Product 2", service: "Service B", quantitySold: 120 },
+//     { product: "Product 3", service: "Service C", quantitySold: 100 },
+//     { product: "Product 4", service: "Service D", quantitySold: 90 },
+//     { product: "Product 5", service: "Service E", quantitySold: 80 },
+// ];
 
-// initially hide all sections
-sections.forEach(section => {
-    section.style.display = 'none';
-});
+// // initialize the charts
+// window.onload = function () {
+//     initializeCharts();
+//     populateTopSellingTable();
+// };
 
-// set default section
-const defaultSectionId = 'user-management'; 
-const defaultSection = document.getElementById(defaultSectionId);
 
-if (defaultSection) {
-    defaultSection.style.display = 'block'; // Show the default section
-}
+// /*-----------------------------------------------------------------------------------------settings-----------------------------------------------------------------------------*/
+// const navLinks = document.querySelectorAll('#settings-nav a');
+// const sections = document.querySelectorAll('.section-content');
 
-// set the corresponding navigation link as active
-navLinks.forEach(link => {
-    const targetSectionId = link.getAttribute('data-section');
-    if (targetSectionId === defaultSectionId) {
-        link.classList.add('active');
-    }
-});
+// // initially hide all sections
+// sections.forEach(section => {
+//     section.style.display = 'none';
+// });
 
-// add click event listener to each navigation link
-navLinks.forEach(link => {
-    link.addEventListener('click', function (event) {
-        event.preventDefault(); 
+// // set default section
+// const defaultSectionId = 'user-management'; 
+// const defaultSection = document.getElementById(defaultSectionId);
+
+// if (defaultSection) {
+//     defaultSection.style.display = 'block'; // Show the default section
+// }
+
+// // set the corresponding navigation link as active
+// navLinks.forEach(link => {
+//     const targetSectionId = link.getAttribute('data-section');
+//     if (targetSectionId === defaultSectionId) {
+//         link.classList.add('active');
+//     }
+// });
+
+// // add click event listener to each navigation link
+// navLinks.forEach(link => {
+//     link.addEventListener('click', function (event) {
+//         event.preventDefault(); 
  
-        const targetSectionId = this.getAttribute('data-section');
+//         const targetSectionId = this.getAttribute('data-section');
 
-        sections.forEach(section => {
-            section.style.display = 'none';
-        });
+//         sections.forEach(section => {
+//             section.style.display = 'none';
+//         });
         
-        const targetSection = document.getElementById(targetSectionId);
-        if (targetSection) {
-            targetSection.style.display = 'block';
-        }
+//         const targetSection = document.getElementById(targetSectionId);
+//         if (targetSection) {
+//             targetSection.style.display = 'block';
+//         }
        
-        navLinks.forEach(nav => nav.classList.remove('active'));
+//         navLinks.forEach(nav => nav.classList.remove('active'));
 
-        this.classList.add('active');
-    });
-});
+//         this.classList.add('active');
+//     });
+// });
 
 
-/*-------------------------------------------------------------------------------------------sign out------------------------------------------------------------------------------*/
-function confirmSignOut() {
-    const isConfirmed = confirm("Are you sure you want to sign out?");
-    if (isConfirmed) {
-        // connect here
-        alert("You have signed out.");
-    } else {
-        alert("Sign out cancelled.");
-    }
-}
+// /*-------------------------------------------------------------------------------------------sign out------------------------------------------------------------------------------*/
+// function confirmSignOut() {
+//     const isConfirmed = confirm("Are you sure you want to sign out?");
+//     if (isConfirmed) {
+//         // connect here
+//         alert("You have signed out.");
+//     } else {
+//         alert("Sign out cancelled.");
+//     }
+// }
 
 

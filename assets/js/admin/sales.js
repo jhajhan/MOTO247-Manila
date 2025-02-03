@@ -2,7 +2,16 @@ $(document).ready(function(){
 
     fetchSales();
 
-    populateProductDropDown();
+    $("#online-sales").hide();
+
+    $("#toggle-sales-btn").click(function () {
+        const isOnlineVisible = $("#online-sales").is(":visible");
+    
+        $("#online-sales").toggle(!isOnlineVisible);
+        $("#physical-sales").toggle(isOnlineVisible);
+    
+        $(this).text(isOnlineVisible ? "SWITCH TO ONLINE SALES" : "SWITCH TO PHYSICAL SALES");
+    });
  
 })
 
@@ -90,6 +99,19 @@ $("#add-physical-order-btn").on('click', function(){
     $("#add-physical-order-modal").show();
 })
 
+$("#generate-report-btn-sales").on('click', function(){
+    alert('hello');
+    $.ajax({
+        url: '/generate-report',
+        method: "GET",
+        success: function() {
+
+        }
+    })
+})
+
+
+
 
 // Function to populate dropdown with products/services
 function populateProductDropDown(selectElement) {
@@ -158,6 +180,44 @@ removeButton.on('click', function() {
 });
 
 
+$('#online-apply-filters-btn').on('click', function() {
+    const payment_method = $('#online-payment-method-filter').val();
+    const payment_status = $('#online-payment-status-filter').val();
+    const status = $('#online-status-filter').val();
+    const sales_type = 'online';
+
+
+    filters = {
+        payment_method: payment_method,
+        payment_status: payment_status,
+        status: status,
+        sales_type: sales_type
+    }
+
+    fetchSales(filters);
+});
+
+
+$('#physical-apply-filters-btn').on('click', function() {
+    const payment_method = $('#physical-payment-method-filter').val();
+    const payment_status = $('#physical-payment-status-filter').val();
+    const status = $('#physical-status-filter').val();
+    const sales_type = 'physical';
+
+    filters = {
+        payment_method: payment_method,
+        payment_status: payment_status,
+        status: status,
+        sales_type: sales_type
+    }
+
+    fetchSales(filters);
+});
+
+
+$("#close-edit-modal").on('click', function(){
+    $('.modal').css('display', 'none');
+})
 
 function fetchSales (filters = {}) {
     $.ajax({
@@ -292,38 +352,6 @@ function fetchSales (filters = {}) {
     })
 }
 
-$('#online-apply-filters-btn').on('click', function() {
-    const payment_method = $('#online-payment-method-filter').val();
-    const payment_status = $('#online-payment-status-filter').val();
-    const status = $('#online-status-filter').val();
-    const sales_type = 'online';
-
-
-    filters = {
-        payment_method: payment_method,
-        payment_status: payment_status,
-        status: status,
-        sales_type: sales_type
-    }
-
-    fetchSales(filters);
-});
-
-$('#physical-apply-filters-btn').on('click', function() {
-    const payment_method = $('#physical-payment-method-filter').val();
-    const payment_status = $('#physical-payment-status-filter').val();
-    const status = $('#physical-status-filter').val();
-    const sales_type = 'physical';
-
-    filters = {
-        payment_method: payment_method,
-        payment_status: payment_status,
-        status: status,
-        sales_type: sales_type
-    }
-
-    fetchSales(filters);
-});
 
 function editSale() {
 
@@ -368,6 +396,3 @@ function deleteSale(id) {
 
 
 
-$("#close-edit-modal").on('click', function(){
-    $('.modal').css('display', 'none');
-})

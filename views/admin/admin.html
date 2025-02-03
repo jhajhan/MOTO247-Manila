@@ -9,6 +9,9 @@
     <title>MOTO247 Management System</title>
     <link rel="stylesheet" href="/assets/css/admin.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 
     <!----------------------------------------chartjs----------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -27,7 +30,7 @@
                 <li class="logo-item">
                     <a href="#">
                         <span class="logo">
-                            <img src="logo.jpg" alt="Brand Logo">
+                            <img src="/assets/img/logo.jpg" alt="Brand Logo">
                         </span>
                     </a>
                 </li>
@@ -106,7 +109,7 @@
                     </div>
     
                     <div class="user">
-                        <img src="jali.png" alt="">
+                        <img src="/assets/img/jali.jpg" alt="">
                         <span class="user-name">Bini Sheena</span>
                     </div>
                 </div>
@@ -133,21 +136,21 @@
                         <div>
                             <div class="filter-group">
                                 <select id="month">
-                                    <option value="January">January</option>
-                                    <option value="February">February</option>
-                                    <option value="March">March</option>
-                                    <option value="April">April</option>
-                                    <option value="May">May</option>
-                                    <option value="June">June</option>
-                                    <option value="July">July</option>
-                                    <option value="August">August</option>
-                                    <option value="September">September</option>
-                                    <option value="October">October</option>
-                                    <option value="November">November</option>
-                                    <option value="December">December</option>
+                                    <option value="01">January</option>
+                                    <option value="02">February</option>
+                                    <option value="03">March</option>
+                                    <option value="04">April</option>
+                                    <option value="05">May</option>
+                                    <option value="06">June</option>
+                                    <option value="07">July</option>
+                                    <option value="08">August</option>
+                                    <option value="09">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
                                 </select>
                             </div>
-                            <div class="numbers" id = "total-profit-montjly">150,000</div>
+                            <div class="numbers" id = "total-profit-monthly"></div>
                             <div class="cardName">Monthly Profit</div>
                         </div>
     
@@ -158,7 +161,7 @@
                     
                     <div class="card">
                         <div>
-                            <div class="numbers" id = "total-profit-daily">5,000</div>
+                            <div class="numbers" id = "total-profit-daily"></div>
                             <div class="cardName">Daily Profit</div>
                         </div>
     
@@ -169,7 +172,7 @@
                     
                     <div class="card">
                         <div>
-                            <div class="numbers" id = "total-orders">50</div>
+                            <div class="numbers" id = "total-orders"></div>
                             <div class="cardName">Total Orders</div>
                         </div>
     
@@ -180,7 +183,7 @@
     
                     <div class="card">
                         <div>
-                            <div class="numbers" id = "total-products-services">30</div>
+                            <div class="numbers" id = "total-products-services"></div>
                             <div class="cardName">Products and Services Available</div>
                         </div>
     
@@ -234,90 +237,7 @@
                             <div class="tableBody">
                                 <table>
                                     <tbody>
-                                        <tr>
-                                            <td> Jolly Ann </td>
-                                            <td> Camshaft </td>
-                                            <td> ₱1,500 </td>
-                                            <td> Paid </td>
-                                            <td> <span class="status completed"> Completed </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td> Jolly Ann </td>
-                                            <td> Piston </td>
-                                            <td> ₱1,000 </td>
-                                            <td> Paid </td>
-                                            <td> <span class="status pending"> Pending </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td> Jolly Ann </td>
-                                            <td> Cylinder </td>
-                                            <td> ₱2,500 </td>
-                                            <td> Due </td>
-                                            <td> <span class="status readyForPickUp"> Ready for Pickup </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td> Jolly Ann </td>
-                                            <td> Battery </td>
-                                            <td> ₱1,110 </td>
-                                            <td> Paid </td>
-                                            <td> <span class="status pickedUp"> Picked Up </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td> Jolly Ann </td>
-                                            <td> Windshield </td>
-                                            <td> ₱500 </td>
-                                            <td> Due </td>
-                                            <td> <span class="status received"> Received </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td> Jolly Ann </td>
-                                            <td> Cylinder </td>
-                                            <td> ₱2,500 </td>
-                                            <td> Due </td>
-                                            <td> <span class="status readyForPickUp"> Ready for Pickup </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td> Jolly Ann </td>
-                                            <td> Battery </td>
-                                            <td> ₱1,110 </td>
-                                            <td> Paid </td>
-                                            <td> <span class="status pickedUp"> Picked Up </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td> Jolly Ann </td>
-                                            <td> Windshield </td>
-                                            <td> ₱500 </td>
-                                            <td> Due </td>
-                                            <td> <span class="status received"> Received </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td> Jolly Ann </td>
-                                            <td> Cylinder </td>
-                                            <td> ₱2,500 </td>
-                                            <td> Due </td>
-                                            <td> <span class="status readyForPickUp"> Ready for Pickup </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td> Jolly Ann </td>
-                                            <td> Battery </td>
-                                            <td> ₱1,110 </td>
-                                            <td> Paid </td>
-                                            <td> <span class="status pickedUp"> Picked Up </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td> Jolly Ann </td>
-                                            <td> Windshield </td>
-                                            <td> ₱500 </td>
-                                            <td> Due </td>
-                                            <td> <span class="status received"> Received </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td> Jolly Ann </td>
-                                            <td> Cylinder </td>
-                                            <td> ₱2,500 </td>
-                                            <td> Due </td>
-                                            <td> <span class="status readyForPickUp"> Ready for Pickup </span></td>
-                                        </tr>
+                                       
                                     </tbody>
                                 </table>
                             </div>
@@ -380,50 +300,7 @@
                                 </tr>
                             </thead>
                             <tbody id="productServiceTableBody">
-                                <tr>
-                                    <td>001</td>
-                                    <td>Laptop</td>
-                                    <td>Product</td>
-                                    <td>$500</td>
-                                    <td>10</td>
-                                    <td>
-                                        <button class="editBtn">Edit</button>
-                                        <button class="deleteBtn">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>002</td>
-                                    <td>Repair Service</td>
-                                    <td>Service</td>
-                                    <td>$50</td>
-                                    <td>N/A</td>
-                                    <td>
-                                        <button class="editBtn">Edit</button>
-                                        <button class="deleteBtn">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>003</td>
-                                    <td>Headphones</td>
-                                    <td>Product</td>
-                                    <td>$100</td>
-                                    <td>0</td>
-                                    <td>
-                                        <button class="editBtn">Edit</button>
-                                        <button class="deleteBtn">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>004</td>
-                                    <td>Cleaning Service</td>
-                                    <td>Service</td>
-                                    <td>$30</td>
-                                    <td>N/A</td>
-                                    <td>
-                                        <button class="editBtn">Edit</button>
-                                        <button class="deleteBtn">Delete</button>
-                                    </td>
-                                </tr>
+                                <!-- Products and service are in here -->
                             </tbody>
                         </table>
                     </div>
@@ -459,7 +336,7 @@
                                 <textarea id="productDescription" required></textarea>
                                 
                                 <label for="productImage">Image:</label>
-                                <input type="file" id="productImage" accept="image/*" />
+                                <input type="file" id="file1" name="'file" accept="image/*" />
                                 
                                 <button id = 'add-product-save' type="submit">Save</button>
                                 <button type="button" id="cancelBtn">Cancel</button>
@@ -529,18 +406,7 @@
                                 </thead>
                                 <tbody id = "onlineSalesTableBody">
                                     <tr>
-                                        <td>101</td>
-                                        <td>201</td>
-                                        <td>John Doe</td>
-                                        <td>Product A</td>
-                                        <td>2025-01-01</td>
-                                        <td>Paid Cash</td>
-                                        <td>Paid</td>
-                                        <td>Completed</td>
-                                        <td>
-                                            <button class="editBtn">Edit</button>
-                                            <button class="deleteBtn">Delete</button>
-                                        </td>
+                                        <!-- Sales data is in here -->
                                     </tr>
                                     <!-- Additional rows here -->
                                 </tbody>
@@ -598,18 +464,7 @@
                                 </thead>
                                 <tbody id = "physicalSalesTableBody">
                                     <tr>
-                                        <td>201</td>
-                                        <td>301</td>
-                                        <td>Olivia White</td>
-                                        <td>Product E</td>
-                                        <td>2025-01-01</td>
-                                        <td>Paid Cash</td>
-                                        <td>Paid</td>
-                                        <td>Completed</td>
-                                        <td>
-                                            <button class="editBtn">Edit</button>
-                                            <button class="deleteBtn">Delete</button>
-                                        </td>
+                                        <!-- Sales data is in here -->
                                     </tr>
                                     <!-- Additional rows here -->
                                 </tbody>
@@ -727,13 +582,13 @@
                                 <option value="weekly">Weekly</option>
                                 <option value="monthly">Monthly</option>
                             </select>
-                            <canvas id="salesChart"></canvas>
+                            <canvas id="salesChart" ></canvas>
                         </div>
                         
                         <!-- Earnings for the Past 12 Months -->
                         <div class="chart-section">
                             <h3>Earnings (for the Past 12 Months)</h3>
-                            <canvas id="earningsChart"></canvas>
+                            <canvas id="earningsChart" ></canvas>
                         </div>
 
                         <!-- GCash vs Cash Breakdown -->
@@ -746,12 +601,6 @@
                         <div class="chart-section">
                             <h3>Order Status Reports</h3>
                             <canvas id="orderStatusChart"></canvas>
-                        </div>
-
-                        <!-- Online vs Physical Sales Comparison -->
-                        <div class="chart-section">
-                            <h3>Sales Comparison</h3>
-                            <canvas id="salesComparisonChart"></canvas>
                         </div>
 
                         <!-- Table for Top Selling Products and Services -->
@@ -800,6 +649,14 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <!-- Online vs Physical Sales Comparison -->
+                        <div class="chart-section">
+                            <h3>Sales Comparison</h3>
+                            <canvas id="salesComparisonChart"></canvas>
+                        </div>
+
+                        
 
                         <button id="generate-report-btn-reports">Generate Report</button>
                     </div>   
@@ -886,15 +743,7 @@
                                     <div id="remove-admins">
                                         <h4>Remove Admin</h4>
                                         <ul id="admin-list">
-                                            <li>
-                                                Admin 1 <button type="submit" class="submit-btn">Remove Account</button>
-                                            </li>
-                                            <li>
-                                                Admin 2 <button type="submit" class="submit-btn">Remove Account</button>
-                                            </li>
-                                            <li>
-                                                Admin 2 <button type="submit" class="submit-btn">Remove Account</button>
-                                            </li>
+                                            <!-- Admins are inserted here -->
                                         </ul>
                                     </div>
                                 </div>          
@@ -924,10 +773,10 @@
                                         <input type="text" id="business-hours" name="business-hours" placeholder="Enter business hours (e.g., 9:00 AM - 5:00 PM)" required>
                                     </div>
                             
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label for="store-logo">Upload Store Logo</label>
                                         <input type="file" id="store-logo" name="store-logo" accept="image/*" >
-                                    </div>
+                                    </div> -->
                             
                                     <button type="submit" class="submit-btn">Update Information</button>
                                 </form>
@@ -965,7 +814,7 @@
                                 <!-- Database Backup Section -->
                                 <h4>Database Backup</h4>
                                 <p>Backup your system's database to protect against data loss. This will create a snapshot of your database at the time of backup, which can be restored later if needed.</p>
-                                <form id="database-backup-form" action="#" method="post">
+                                <form id="database-backup-form"  method="post">
                                     <button type="submit" class="submit-btn">Backup Database</button>
                                 </form>
                                 <p class="note">Note: The backup process may take a few minutes depending on the size of the database.</p>
@@ -1001,9 +850,11 @@
 
     <!----------------------- js file -------------------------->
     <script src='/assets/js/admin/admin.js'></script>
+    <script src= '/assets/js/admin/dashboard.js'></script>
     <script src= '/assets/js/admin/main.js'></script>
     <script src= '/assets/js/admin/product_service.js'></script>
     <script src= '/assets/js/admin/sales.js'></script>
+    <script src= '/assets/js/admin/reports_analytics.js'></script>
     <script src= '/assets/js/admin/settings.js'></script>
 
     <!------------------------------------ ionicons ---------------------------->

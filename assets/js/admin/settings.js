@@ -1,5 +1,40 @@
 $(document).ready(function(){
     fetchSettings();
+
+    const $navLinks = $("#settings-nav a");
+    const $sections = $(".section-content");
+
+    // Initially hide all sections
+    $sections.hide();
+
+    // Set default section
+    const defaultSectionId = "user-management";
+    const $defaultSection = $("#" + defaultSectionId);
+
+    if ($defaultSection.length) {
+        $defaultSection.show(); // Show the default section
+    }
+
+    // Set the corresponding navigation link as active
+    $navLinks.each(function () {
+        const targetSectionId = $(this).data("section");
+        if (targetSectionId === defaultSectionId) {
+            $(this).addClass("active");
+        }
+    });
+
+    // Add click event listener to each navigation link
+    $navLinks.click(function (event) {
+        event.preventDefault();
+
+        const targetSectionId = $(this).data("section");
+
+        $sections.hide();
+        $("#" + targetSectionId).show();
+
+        $navLinks.removeClass("active");
+        $(this).addClass("active");
+    });
 })
 
 
@@ -23,7 +58,7 @@ function fetchSettings() {
                     const listItem = `
                         <li>
                             ${admin.full_name} 
-                            <button type="submit" class="submit-btn remove-admin-btn" data-id="${admin.id}">
+                            <button type="submit" class="submit-btn remove-admin-btn" data-id="${admin.user_id}">
                                 Remove
                             </button>
                         </li>
@@ -132,5 +167,37 @@ $('#edit-payment-form').on('submit', function(event){
 
 function removeAdmin(id) {
 
+    if (!confirm('Are you sure you want to remove this admin?')) {
+        return;
+    }
+    $.ajax({
+        url: '/admin/settings',
+        method: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify({id}),
+        success: function(response) {
+            alert(response.message);
+            fetchSettings();
+        }
+
+    })
 }
+
+$('#database-backup-form').on('submit', function(event) {
+    event.preventDefault();
+    
+    $.ajax({
+        url: '/admin/backup',
+        method: 'GET',
+        success: function(response) {
+            // The PHP backend will handle the download directly
+            alert("Backup started! If no download prompt appears, check your browser settings.");
+        },
+        error: function(xhr, status, error) {
+            console.error("Error:", error);
+            alert("There was an error creating the backup.");
+        }
+    });
+});
+
 

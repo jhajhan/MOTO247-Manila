@@ -1,29 +1,34 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_FILES['productImage']) && $_FILES['productImage']['error'] == 0) {
-        $uploadedFile = $_FILES['productImage'];
-        $uploadDirectory = 'assets/img/';  // Folder where the image will be saved
+if (isset($_FILES['file1'])) {
+    $file = $_FILES['file1'];
 
-        // Get the file name and generate a unique name
-        $fileName = basename($uploadedFile['name']);
-        $uniqueFileName = uniqid() . '_' . $fileName;
+    if ($file['error'] === 0) {
+        $file_name = $file['name'];
+        $tmp_name = $file['tmp_name'];
 
-        $targetPath = $uploadDirectory . $uniqueFileName;
+        // Define the upload directory relative to the root
+        $location = $_SERVER['DOCUMENT_ROOT'] . '/assets/img/';  // Absolute path to 'assets/img'
 
-        // Check if the file is an image (optional)
-        $fileType = mime_content_type($uploadedFile['tmp_name']);
-        if (strpos($fileType, 'image') !== false) {
-            if (move_uploaded_file($uploadedFile['tmp_name'], $targetPath)) {
-                // File uploaded successfully
-                echo json_encode(['status' => 'success', 'imageUrl' => '/assets/img/' . $uniqueFileName]);
-            } else {
-                echo json_encode(['status' => 'error', 'message' => 'Failed to move uploaded file']);
-            }
+
+        // Ensure the upload directory exists
+        if (!is_dir($location)) {
+            mkdir($location, 0777, true);
+        }
+
+        // Move the uploaded file to the directory
+        if (move_uploaded_file($tmp_name, $location . $file_name)) {
+            // Construct the file URL relative to your public directory (you might need to adjust this part)
+            $file_url = '/assets/img/' . $file_name;
+
+            // Return a JSON response with the image URL
+            echo json_encode(['status' => 'success', 'imageUrl' => $file_url]);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'File is not an image']);
+            echo json_encode(['status' => 'error', 'message' => 'Failed to move uploaded file.']);
         }
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'No file uploaded or error in upload']);
+        echo json_encode(['status' => 'error', 'message' => 'Upload Error: ' . $file['error']]);
     }
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'No file uploaded.']);
 }
 ?>

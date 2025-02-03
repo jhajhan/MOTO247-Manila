@@ -88,6 +88,27 @@
 
         }
 
+        function removeAdmin($data) {
+            $id = $data['id'];
+
+            global $conn;
+            $query = 'DELETE FROM user WHERE user_id = ?';
+            $stmt = mysqli_prepare($conn, $query);
+            $stmt->bind_param('i', $id);
+
+            header('Content-Type: application/json');
+
+            if ($stmt->execute()) {
+                if ($stmt->affected_rows > 0) {
+                    echo json_encode(['message' => 'Admin removed successfully!']);
+                } else {
+                    echo json_encode(['message' => 'No admin was removed.']);
+                }
+            } else {
+                echo json_encode(['message' => 'SQL Error: ' . $stmt->error]);
+            }
+        }
+
         function updateStoreDetails ($data) {
             $store_name = $data['business_name'];
             $store_address = $data['business_address'];

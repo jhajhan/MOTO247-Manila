@@ -65,16 +65,30 @@ switch ($uri) {
 
 
     case '/admin/dashboard':
-
-        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-            handleController('admin/dashboard', 'Dashboard', 'index'); 
-        } else {
-            require_once __DIR__ . '/../views/admin/admin.html';
+        if ($method == 'GET') {
+            // Check if the request is an AJAX request
+            if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+                // Get the date and month from the query parameters
+                $date = isset($_GET['date']) ? $_GET['date'] : '';
+                $month = isset($_GET['month']) ? $_GET['month'] : '';
+    
+                // Prepare the data for the response
+                $data = [
+                    'date' => $date,
+                    'month' => $month,
+                ];
+    
+                // Handle the controller logic
+                handleController('admin/dashboard', 'Dashboard', 'index', $data);
+            } else {
+                // If it's not an AJAX request, load the HTML view
+                require_once __DIR__ . '/../views/admin/admin.html';
+            }
         }
         break;
-
+        
     case '/admin/product-service': 
-
+ 
         
         if ($method == 'GET') {    
         // Check if this is an AJAX request
@@ -102,11 +116,16 @@ switch ($uri) {
 
     case '/admin/reports-analytics':
 
-        $data = json_decode(file_get_contents('php://input'), true);
+        $aggregation = isset($_GET['aggregation']) ? $_GET['aggregation'] : '';
+                
+                // Prepare the data for the response
+                $data = [
+                    'aggregation' => $aggregation
+                ];
 
         if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             if ($data) {
-                handleController('admin/reports_analytics', 'Reports_Analytics', 'getAnalytics', $data);
+                handleController('admin/reports_analytics', 'Reports_Analytics', 'index', $data);
             } else {
                 handleController('admin/reports_analytics', 'Reports_Analytics', 'index');
             }                       
@@ -160,12 +179,23 @@ switch ($uri) {
         } else if ($method == 'POST') {
             $data = json_decode(file_get_contents('php://input'), true);
             handleController('admin/settings', 'Settings', 'addAdmin', $data);
+        } else if ($method == 'DELETE') {
+            $data = json_decode(file_get_contents('php://input'), true);
+            handleController('admin/settings', 'Settings', 'removeAdmin', $data);
         }
 
         break;
 
+    case '/admin/backup':
+        require_once __DIR__ . '/../config/backup.php';
+        break;
+
     case '/upload-product-image':
         require_once __DIR__ . '/../controllers/admin/upload_product_image.php';
+        break;
+
+    case '/generate-report':
+        require_once __DIR__ . '/../controllers/admin/generate_report.php';
         break;
 
     // 404 Error for Unknown Routes

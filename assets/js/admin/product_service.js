@@ -23,30 +23,25 @@ $(document).ready(function() {
         fetchProducts(filters)
     })
 
-
-    $('#productServiceForm').on('submit', function(event) {
-        event.preventDefault();
-        
-        if (isEditing) {
-            editProduct();
-        } else {
-            addProduct();
-        }
-    
-    });
-
-        
-    
-  
-
-
-  
-    
-
 });
 
 
+
+
+$('#productServiceForm').on('submit', function(event) {
+    event.preventDefault();
+    
+    if (isEditing) {
+        editProduct();
+    } else {
+        addProduct();
+    }
+
+});
+
 function fetchProducts(filters = {}) {
+
+    
     $.ajax({
         url: '/admin/product-service',
         method: 'GET',
@@ -142,6 +137,7 @@ $('#addProductServiceBtn').on('click', function() {
     $('#productServiceForm')[0].reset(); 
 });
 
+
 $("#close-edit-add-modal").on('click', function(){
     $('.modal').css('display', 'none');
 })
@@ -150,45 +146,57 @@ $("#close-edit-add-modal").on('click', function(){
 function addProduct() {
     alert('hallo');
 
-        const name = $('#productName').val();
-        const type = $('#productType').val();
-        const price = $('#productPrice').val();
-        const unit_price = $('#productUnitPrice').val();
-        const stock = $('#productStock').val();
-        const description = $('#productDescription').val();
-        let img = '';
+    const name = $('#productName').val();
+    const type = $('#productType').val();
+    const price = $('#productPrice').val();
+    const unit_price = $('#productUnitPrice').val();
+    const stock = $('#productStock').val();
+    const description = $('#productDescription').val();
+    let img = '';
 
-        const formData = new FormData();  // Create a FormData object
-        formData.append('productImage', $('#productImage')[0].files[0]);
+    var formData = new FormData();
+    var fileInput = $('#file1')[0].files[0];  // Ensure the file is being correctly selected
+
+    if (fileInput) {
+        formData.append('file1', fileInput);
 
         $.ajax({
             url: '/upload-product-image',  // Your PHP upload endpoint
             method: 'POST',
             data: formData,
             contentType: false,  // Don't set content type for FormData
-            processData: false,  // Don't process the data
+            processData: false,  // Don't process the data (important for file uploads)
             success: function(response) {
-                img = response['imageUrl'];
-                // console.log(response['status']);
+                var data = JSON.parse(response); // Parse the JSON response
+                if (data.status === 'success') {
+                    img  = data.imageUrl;  // The URL of the uploaded image
+                    console.log("Image uploaded successfully! URL: " + img);
+
+                    // Now proceed with the second AJAX call after the image upload is successful
+                    $.ajax({
+                        url: '/admin/product-service',
+                        method: "POST",
+                        type: 'application/json',
+                        data: JSON.stringify({ name, type, price, unit_price, stock, description, img }),
+                        success: function () {
+                            fetchProducts();
+                            $('.modal').hide();
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+
+                } else {
+                    console.log("Error uploading image: " + data.message);
+                }
             }
         });
-
-
-
-        $.ajax ({
-            url: '/admin/product-service',
-            method: "POST",
-            type: 'application/json',
-            data: JSON.stringify({ name, type, price, unit_price, stock, description, img}),
-            success: function () {
-                fetchProducts();
-            },
-            error: function (error) {
-                console.log(error);
-            }
-            
-        })
+    } else {
+        console.log("No file selected!");
     }
+}
+
 
 function editProduct () {
     const id = $('#productID').val();
@@ -198,19 +206,50 @@ function editProduct () {
     const unit_price = $("#productUnitPrice").val();
     const stock = $('#productStock').val();
     const description = $('#productDescription').val();
+    let img = '';
 
-    $.ajax({
-        url: '/admin/product-service',
-        method: 'PUT',
-        contentType: 'application/json',
-        data: JSON.stringify({ id, name, type, price, unit_price, stock, description}),
-        success: function(data) {
-            fetchProducts();
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    })
+    var formData = new FormData();
+    var fileInput = $('#file1')[0].files[0];  // Ensure the file is being correctly selected
+
+    if (fileInput) {
+        formData.append('file1', fileInput);
+
+        $.ajax({
+            url: '/upload-product-image',  // Your PHP upload endpoint
+            method: 'POST',
+            data: formData,
+            contentType: false,  // Don't set content type for FormData
+            processData: false,  // Don't process the data (important for file uploads)
+            success: function(response) {
+                var data = JSON.parse(response); // Parse the JSON response
+                if (data.status === 'success') {
+                    img  = data.imageUrl;  // The URL of the uploaded image
+                    console.log("Image uploaded successfully! URL: " + img);
+
+                    $.ajax({
+                        url: '/admin/product-service',
+                        method: 'PUT',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ id, name, type, price, unit_price, stock, description, img}),
+                        success: function(data) {
+                            fetchProducts();
+                            $('.modal').hide();
+
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    })
+                
+
+                } else {
+                    console.log("Error uploading image: " + data.message);
+                }
+            }
+        });
+    } else {
+        console.log("No file selected!");
+    }
 
 }
 

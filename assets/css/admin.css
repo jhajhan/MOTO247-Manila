@@ -40,7 +40,7 @@ body {
 }
 
 #dashboard {
-    display: block;
+    display: none;
 }
 /* ---------------------------------------------------------- dashboard navigation style ---------------------------------------------------------*/
 .navigation {
@@ -357,6 +357,8 @@ body {
 }
 
 /*---------------------------------------------------- dashboard recent order style ------------------------------------------------*/
+
+
 .details {
     position: relative;
     width: 100%;
@@ -368,7 +370,12 @@ body {
 } 
 
 .details .recentOrders {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to the top */
+    flex: 1; /* Make it grow to fill space */
+    min-height: 500px; /* Ensure minimum height */
+    max-height: 585px; /* Match charts */
     display: grid;
     min-height: 500px;
     background: var(--white);
@@ -378,12 +385,18 @@ body {
     overflow: hidden;
     box-shadow: 0 1px 5px var(--ceru);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
 }
 
 .details .tableContainer {
     position: relative;
     max-height: 500px;
     overflow-y: auto;
+    flex: 1; /* Allow it to take available space */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 100%;
 }
 
 .details .tableContainer table {
@@ -397,13 +410,21 @@ body {
     background: var(--white);
     z-index: 10;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    
 }
+
+.details {
+    align-items: stretch; /* Make all child elements stretch to equal height */
+}
+
 
 .details .tableContainer tbody {
     display: block;
-    max-height: 450px;
     overflow-y: auto;
     width: 100%;
+    flex: 1; /* Allow it to take remaining space */
+    overflow-y: auto;
+    max-height: calc(100% - 40px); /* Adjust to fit inside container */
 }
 
 .details .tableContainer thead,
@@ -549,8 +570,13 @@ body {
 
 canvas {
     width: 100% !important;
-    height: 467px !important;
-    
+    height: auto !important;
+    max-height: 350px; /* Set a reasonable max height */
+}
+
+.chart-container {
+    height: 585px; /* Match the table container height */
+    min-height: 500px;
 }
 
 /*----------------------------------------------------------------- dashboard generate reports ---------------------------------------------*/
@@ -1414,6 +1440,7 @@ canvas {
     margin-bottom: 10px;  /* Adds spacing between dropdown groups */
 }
 
+
 /* .product-dropdown-container {
     display: flex;
     align-items: center;   Align dropdown and button vertically 
@@ -1566,7 +1593,7 @@ canvas {
 
 #charts-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     margin-bottom: 20px;
 }
@@ -1580,6 +1607,7 @@ canvas {
     text-align: center;
     box-shadow: 0 1px 5px var(--ceru);
     transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    height: auto; /* Make sure chart section does not stretch */
 }
 
 .chart-section h3 {
@@ -1596,14 +1624,17 @@ canvas {
 }
 
 #reports-analytics canvas {
-    width: 100% !important;
-    height: 260px !important;
-    max-height: 500px;
+    width: 100%; /* Ensure canvas fills the container */
+    max-width: 500px; /* Prevent the chart from stretching beyond a reasonable width */
+    height: auto !important; /* Maintain aspect ratio */
+    max-height: 400px; /* Set a max height to ensure it doesn’t stretch vertically too much */
 }
 
 #charts-container > .chart-section:nth-child(n+7) {
     grid-column: span 2;
 }
+
+
 
 #topProductsTable {
     width: 30%;

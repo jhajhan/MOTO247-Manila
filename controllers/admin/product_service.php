@@ -186,9 +186,14 @@
             $type = $data['type'];
             $stock = $data['stock'];
             $description = $data['description'];
+            $img = $data['img'];
 
-            $query = "UPDATE product SET name='$name', price='$price', type='$type', stock = '$stock', description='$description' WHERE prod_id='$id'";
-            $result = mysqli_query($conn, $query);
+
+            $query = "UPDATE product SET name= ?, price= ?, type= ?, stock = ?, description= ?, image = ? WHERE prod_id= ?";
+            $stmt = mysqli_prepare($conn, $query);
+            $stmt->bind_param('sdsissi', $name, $price, $type, $stock, $description, $img, $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
             if ($result) {
                 echo json_encode(['success' => true, 'message' => 'Product updated successfully']);

@@ -63,7 +63,7 @@ if (!isset($_SESSION['auth_user']['user_id'])) {
                         </div>
 
                         <div class="col-md-2 text-center">
-                            <button class="btn btn-danger btn-sm"<i class="fa fa-trash"></i> Remove</button>
+                            <button class="btn btn-danger btn-sm deleteItem" value="<?=$citem['cid']?>"<i class="fa fa-trash"></i> Remove</button>
                         </div>
                     </div>
                     </div>

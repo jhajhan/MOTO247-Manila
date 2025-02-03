@@ -36,11 +36,11 @@ if(isset($_GET['id'])) { // Changed from 'product' to 'id'
                          <button class="input-group-text increment-btn">+</button>
                     </div>
                 
-                <div class="row mt-3">
+                <!-- <div class="row mt-3">
                     <div class="col-md-6">
                      <button class="btn btn-primary px-4 addToCart-btn" value='<?= $product['id'];?>'>  Add to Cart </button>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="row mt-3">
                     <div class="col-md-6">

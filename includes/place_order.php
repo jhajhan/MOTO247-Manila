@@ -75,6 +75,16 @@ if(isset($_SESSION['authenticated'])){
                 $insert_items_query = "INSERT INTO order_item (order_id, product_id, quantity, price) 
                                        VALUES ('$order_id','$prod_id','$prod_qty','$price')";
                 $insert_query_run = mysqli_query($conn, $insert_items_query);
+
+                $product_query = "SELECT * FROM product WHERE prod_id = '$prod_id'";
+                $product_query_run = mysqli_query($conn, $product_query);
+                $productData = mysqli_fetch_array($product_query_run);
+                $current_qty= $productData['stock'];
+
+                $new_qty = $current_qty - $prod_qty;
+
+                $updateQty_query = "UPDATE product SET stock = '$new_qty' WHERE prod_id = '$prod_id'";
+                $updateQty_query_run = mysqli_query($conn, $updateQty_query);
             }
 
             // Clear the cart after placing the order

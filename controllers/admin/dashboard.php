@@ -42,7 +42,8 @@
      function getTotalSales($data) {
           global $conn;
 
-          $date = $data['date'];
+          $date = ($data['date']) != '' ? $data['date'] : date('Y-m-d');
+
 
           $query = "SELECT SUM(total_amount) as total_sales FROM `order` WHERE payment_status = 'paid' AND date_ordered = ?";
           $stmt = mysqli_prepare($conn, $query);

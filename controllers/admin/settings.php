@@ -3,11 +3,15 @@
 
     class Settings {
 
-        function index() {
+        function index($sessionManager) {
+            $user_id = $sessionManager->get('user_id');
+
+            $personal_info = $this->getPersonalInfo($user_id);
             $store_info = $this->getStoreInfo();
             $admins = $this->getAdmins();
 
             $response = [
+                'personal_info' => $personal_info,
                 'store_info' => $store_info,
                 'admins' => $admins
 
@@ -17,28 +21,74 @@
             echo json_encode($response);
         }
 
-        function updateProfileDetails ($data) {
+        function updateProfileDetails($data, $sessionManager) {
+            global $conn;
+            
+            $user_id = $sessionManager->get('user_id');
             $name = $data['name'];
             $email = $data['email'];
             $old_password = $data['old_password'];
             $new_password = $data['new_password'];
             $confirm_password = $data['confirm_password'];
-            
-
-            $id = $_SESSION['user_id'];
-
-            global $conn;
-            $query = 'UPDATE user SET name = ?, email = ?, password = ? WHERE id = ?';
+        
+            $response = [];
+        
+            // Retrieve the current password from the database
+            $query = "SELECT password FROM user WHERE user_id = ?";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param('sssi', $name, $email, $password, $id);
+            $stmt->bind_param('i', $user_id);
             $stmt->execute();
-
-            if ($stmt->affected_rows > 0) {
-                echo 'success';
-            } else {
-                echo 'failed';
+            $stmt->bind_result($hashed_password);
+            $stmt->fetch();
+            $stmt->close();
+        
+            // Verify if the old password is correct
+            if (!password_verify($old_password, $hashed_password)) {
+                $response = ['message' => 'Incorrect old password.'];
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                return;
             }
+        
+            // Update query
+            if (!empty($confirm_password)) {
+                if ($new_password !== $confirm_password) {
+                    $response = ['message' => 'New password and confirm password do not match.'];
+                } else {
+                    // Hash the new password
+                    $hashed_new_password = password_hash($confirm_password, PASSWORD_DEFAULT);
+                    $query = 'UPDATE user SET full_name = ?, email = ?, password = ? WHERE user_id = ?';
+                    $stmt = $conn->prepare($query);
+                    $stmt->bind_param('sssi', $name, $email, $hashed_new_password, $user_id);
+                }
+            } else {
+                $query = 'UPDATE user SET full_name = ?, email = ? WHERE user_id = ?';
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('ssi', $name, $email, $user_id);
+            }
+        
+            $stmt->execute();
+        
+            if ($stmt->affected_rows > 0) {
+                $response = ['message' => 'Profile details updated.'];
+            } else {
+                $response = ['message' => 'Profile details cannot be updated.'];
+            }
+        
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }
+        
 
+        function getPersonalInfo($user_id) {
+            global $conn;
+            $query = 'SELECT * FROM user WHERE user_id = ?';
+            $stmt = mysqli_prepare($conn, $query);
+            $stmt->bind_param('i', $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            return mysqli_fetch_assoc($result);
         }
 
         function getStoreInfo() {

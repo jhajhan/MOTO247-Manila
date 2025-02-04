@@ -22,27 +22,47 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Get the requested UR
 $method = $_SERVER['REQUEST_METHOD'];
 
 // Helper function for instantiating and calling controllers
-function handleController($controllerPath, $controllerClass, $method, $params = null) {
+function handleController($controllerPath, $controllerClass, $method, ...$params) {
     require_once __DIR__ . "/../controllers/{$controllerPath}.php";
     $controller = new $controllerClass();
-    
-    if ($params != null) {
-        $controller->$method($params);
+
+    if (!empty($params)) {
+        $controller->$method(...$params);
     } else {
         $controller->$method();
     }
 }
 
+
 switch ($uri) {
     // Client Routes
     case '/':
-        require_once __DIR__ . '/../views/client/index.html';
+        if ($method == 'GET') {
+            if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+                handleController('client/product_service', 'Product_Service', 'index');
+            } else { 
+                require_once __DIR__ . '/../views/client/index.html';
+            }
+        }
         break;
+    
 
 
     case '/products':
-        handleController('admin/product_service', 'Product_Service', 'getProducts');
+        handleController('client/product_service', 'Product_Service', 'getProducts');
         break;
+
+    case '/manage-cart':
+        $data = json_decode(file_get_contents('php://input'), true);
+        handleController('client/addtocart', 'CartManager', 'index', $data, $authSession, $sessionManager);
+        break;
+
+    case '/cart':
+
+        if ($method == 'GET') {
+            if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+                handleController('client/addtocart', 'CartManager', 'getCartItems', $authSession, $sessionManager);
+        } }
 
 
     // Authentication Routes
@@ -58,6 +78,8 @@ switch ($uri) {
         if ($method == 'POST') {
             $data = json_decode(file_get_contents('php://input'), true);
             handleController('authentication/authentication', 'Authentication', 'login', $data);
+        } else {
+            require_once __DIR__ . '/../views/client/account.html';
         }
         break;
 
@@ -78,13 +100,13 @@ switch ($uri) {
     // Admin Routes
 
     case '/admin':
-        // restrictAdminAccess($authSession);
+        restrictAdminAccess($authSession);
         require_once __DIR__ . '/../views/admin/admin.php';
         break;
 
 
     case '/admin/dashboard':
-        // restrictAdminAccess($authSession);
+        restrictAdminAccess($authSession);
         if ($method == 'GET') {
             // Check if the request is an AJAX request
             if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
@@ -109,7 +131,7 @@ switch ($uri) {
         
     case '/admin/product-service': 
  
-        
+        restrictAdminAccess($authSession);
         if ($method == 'GET') {    
         // Check if this is an AJAX request
             if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
@@ -136,6 +158,7 @@ switch ($uri) {
 
     case '/admin/reports-analytics':
 
+        restrictAdminAccess($authSession);
         $aggregation = isset($_GET['aggregation']) ? $_GET['aggregation'] : '';
                 
                 // Prepare the data for the response
@@ -158,7 +181,7 @@ switch ($uri) {
 
     case '/admin/sales':
   
-        
+        restrictAdminAccess($authSession);
         if ($method == 'GET') {
             if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
                 handleController('admin/sales', 'Sales', 'index');
@@ -181,16 +204,17 @@ switch ($uri) {
 
     case '/admin/settings':
 
+        restrictAdminAccess($authSession);
         if ($method == 'GET') {
             if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-                handleController('admin/settings', 'Settings', 'index');
+                handleController('admin/settings', 'Settings', 'index', $sessionManager);
             } else {
                 require_once __DIR__ . '/../views/admin/admin.php';
             }
         } else if ($method == 'PUT') {
             $data = json_decode(file_get_contents('php://input'), true);
            if ($data['action'] == 'update_profile') {
-            handleController('admin/settings', 'Settings', 'updateProfileDetails', $data);
+            handleController('admin/settings', 'Settings', 'updateProfileDetails', $data, $sessionManager);
            } else if($data['action'] == 'update_general_info') {
             handleController('admin/settings', 'Settings', 'updateStoreDetails', $data);
            } else if($data['action'] == 'update_payment_info') {
@@ -207,6 +231,7 @@ switch ($uri) {
         break;
 
     case '/admin/backup':
+        restrictAdminAccess($authSession);
         require_once __DIR__ . '/../config/backup.php';
         break;
 

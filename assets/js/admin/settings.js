@@ -43,6 +43,10 @@ function fetchSettings() {
         url: '/admin/settings',
         method: 'GET',
         success: function(response) {
+
+            $("#settings-name").val(response.personal_info.full_name);
+            $("#settings-email").val(response.personal_info.email);
+
             $('#store-name').val(response.store_info.name);
             $('#contact-number').val(response.store_info.contact_number);
             $('#store-address').val(response.store_info.address);
@@ -76,7 +80,8 @@ function fetchSettings() {
     })
 }
 
-$('#edit-profile-form').on('submit', function(){
+$('#edit-profile-form').on('submit', function(e){
+    e.preventDefault();
     const name = $('#settings-name').val();
     const email = $('#settings-email').val();
     const old_password = $('#settings-oldpassword').val();
@@ -86,11 +91,12 @@ $('#edit-profile-form').on('submit', function(){
 
     $.ajax({
         url: '/admin/settings',
-        method: PUT,
-        type: 'application/json',
+        method: 'PUT',
+        contentType: 'application/json',
         data: JSON.stringify({name, email, old_password, new_password, confirm_password, action}),
-        success: function() {
-            alert('Profile updated!');
+        success: function(response) {
+            alert(response.message);
+            fetchSettings();
         }
     })
 })
@@ -104,7 +110,7 @@ $('#add-admin-form').on('submit', function(event){
     const email = $('#admin-email').val();
     const password = $('#admin-password').val();
     const action = 'update_profile'
-    alert('yow');
+   
 
     $.ajax({
         url: '/admin/settings',

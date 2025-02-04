@@ -388,6 +388,7 @@ footer{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    border-top: 3px solid #192C44;
 }
 
 footer .right-footer{
@@ -477,7 +478,90 @@ footer .copyright{
     padding-left: 40px;
 }
 
-/* Shop Page */
+/* Services Page */
+#services {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.service-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    min-height: 100vh;
+}
+
+#service-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    flex-grow: 1;
+}
+
+#service-section h2 {
+    color: #192C44;
+    margin-bottom: 5px;
+    font-size: 2.5rem;
+    margin-top: 10px;
+}
+
+#service-section #paragraph {
+    font-size: 01.0rem;
+    max-width: 800px;
+}
+
+/* Card Layout */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 40px;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.cards .card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #D7E7EB;
+    cursor: pointer;
+}
+
+.cards .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cards .card h3 {
+    font-size: 1.5rem;
+    color: #192C44;
+    padding: 15px;
+    margin-bottom: 30px;
+    background-color: #D7E7EB;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.cards .card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    text-align: justify;
+}
+
+
+/* Product Page */
 #page-header{
     background-image: url(files/banners/banner0.png);
     width: 100%;

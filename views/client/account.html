@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOTO247</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
 <body id="accountpage">
@@ -15,11 +16,11 @@
 
         <div>
             <ul id="navbar">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="/views/client/index.html">Home</a></li>
+                <li><a href="/views/client/about.html">About</a></li>
+                <li><a href="/views/client/services.html">Services</a></li>
+                <li><a href="/views/client/products.html">Products</a></li>
+                <li><a href="/views/client/contact.html">Contact</a></li>
             </ul>
         </div>
 
@@ -28,8 +29,8 @@
                 <li>
                     <input type="text" placeholder="Search..." id="search-bar">
                 </li>
-                <li><a class="active" href="account.html"><ion-icon name="person"></ion-icon></a></li>
-                <li><a href="cart.html"><ion-icon name="cart"></ion-icon></a></li>
+                <li><a class="active" href="/views/client/account.html"><ion-icon name="person"></ion-icon></a></li>
+                <li><a href="/views/client/cart.html"><ion-icon name="cart"></ion-icon></a></li>
             </ul>
         </div>
     </section>
@@ -41,16 +42,16 @@
             <div class="form-box login">
                 <h2>Login</h2>
 
-                <form action="#">
+                <form id = "login-form" method = "POST">
                     <div class="input-box">
                         <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                        <input type="email" required>
+                        <input id = "login-email" type="email" required>
                         <label>Email</label>
                     </div>
 
                     <div class="input-box">
                         <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                        <input type="password" required>
+                        <input id = "login-password" type="password" required>
                         <label>Password</label>
                     </div>
 
@@ -71,23 +72,23 @@
             <div class="form-box register">
                 <h2>Register</h2>
 
-                <form action="#">
+                <form id = "register-form" method = "POST">
                     <div class="left-regis">
                         <div class="input-box">
                             <span class="icon"><ion-icon name="person"></ion-icon></span>
-                            <input type="text" required>
+                            <input id = "register-username" type="text" required>
                             <label>Username</label>
                         </div>
 
                         <div class="input-box">
                             <span class="icon"><ion-icon name="call"></ion-icon></span>
-                            <input type="tel" maxlength="11" required>
+                            <input id = "register-phone" type="tel" maxlength="11" required>
                             <label>Phone Number</label>
                         </div>
 
                         <div class="input-box">
                             <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                            <input type="email" required>
+                            <input id = "register-email" type="email" required>
                             <label>Email</label>
                         </div>
                     </div>
@@ -101,7 +102,7 @@
 
                         <div class="input-box">
                             <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                            <input type="password" required>
+                            <input id = "register-password" type="password" required>
                             <label>Confirm Password</label>
                         </div>
 
@@ -122,7 +123,8 @@
         
 
 
-    <script src="script.js"></script>
+    <script src="/views/client/script.js"></script>
+    <script src="/assets/js/authentication/authentication.js"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

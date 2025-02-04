@@ -81,7 +81,7 @@
                 </li>
 
                 <li>
-                    <a href="#" class="sign-out-btn" onclick="confirmSignOut()">
+                    <a class="sign-out-btn" id = 'admin-sign-out' >
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -839,8 +839,9 @@
                 <!---------------------------------sign out section--------------------------------->
                 <div id="sign-out" class="section">
                     <h2>Sign Out</h2>
-                    <button onclick="confirmSignOut()">Sign Out</button>
+                    <button id="sign-out-btn">Sign Out</button>
                 </div>
+                
                 <!------------------------------end of sign out section----------------------------------------------->
 
             </div> 

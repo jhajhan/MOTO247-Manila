@@ -3,11 +3,17 @@
 require_once __DIR__ . '/../session/session_manager.php';
 require_once __DIR__ . '/../session/auth_session.php';
 
+// Initialize SessionManager to start the session
+$sessionManager = new SessionManager();
+$sessionManager->start();
+
+// Initialize AuthSession for checking user roles (e.g., Admin)
 $authSession = new AuthSession();
 
+// Restrict Admin Access
 function restrictAdminAccess($authSession) {
     if (!$authSession->isAdmin()) {
-        header("Location: /"); // Redirect non-admins to login
+        header("Location: /"); // Redirect non-admins to the homepage (or login)
         exit();
     }
 }
@@ -30,7 +36,7 @@ function handleController($controllerPath, $controllerClass, $method, $params = 
 switch ($uri) {
     // Client Routes
     case '/':
-        require_once __DIR__ . '/../views/client/home.php';
+        require_once __DIR__ . '/../views/client/index.html';
         break;
 
 
@@ -73,7 +79,7 @@ switch ($uri) {
 
     case '/admin':
         // restrictAdminAccess($authSession);
-        require_once __DIR__ . '/../views/admin/admin.html';
+        require_once __DIR__ . '/../views/admin/admin.php';
         break;
 
 
@@ -96,7 +102,7 @@ switch ($uri) {
                 handleController('admin/dashboard', 'Dashboard', 'index', $data);
             } else {
                 // If it's not an AJAX request, load the HTML view
-                require_once __DIR__ . '/../views/admin/admin.html';
+                require_once __DIR__ . '/../views/admin/admin.php';
             }
         }
         break;
@@ -111,7 +117,7 @@ switch ($uri) {
                 handleController('admin/product_service', 'Product_Service', 'index');
             } else {
                 // If it's a normal browser request, load the admin panel HTML
-                require_once __DIR__ . '/../views/admin/admin.html';
+                require_once __DIR__ . '/../views/admin/admin.php';
             }
            
         } else if ($method == 'POST') {
@@ -144,7 +150,7 @@ switch ($uri) {
                 handleController('admin/reports_analytics', 'Reports_Analytics', 'index');
             }                       
         } else {
-            require_once __DIR__ . '/../views/admin/admin.html';
+            require_once __DIR__ . '/../views/admin/admin.php';
         }
         
         break;
@@ -157,7 +163,7 @@ switch ($uri) {
             if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
                 handleController('admin/sales', 'Sales', 'index');
             } else {
-                require_once __DIR__ . '/../views/admin/admin.html';
+                require_once __DIR__ . '/../views/admin/admin.php';
             }
             
         } else if ($method == 'POST') {
@@ -179,7 +185,7 @@ switch ($uri) {
             if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
                 handleController('admin/settings', 'Settings', 'index');
             } else {
-                require_once __DIR__ . '/../views/admin/admin.html';
+                require_once __DIR__ . '/../views/admin/admin.php';
             }
         } else if ($method == 'PUT') {
             $data = json_decode(file_get_contents('php://input'), true);

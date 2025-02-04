@@ -24,7 +24,7 @@
             $email = htmlspecialchars($data['email']);
             $username = htmlspecialchars($data['username']);
             $password = password_hash($data['password'], PASSWORD_BCRYPT);
-            $full_name = htmlspecialchars($data['full_name']);
+            $full_name = htmlspecialchars($data['full_name']) ?? null;
             $role = htmlspecialchars($data['role']) ?? 'user';
             $created_at = date('Y-m-d H:i:s');
             $token = bin2hex(random_bytes(50));
@@ -78,40 +78,48 @@
 
         }
 
-        function login ($data) {
-
+        function login($data) {
+            ob_start(); // Start output buffering
+        
             global $conn;
-
-
-            $username = htmlspecialchars($data['username']);
+            $email = htmlspecialchars($data['email']);
             $password = $data['password'];
-
-            
-
-            $query = "SELECT * FROM user WHERE username = ?";
+        
+            $query = "SELECT * FROM user WHERE email = ?";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param('s', $username);
-            echo $stmt->execute();
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
             $result = $stmt->get_result();
             $user = $result->fetch_assoc();
-
-            echo json_encode($user);
-            echo password_verify($password, $user['password']);
-
         
+            header('Content-Type: application/json');
+
+            $response = [];
+
             if ($user) {
                 if ($user['verified'] == 1 && password_verify($password, $user['password'])) {
                     $session = new SessionManager();
                     $session->start();
-                    $session->set('user_id', $user['id']);
+                    $session->set('user_id', $user['user_id']);
                     $session->set('user_type', $user['role']);
-                    echo json_encode(['message' => 'User logged in successfully']);
 
+                    $response['status'] = 'success';
+                    $response['redirect'] = ($user['role'] === 'admin') ? '/admin' : '/';
                 } else {
-                    echo json_encode(['message' => 'Invalid email or password']);
+                    $response['status'] = 'error';
+                    $response['message'] = 'Invalid email or password';
                 }
+            } else {
+                $response['status'] = 'error';
+                $response['message'] = 'User not found';
             }
+
+            echo json_encode($response);
+            exit();
+
+            
         }
+        
 
         function verifyEmail ($token) {
 
@@ -142,11 +150,45 @@
         }
 
         function logout() {
-            $auth = new AuthSession();
-            $auth->logout();
-            echo json_encode(['message' => 'User logged out successfully']);
-
+            try {
+                // Initialize session handling
+                $auth = new AuthSession();
+                
+                // Check if the user is authenticated before attempting to logout
+                if (!$auth->isLogged()) {
+                    // If the user is not logged in, return an error response
+                    header('Content-Type: application/json');
+                    echo json_encode([
+                        'status' => 'error',
+                        'message' => 'User is not logged in.'
+                    ]);
+                    exit();
+                }
+        
+                // Perform the logout operation
+                $auth->logout();
+        
+                // Ensure headers are set before output
+                header('Content-Type: application/json');
+                
+                // Return JSON response with success status and redirect URL
+                echo json_encode([
+                    'status' => 'success',
+                    'redirect' => '/'
+                ]);
+                exit();
+        
+            } catch (Exception $e) {
+                // If any exception occurs, catch it and send an error response
+                header('Content-Type: application/json');
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'An error occurred during logout: ' . $e->getMessage()
+                ]);
+                exit();
+            }
         }
+        
     }
 
 ?>

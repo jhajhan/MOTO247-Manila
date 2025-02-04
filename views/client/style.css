@@ -72,6 +72,7 @@ body{
     position: sticky;
     top: 0;
     left: 0;
+    flex-wrap: wrap;
 }
 
 .logo{
@@ -296,6 +297,13 @@ body{
     font-size: 25px;
 }
 
+.subtitle{
+    padding: 7px;
+    font-size: 23px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #192C44;
+}
 
 #banner{
     display: flex;
@@ -545,6 +553,7 @@ footer .copyright{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 100px;
 }
 
 #contact-details .details{
@@ -588,7 +597,7 @@ footer .copyright{
 #contact-details .map{
     width: 55%;
     height: 400px;
-    border: 3px solid #108FB6;
+    border: 10px solid #192C44;
 }
 
 #contact-details .map iframe{
@@ -599,13 +608,13 @@ footer .copyright{
 #form-details{
     display: flex;
     justify-content: space-between;
-    margin: 30px;
+    margin: 70px;
     padding: 80px;
-    border: 1px solid #e1e1e1;
+    border: 3px solid #e1e1e1;
 }
 
 #form-details form{
-    width: 65%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -624,13 +633,16 @@ footer .copyright{
     padding-bottom: 25px;
     display: flex;
     align-items: flex-start;
+    padding-top: 35px;
 }
 
 #form-details .people div img{
-    width: 65px;
-    height: 65px;
+    width: 100px;
+    height: auto;
     object-fit: cover;
     margin-right: 15px;
+    border-radius: 50%;
+    border: 2px solid #192C44;
 }
 
 #form-details .people div p{
@@ -641,18 +653,227 @@ footer .copyright{
 
 #form-details .people div p span{
     display: block;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
     color: #000;
 }
 
 /* Account Page */
-.account-container{
+
+/* Dropdown menu styling */
+.dropdown{
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu{
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 60px;
+    background: #108FB6;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    list-style: none;
+    padding: 15px 0;
+    min-width: 200px;
+    z-index: 1000;
+}
+
+.dropdown-menu li{
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.dropdown-menu li a{
+    text-decoration: none;
+    color: #fff !important;
+    display: block;
+}
+
+.dropdown-menu li:not(:last-child){
+    margin-bottom: 5px;
+}
+
+.dropdown-menu li a:hover,
+.dropdown-menu li a.active{
+    color: #192C44 !important;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.dropdown-menu.show{
+    display: block;
+}
+
+/* Account Profile Settings Layout */
+/* General Styles */
+#profile-settings {
     display: flex;
+    width: 100%;
+    height: 90vh;
+    background-color: #f4f4f4;
+}
+
+/* Sidebar */
+.profile-sidebar {
+    width: 250px;
+    height: 100vh;
+    background: #192C44;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-bottom: 10px;
+}
+
+#profile-username {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.p-button {
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: 0.2s;
+    background-color: #D7E7EB;
+    color: #192C44;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 50px;
+}
+
+.settings-menu {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.settings-menu li {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.settings-menu li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.settings-menu li a:hover {
+    color: #D7E7EB !important;
+    position: relative;
+    transition: color 0.3s ease;
+    font-weight: bold;
+}
+
+.last-setting-menu{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Content Section */
+.profile-content{
+    flex: 1;
+    padding: 30px;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section{
+    display: none;
+}
+
+.profile-section h2{
+    font-size: 30px;
+    margin-bottom: 5px;
+    color: #192C44;
+    border-bottom: 2px solid #192C44;
+}
+
+.profile-section form{
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-section label{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.profile-section input{
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.hidden{
+    display: none;
+}
+
+.profile-content .normal{
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.password-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 40%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    color: #555;
+}
+
+
+/* For dropdown 'to */
+.account-container{
+    display: none; /* Hidden lang muna, shown via JS */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for modal effect */
+    z-index: 1000;
     justify-content: center;
     align-items: center;
-    height: 90vh;
-    width: 100%;
+}
+
+.account-container.active {
+    display: flex;
 }
 
 .wrapper{
@@ -856,7 +1077,27 @@ footer .copyright{
     font-weight: 650;
 }
 
+/* Additional styling for modal effect */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.modal-overlay.active {
+    display: block;
+}
+
 /* Cart Page */
+#cart{
+    overflow-x: auto;
+}
+
 #cart table{
     width: 100%;
     border-collapse: collapse;
@@ -873,8 +1114,12 @@ footer .copyright{
     width: 70px;
 }
 
-#cart table td:nth-child(1){
-    width: 100px;
+#cart table td:nth-child(1),
+#cart table td:nth-child(4),
+#cart table td:nth-child(5),
+#cart table td:nth-child(6),
+#cart table td:nth-child(7){
+    width: 150px;
     text-align: center;
 }
 
@@ -885,13 +1130,6 @@ footer .copyright{
 
 #cart table td:nth-child(3){
     width: 250px;
-    text-align: center;
-}
-
-#cart table td:nth-child(4),
-#cart table td:nth-child(5),
-#cart table td:nth-child(6){
-    width: 150px;
     text-align: center;
 }
 
@@ -969,3 +1207,99 @@ footer .copyright{
     padding: 10px;
     font-size: 13px;
 }
+
+#select-product{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#select-all{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+#sticky-bar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #D7E7EB;
+    padding: 15px 20px;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cart-container{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 60px;
+}
+
+.cart-container label{
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+}
+
+.cart-container button{
+    background: none;
+    border: none;
+    color: #108FB6;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 5px 10px;
+}
+
+.total{
+    font-size: 14px;
+    padding-right: 60px;
+}
+
+.total span{
+    padding-right: 18px;
+}
+
+.total strong{
+    color: #108FB6;
+    font-size: 16px;
+}
+
+/* Media Query */
+
+/* For mobile devices */
+@media (max-width: 480px) {
+
+}
+  
+/* For tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+    #navbar, #icons{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+}
+  
+  /* For small laptops */
+@media (min-width: 769px) and (max-width: 1024px) {
+    
+}
+  
+/* For large screens */
+@media (min-width: 1025px) and (max-width: 1440px) {
+   
+}
+  
+/* For extra-large screens */
+@media (min-width: 1441px) {
+  
+}
+  

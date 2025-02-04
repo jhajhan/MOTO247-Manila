@@ -146,24 +146,57 @@ $('#edit-general-form').on('submit', function(event){
 })
 
 
-$('#edit-payment-form').on('submit', function(event){
+$('#edit-payment-form').on('submit', function(event) {
     event.preventDefault();
-    alert('hello');
+
     const gcash_account = $('#gcash-name').val();
     const gcash_no = $('#gcash-number').val();
-    // const gcash_qr = $('#gcash-qr').val();
+    let gcash_qr = '';
     const action = 'update_payment_info';
 
-    $.ajax({
-        url: '/admin/settings',
-        method: 'PUT',
-        type: 'application/json',
-        data: JSON.stringify({gcash_account, gcash_no, action}),
-        success: function() {
-            alert('Payment Info Updated!');
-        }
-    })
-})
+    var formData = new FormData();
+    var fileInput = $('#gcash-qr')[0].files[0];  // Ensure the file is being correctly selected
+
+    if (fileInput) {
+        formData.append('file1', fileInput);
+
+        // First AJAX request to upload image
+        $.ajax({
+            url: '/upload-image',  // Your PHP upload endpoint
+            method: 'POST',
+            data: formData,
+            contentType: false,  // Don't set content type for FormData
+            processData: false,  // Don't process the data (important for file uploads)
+            success: function(response) {
+                alert('yoh');
+                data = JSON.parse(response);
+
+                gcash_qr = data.imageUrl;  // The URL of the uploaded image
+                console.log("Image uploaded successfully! URL: " + gcash_qr);
+
+                // Second AJAX request to update payment info
+                $.ajax({
+                    url: '/admin/settings',
+                    method: 'PUT',
+                    contentType: 'application/json',  // Proper content type for JSON data
+                    data: JSON.stringify({ gcash_account, gcash_no, gcash_qr, action }), // Send JSON data
+                    success: function() {
+                        alert('Payment Info Updated!');
+                    },
+                    error: function() {
+                        alert('Error updating payment info');
+                    }
+                });
+            },
+            error: function() {
+                alert('Error uploading image');
+            }
+        });
+    }
+});
+
+    
+
 
 function removeAdmin(id) {
 

@@ -1,5 +1,17 @@
 <?php
 
+require_once __DIR__ . '/../session/session_manager.php';
+require_once __DIR__ . '/../session/auth_session.php';
+
+$authSession = new AuthSession();
+
+function restrictAdminAccess($authSession) {
+    if (!$authSession->isAdmin()) {
+        header("Location: /"); // Redirect non-admins to login
+        exit();
+    }
+}
+
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Get the requested URI
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -60,11 +72,13 @@ switch ($uri) {
     // Admin Routes
 
     case '/admin':
+        // restrictAdminAccess($authSession);
         require_once __DIR__ . '/../views/admin/admin.html';
         break;
 
 
     case '/admin/dashboard':
+        // restrictAdminAccess($authSession);
         if ($method == 'GET') {
             // Check if the request is an AJAX request
             if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
@@ -190,7 +204,7 @@ switch ($uri) {
         require_once __DIR__ . '/../config/backup.php';
         break;
 
-    case '/upload-product-image':
+    case '/upload-image':
         require_once __DIR__ . '/../controllers/admin/upload_product_image.php';
         break;
 

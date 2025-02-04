@@ -19,37 +19,30 @@ $dbname = $_ENV['DB_NAME'];
 // Set the backup file name with timestamp
 $backupFile = 'backup_' . $dbname . '_' . date("Y-m-d_H-i-s") . '.sql';
 
-// Define backup file path (you can use a temporary folder for this)
-$backupPath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $backupFile; // Use PHP's temp directory
+// Define backup file path (temporary directory)
+$backupPath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $backupFile;
 
-// Command to execute mysqldump and save the backup to the specified file
-$command = "mysqldump --opt -h $host -u $username -p$password $dbname > $backupPath";
-
-// Execute the command to create the backup
+// Command to execute mysqldump
+$command = "mysqldump --opt -h $host -u $username --password='$password' $dbname 2>&1 > $backupPath";
 exec($command, $output, $result);
 
-// Check if the backup was successful
+// Debugging: Log output to check if command runs
+error_log("Backup Output: " . print_r($output, true));
+
+// Ensure no output is sent before headers
 if ($result == 0 && file_exists($backupPath)) {
-    // Clean the output buffer and prevent any additional output
-    ob_clean();
+    ob_clean(); // Clear buffer
     flush();
 
-    // Set headers to force the browser to download the file
     header('Content-Type: application/sql');
     header('Content-Disposition: attachment; filename="' . basename($backupFile) . '"');
     header('Content-Length: ' . filesize($backupPath));
 
-    // Read the file and send it to the browser
     readfile($backupPath);
-
-    // Optionally, delete the backup file after download to save space
     unlink($backupPath);
-    exit;  // Ensure no further output is sent
+    exit;
 } else {
-    // Error handling if backup fails
+    ob_end_clean();
     echo json_encode(['error' => 'Error creating database backup.']);
 }
-
-// End output buffering and discard any output
-ob_end_clean();
 ?>

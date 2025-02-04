@@ -161,7 +161,7 @@ function addProduct() {
         formData.append('file1', fileInput);
 
         $.ajax({
-            url: '/upload-product-image',  // Your PHP upload endpoint
+            url: '/upload-image',  // Your PHP upload endpoint
             method: 'POST',
             data: formData,
             contentType: false,  // Don't set content type for FormData
@@ -215,7 +215,7 @@ function editProduct () {
         formData.append('file1', fileInput);
 
         $.ajax({
-            url: '/upload-product-image',  // Your PHP upload endpoint
+            url: '/upload-image',  // Your PHP upload endpoint
             method: 'POST',
             data: formData,
             contentType: false,  // Don't set content type for FormData

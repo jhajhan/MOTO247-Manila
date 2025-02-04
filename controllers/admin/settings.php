@@ -133,22 +133,32 @@
         }
 
         function updatePaymentDetails($data) {
+            global $conn;
+        
             $account_name = $data['gcash_account'];
             $account_number = $data['gcash_no'];
-            // $qr = $data['qr'];
-
-            global $conn;
-            $query = 'UPDATE store_info SET account_name = ?, account_no = ? WHERE store_id = 1';
+            $qr = $data['gcash_qr'];
+        
+            // Fix: Add missing comma in SQL query
+            $query = 'UPDATE store_info SET account_name = ?, account_no = ?, account_qr = ? WHERE store_id = 1';
+        
+            // Prepare statement
             $stmt = $conn->prepare($query);
-            $stmt->bind_param('ss', $account_name, $account_number);
-            $stmt->execute();
-
-            if ($stmt->affected_rows > 0) {
-                echo 'success';
+            if (!$stmt) {
+                return 'Error: ' . $conn->error;  // Return SQL error
+            }
+        
+            // Bind parameters
+            $stmt->bind_param('sss', $account_name, $account_number, $qr);
+        
+            // Execute query
+            if ($stmt->execute()) {
+                return ($stmt->affected_rows > 0) ? 'success' : 'no changes made';
             } else {
-                echo 'failed';
+                return 'failed: ' . $stmt->error;  // Return error message
             }
         }
+        
     }
     
     

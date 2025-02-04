@@ -1,5 +1,17 @@
 <?php
 
+require_once __DIR__ . '/../session/session_manager.php';
+require_once __DIR__ . '/../session/auth_session.php';
+
+$authSession = new AuthSession();
+
+function restrictAdminAccess($authSession) {
+    if (!$authSession->isAdmin()) {
+        header("Location: /"); // Redirect non-admins to login
+        exit();
+    }
+}
+
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Get the requested URI
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -21,23 +33,87 @@ switch ($uri) {
         require_once __DIR__ . '/../views/client/home.php';
         break;
 
-    case '/register':
-        require_once __DIR__ . '/../views/client/register.php';
-        break;
 
     case '/products':
         handleController('admin/product_service', 'Product_Service', 'getProducts');
         break;
 
-    // Admin Routes
-    case '/admin/dashboard':
-        handleController('admin/dashboard', 'Dashboard', 'index');
+
+    // Authentication Routes
+
+    case '/register':
+        if ($method == 'POST') {
+            $data = json_decode(file_get_contents('php://input'), true);
+            handleController('authentication/authentication', 'Authentication', 'register', $data);
+        }
         break;
 
-    case '/admin/product-service': 
-        if ($method == 'GET') {
+    case '/login':
+        if ($method == 'POST') {
             $data = json_decode(file_get_contents('php://input'), true);
-            handleController('admin/product_service', 'Product_Service', 'index');
+            handleController('authentication/authentication', 'Authentication', 'login', $data);
+        }
+        break;
+
+    case '/logout':
+        handleController('authentication/authentication', 'Authentication', 'logout');
+        break;
+
+    case '/verify-email':
+        if ($method == 'GET') {
+            if (isset($_GET['token'])) {
+                $token = $_GET['token'];
+                handleController('authentication/authentication', 'Authentication', 'verifyEmail', $token);
+            }
+        }
+
+        break;
+
+    // Admin Routes
+
+    case '/admin':
+        // restrictAdminAccess($authSession);
+        require_once __DIR__ . '/../views/admin/admin.html';
+        break;
+
+
+    case '/admin/dashboard':
+        // restrictAdminAccess($authSession);
+        if ($method == 'GET') {
+            // Check if the request is an AJAX request
+            if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+                // Get the date and month from the query parameters
+                $date = isset($_GET['date']) ? $_GET['date'] : '';
+                $month = isset($_GET['month']) ? $_GET['month'] : '';
+    
+                // Prepare the data for the response
+                $data = [
+                    'date' => $date,
+                    'month' => $month,
+                ];
+    
+                // Handle the controller logic
+                handleController('admin/dashboard', 'Dashboard', 'index', $data);
+            } else {
+                // If it's not an AJAX request, load the HTML view
+                require_once __DIR__ . '/../views/admin/admin.html';
+            }
+        }
+        break;
+        
+    case '/admin/product-service': 
+ 
+        
+        if ($method == 'GET') {    
+        // Check if this is an AJAX request
+            if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+                $data = json_decode(file_get_contents('php://input'), true);
+                handleController('admin/product_service', 'Product_Service', 'index');
+            } else {
+                // If it's a normal browser request, load the admin panel HTML
+                require_once __DIR__ . '/../views/admin/admin.html';
+            }
+           
         } else if ($method == 'POST') {
             $data = json_decode(file_get_contents('php://input'), true);
             handleController('admin/product_service', 'Product_Service', 'addProduct', $data);
@@ -53,28 +129,87 @@ switch ($uri) {
 
 
     case '/admin/reports-analytics':
-        handleController('admin/reports_analytics', 'Reports_Analytics', 'index');
+
+        $aggregation = isset($_GET['aggregation']) ? $_GET['aggregation'] : '';
+                
+                // Prepare the data for the response
+                $data = [
+                    'aggregation' => $aggregation
+                ];
+
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            if ($data) {
+                handleController('admin/reports_analytics', 'Reports_Analytics', 'index', $data);
+            } else {
+                handleController('admin/reports_analytics', 'Reports_Analytics', 'index');
+            }                       
+        } else {
+            require_once __DIR__ . '/../views/admin/admin.html';
+        }
+        
         break;
 
+
     case '/admin/sales':
+  
         
         if ($method == 'GET') {
-            handleController('admin/sales', 'Sales', 'index');
+            if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+                handleController('admin/sales', 'Sales', 'index');
+            } else {
+                require_once __DIR__ . '/../views/admin/admin.html';
+            }
+            
         } else if ($method == 'POST') {
             $data = json_decode(file_get_contents('php://input'), true);
-            handleController('admin/sales', 'Sales', 'addPhysicalSale', $data);
+            handleController('admin/sales', 'Sales', 'addSale', $data);
         } else if ($method == 'PUT') {
             $data = json_decode(file_get_contents('php://input'), true);
-            handleController('admin/sales', 'Sales', 'updateOrderStatus', $data);
+            handleController('admin/sales', 'Sales', 'editOrder', $data);
         } else if ($method == 'DELETE') {
             $data = json_decode(file_get_contents('php://input'), true);
-            handleController('admin/sales', 'Sales', 'deleteOrder', $data);
+            handleController('admin/sales', 'Sales', 'deleteSale', $data);
         }
 
         break;
 
     case '/admin/settings':
-        handleController('admin/settings', 'Settings', 'index');
+
+        if ($method == 'GET') {
+            if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+                handleController('admin/settings', 'Settings', 'index');
+            } else {
+                require_once __DIR__ . '/../views/admin/admin.html';
+            }
+        } else if ($method == 'PUT') {
+            $data = json_decode(file_get_contents('php://input'), true);
+           if ($data['action'] == 'update_profile') {
+            handleController('admin/settings', 'Settings', 'updateProfileDetails', $data);
+           } else if($data['action'] == 'update_general_info') {
+            handleController('admin/settings', 'Settings', 'updateStoreDetails', $data);
+           } else if($data['action'] == 'update_payment_info') {
+            handleController('admin/settings', 'Settings', 'updatePaymentDetails', $data);
+           }
+        } else if ($method == 'POST') {
+            $data = json_decode(file_get_contents('php://input'), true);
+            handleController('admin/settings', 'Settings', 'addAdmin', $data);
+        } else if ($method == 'DELETE') {
+            $data = json_decode(file_get_contents('php://input'), true);
+            handleController('admin/settings', 'Settings', 'removeAdmin', $data);
+        }
+
+        break;
+
+    case '/admin/backup':
+        require_once __DIR__ . '/../config/backup.php';
+        break;
+
+    case '/upload-image':
+        require_once __DIR__ . '/../controllers/admin/upload_product_image.php';
+        break;
+
+    case '/generate-report':
+        require_once __DIR__ . '/../controllers/admin/generate_report.php';
         break;
 
     // 404 Error for Unknown Routes

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,5 +9,9 @@
 <body>
     <h1>Welcome to the Homepage!</h1>
     <a href="/register">Register</a>
+
+   
+
+
 </body>
 </html>

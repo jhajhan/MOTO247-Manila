@@ -77,6 +77,25 @@ function getCartItems() {
 }
 
 
+function getOrders() 
+{
+    global $conn;
+    $userId = $_SESSION['auth_user']['user_id'];
+
+    // Use backticks around the table name 'order'
+    $query = "SELECT * FROM `order` WHERE user_id = '$userId' ORDER BY order_id DESC";
+    $query_run = mysqli_query($conn, $query);
+
+    // Check if the query was successful
+    if ($query_run) {
+        return $query_run;
+    } else {
+        // Handle the error, e.g., log it or return false
+        error_log("Error in getOrders: " . mysqli_error($conn));
+        return false;
+    }
+}
+
 
 
 function redirect($url, $message) {
@@ -85,6 +104,14 @@ function redirect($url, $message) {
     exit(0);
 }
 
+
+function checkTrackingNum($tracking_no){
+    global $conn;
+    $userId = $_SESSION['auth_user']['user_id'];
+
+    $query ="SELECT * FROM `order` WHERE tracking_no = '$tracking_no' AND  user_id = '$userId'";
+    return mysqli_query($conn, $query);
+}
 
 
 ?>

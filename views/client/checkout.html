@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOTO247</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section id="header">
+        <a href="#"><img src="files/Logo.png" class="logo" alt="logo"></a>
+
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <ul id="icons">
+                <li>
+                    <input type="text" placeholder="Search..." id="search-bar">
+                </li>
+                <li><a href="account.html"><ion-icon name="person"></ion-icon></a></li>
+                <li><a class="active" href="cart.html"><ion-icon name="cart"></ion-icon></a></li>
+            </ul>
+        </div>
+    </section>
+    
+    <section id="checkout" class="section-p1">
+        <div class="checkout-container">
+            <!-- Delivery Information -->
+            <div class="checkout-box full-width">
+                <h3>Delivery Address</h3>
+                <p><strong>Name:</strong> Nikki Manginsay</p>
+                <p><strong>Contact Number:</strong> (+63) 9926293624</p>
+                <p><strong>Address:</strong> Blk 30 Lot 31 Purok 4 Martizano Street, Matro Residence, Central Bicutan, Taguig City, Metro Manila, 1633</p>
+            </div>
+            
+            <!-- Products Ordered -->
+            <div class="checkout-box full-width">
+                <h3>Products Ordered</h3>
+                <table width="100%">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Unit Price</th>
+                            <th>Quantity</th>
+                            <th>Item Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="files/products/product1.jpg" alt="Product Image"></td>
+                            <td>Product Name</td>
+                            <td>₱253</td>
+                            <td>1</td>
+                            <td>₱253</td>
+                        </tr>
+
+                        <tr>
+                            <td><img src="files/products/product1.jpg" alt="Product Image"></td>
+                            <td>Product Name</td>
+                            <td>₱253</td>
+                            <td>1</td>
+                            <td>₱253</td>
+                        </tr>
+
+                        <tr>
+                            <td><img src="files/products/product1.jpg" alt="Product Image"></td>
+                            <td>Product Name</td>
+                            <td>₱253</td>
+                            <td>1</td>
+                            <td>₱253</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    
+            <!-- Payment Method -->
+            <div class="checkout-box full-width">
+                <h3>Payment Method</h3>
+                <p>Cash on Delivery (COD)</p>
+            </div>
+    
+            <!-- Order Summary -->
+            <div class="checkout-box full-width">
+                <h3>Order Summary</h3>
+                <p><strong>Cart Subtotal:</strong> ₱253</p>
+                <p><strong>Shipping Fee:</strong> ₱36</p>
+                <p><strong>Total:</strong> <span class="total-price">₱289</span></p>
+            </div>
+    
+            <div class="checkout-buttons">
+                <button class="normal">Place Order</button>
+
+                <a href="cart.html">
+                    <button class="normal" id="back-to-cart">Back to Cart</button>
+                </a>
+                
+            </div>
+        </div>
+    </section>
+    
+
+    <script src="script.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

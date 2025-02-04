@@ -33,51 +33,50 @@
             </ul>
         </div>
     </section>
-
-    <section id="page-header" class="about-header">
-        <h2>Let's Talk</h2>
-        <p>Leave a message. We love to hear from you</p>
-    </section>
-
+    
     <section id="cart" class="section-p1">
         <table width="100%">
             <thead>
                 <tr>
-                    <td>Remove</td>
+                    <td>Select</td>
                     <td>Image</td>
                     <td>Product</td>
                     <td>Price</td>
                     <td>Quantity</td>
                     <td>Subtotal</td>
+                    <td>Remove/Delete</td>
                 </tr>
             </thead>
 
             <tbody>
                 <tr>
-                    <td><a href=""></a><ion-icon name="close-circle-outline"></ion-icon></a></td>
+                    <td><input type="checkbox" id="select-product"></td>
                     <td><img src="files/products/p1.png" alt=""></td>
                     <td>Product Name</td>
                     <td>₱15</td>
                     <td><input type="number" value="1"></td>
                     <td>₱15</td>
+                    <td><a href=""></a><ion-icon name="close-circle-outline"></ion-icon></a></td>
                 </tr>
 
                 <tr>
-                    <td><a href=""></a><ion-icon name="close-circle-outline"></ion-icon></a></td>
+                    <td><input type="checkbox" id="select-product"></a></td>
                     <td><img src="files/products/p1.png" alt=""></td>
                     <td>Product Name</td>
                     <td>₱15</td>
                     <td><input type="number" value="1"></td>
                     <td>₱15</td>
+                    <td><a href=""></a><ion-icon name="close-circle-outline"></ion-icon></a></td>
                 </tr>
 
                 <tr>
-                    <td><a href=""></a><ion-icon name="close-circle-outline"></ion-icon></a></td>
+                    <td><input type="checkbox" id="select-product"></a></td>
                     <td><img src="files/products/p1.png" alt=""></td>
                     <td>Product Name</td>
                     <td>₱15</td>
                     <td><input type="number" value="1"></td>
                     <td>₱15</td>
+                    <td><a href=""></a><ion-icon name="close-circle-outline"></ion-icon></a></td>
                 </tr>
             </tbody>
         </table>
@@ -117,47 +116,19 @@
         </div>
     </section>
 
-    <footer class="section-p1">
-        <div class="col">
-            <img class="logo" src="files/Logo.png" alt="Logo">
-            <h4>Contact</h4>
-            <p><strong>Address:</strong> chuchu</p>
-            <p><strong>Phone:</strong> chuchu</p>
-            <p><strong>Work Hours:</strong> chuchu</p>
+    <section id="sticky-bar" class="section-p1">
+        <div class="cart-container">
+            <input type="checkbox" id="select-all">
+            <label for="select-all">Select All (22)</label>
+            <button class="delete">Delete</button>
+        </div>   
 
-            <div class="follow">
-                <h4>Follow us</h4>
+        <div class="total">
+            <span>Total (1 item): <strong>₱253</strong></span>
 
-                <div class="icon">
-                    <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                </div>
-            </div>
+            <button class="normal">Check Out</button>
         </div>
-
-        <div class="col">
-            <h4>About</h4>
-            <a href="#">About Us</a>
-            <a href="#">Delivery Information</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms & Conditions</a>
-            <a href="#">Contact Us</a>
-        </div>
-
-        <div class="col">
-            <h4>My Account</h4>
-            <a href="#">Sign In</a>
-            <a href="#">View Cart</a>
-            <a href="#">My Wishlist</a>
-            <a href="#">Track My Order</a>
-            <a href="#">Help</a>
-        </div>
-        
-        <div class="copyright">
-            <p>&copy; Copyright Reserved.</p>
-        </div>
-    </footer>
+    </section>
 
     <script src="script.js"></script>
 

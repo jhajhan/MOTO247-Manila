@@ -29,20 +29,103 @@
                 <li>
                     <input type="text" placeholder="Search..." id="search-bar">
                 </li>
-                <li><a class="active" href="/views/client/account.html"><ion-icon name="person"></ion-icon></a></li>
-                <li><a href="/views/client/cart.html"><ion-icon name="cart"></ion-icon></a></li>
+                <li><a class="active" href="account.html"><ion-icon name="person"></ion-icon></a></li>
+                <li><a href="cart.html"><ion-icon name="cart"></ion-icon></a></li>
             </ul>
         </div>
     </section>
 
-    <div class="account-container">
+    <!-- Account Profile or Profile Settings na visible if logged in si user -->
+    <div id="profile-settings">
+        <div class="profile-sidebar">
+            <img src="files/pp1_placeholder.jpg" class="profile-pic" alt="Profile Picture">
+            <h3 id="profile-username">Tina Kitten</h3>
+            <button class="p-button">Update Profile Image</button>
+            <ul class="settings-menu">
+                <li><a href="#" onclick="showSection(event, 'edit-profile')">Edit Profile</a></li>
+                <li><a href="#" onclick="showSection(event, 'password-settings')">Password Settings</a></li>
+                <li><a href="#" onclick="showSection(event, 'display-settings')">Display & Accessibility</a></li>
+                <li><a href="#" class="last-setting-menu" >Sign Out</a></li>
+            </ul>
+        </div>
+    
+        <div class="profile-content">
+            <div id="edit-profile" class="profile-section">
+                <h2 class="profile-heading">Profile Information</h2>
+                <form>
+                    <label>Username</label>
+                    <input type="text" id="edit-username" value="Tina Kitten">
+    
+                    <label>Phone Number</label>
+                    <input type="tel" id="edit-phone" value="+639123456789">
+    
+                    <label>Email</label>
+                    <input type="email" id="edit-email" value="tinakitten@gmail.com">
+    
+                    <label>Address</label>
+                    <input type="text" id="edit-address" value="123 sa fine dining restaurant">
+    
+                    <label>Registered Date</label>
+                    <input type="text" value="January 1, 2023" disabled>
+    
+                    <div class="update-cancel">
+                        <button class="normal">Edit</button>
+                        <button class="normal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+    
+            <div id="password-settings" class="profile-section hidden">
+                <h2>Password Settings</h2>
+                <form>
+                    <label for="edit-password">Current Password</label>
+                    <div class="password-container">
+                        <input type="password" id="edit-password" value="password" disabled>
+                        <ion-icon class="eye-icon" data-toggle="edit-password" name="eye-outline"></ion-icon>
+                    </div>
+                    
+                    <label for="new-password">New Password</label>
+                    <div class="password-container">
+                        <input type="password" id="new-password">
+                        <ion-icon class="eye-icon" data-toggle="new-password" name="eye-outline"></ion-icon>
+                    </div>
+            
+                    <label for="confirm-password">Confirm New Password</label>
+                    <div class="password-container">
+                        <input type="password" id="confirm-password">
+                        <ion-icon class="eye-icon" data-toggle="confirm-password" name="eye-outline"></ion-icon>
+                    </div>
+            
+                    <div class="update-cancel">
+                        <button class="normal">Update Password</button>
+                        <button class="normal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div id="display-settings" class="profile-section hidden">
+                <h2>Display & Accessibility</h2>
+                <p>Customize your theme and accessibility settings.</p>
+                <button class="normal">Toggle Dark Mode</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login/Register Modal Popup. Eto kapag hindi naka login si user.
+     Two scenarios:
+     1. Kapag pinindot ni user yung account icon sa navbar dapat naka display
+     dun sa last text sa dropdown is "Login/Register" tapos kapag pinindot yun
+     ni user, lalabas 'tong modal na 'to
+     2. Kapag nasa site si user tapos nag add to cart siya agad, mag p-pop up
+     'tong modal na login/register') -->
+    <div class="account-container" id="account-modal">
         <div class="wrapper">
-            <span class="icon-close"><ion-icon name="close"></ion-icon></span>
+            <span class="icon-close" id="close-modal"><ion-icon name="close"></ion-icon></span>
 
             <div class="form-box login">
                 <h2>Login</h2>
 
-                <form id = "login-form" method = "POST">
+                <form action="#">
                     <div class="input-box">
                         <span class="icon"><ion-icon name="mail"></ion-icon></span>
                         <input id = "login-email" type="email" required>
@@ -72,7 +155,7 @@
             <div class="form-box register">
                 <h2>Register</h2>
 
-                <form id = "register-form" method = "POST">
+                <form action="#">
                     <div class="left-regis">
                         <div class="input-box">
                             <span class="icon"><ion-icon name="person"></ion-icon></span>
@@ -123,8 +206,7 @@
         
 
 
-    <script src="/views/client/script.js"></script>
-    <script src="/assets/js/authentication/authentication.js"></script>
+    <script src="script.js"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

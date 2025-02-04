@@ -16,38 +16,43 @@
                 <li class="nav-item">
                   <a class="nav-link" href="dashboard.php">Market</a>
                 </li>
-                <li class="nav-item dropdown">
+              </ul> -
+
+               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Shop
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><a class="dropdown-item" href="/MOTO247-Manila/views/products.php">Products</a></li>
+                    <li><a class="dropdown-item" href="/MOTO247-Manila/views/services.php">Services</a></li>
+                    <!-- <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Cart</a></li> -->
                   </ul>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/MOTO247-Manila/views/cart.php">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/MOTO247-Manila/views/orders.php">Orders</a>
+                </li>
+
               </ul>
               <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <?php if(!isset($_SESSION['authenticated'])): ?>
-                <li class="nav-item">
-                  <a class="nav-link" href="login.php">Login</a>
-                </li>
-                <?php endif; ?>
-
                 <?php if(!isset($_SESSION['authenticated'])): ?>
-                <li class="nav-item">
-                  <a class="nav-link" href="register.php">Registration</a>
-                </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/MOTO247-Manila/views/login.php">Login</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/MOTO247-Manila/views/register.php">Registration</a>
+                  </li>
                 <?php endif; ?>
 
-               <?php if(isset($_SESSION['authenticated'])): ?>
-                <li class="nav-item">
-                  <a class="nav-link" name="logout" href="logout.php">Logout</a>
-                </li>
+                <?php if(isset($_SESSION['authenticated'])): ?>
+                  <li class="nav-item">
+                    <a class="nav-link" name="logout" href="logout.php">Logout</a>
+                  </li>
                 <?php endif; ?>
-
-
               </ul>
               <form class="d-flex ms-3" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

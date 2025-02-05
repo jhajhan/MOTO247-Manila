@@ -49,21 +49,31 @@ function displayServices(page) {
         servicesList.append(serviceHTML);
     });
 
-    updateServicesPaginationControls();
+    // updateServicesPaginationControls();
+    $("html, body").animate({ scrollTop: $("#services-list").offset().top - 150 }, "fast");
 }
 
 function setupServicesPagination() {
+  
     const totalPages = Math.ceil(services.length / servicesPerPage);
     console.log("Total Services:", services.length, "Total Pages:", totalPages); // Debugging
 
     const paginationContainer = $("#pagination");
     paginationContainer.empty();
 
-    // Previous button
+    // If there's only 1 page, show only the page number and nothing else
+    if (totalPages === 1 || totalPages === 0) {
+        paginationContainer.append(`<span class="page-link active" 
+                style="background:#0e7fa0; color:white; padding:8px 15px; border-radius:5px; font-weight:bold;">
+                1
+            </span>`);
+
+        return;
+    }
+
+    // Previous button (only if there's more than 1 page and not on page 1)
     if (servicesCurrentPage > 1) {
-        paginationContainer.append(`<a href="#" class="prev" data-page="${servicesCurrentPage - 1}"><ion-icon name="arrow-back"></ion-icon></a>`);
-    } else {
-        paginationContainer.append(`<a href="#" class="prev disabled" data-page="${servicesCurrentPage - 1}"><ion-icon name="arrow-back"></ion-icon></a>`);
+        paginationContainer.append(`<a href="#" class="prev" data-page="${servicesCurrentPage - 1}">«</a>`);
     }
 
     // Page number links
@@ -72,14 +82,12 @@ function setupServicesPagination() {
         paginationContainer.append(`<a href="#" class="page-link ${activeClass}" data-page="${i}">${i}</a>`);
     }
 
-    // Next button
+    // Next button (only if there's more than 1 page and not on the last page)
     if (servicesCurrentPage < totalPages) {
-        paginationContainer.append(`<a href="#" class="next" data-page="${servicesCurrentPage + 1}"><ion-icon name="arrow-forward"></ion-icon></a>`);
-    } else {
-        paginationContainer.append(`<a href="#" class="next disabled" data-page="${servicesCurrentPage + 1}"><ion-icon name="arrow-forward"></ion-icon></a>`);
+        paginationContainer.append(`<a href="#" class="next" data-page="${servicesCurrentPage + 1}">»</a>`);
     }
 
-    // Add click functionality for page number and arrows
+    // Add click functionality for page numbers and arrows
     $(".page-link").click(function (e) {
         e.preventDefault();
         servicesCurrentPage = parseInt($(this).attr("data-page"));
@@ -91,32 +99,11 @@ function setupServicesPagination() {
         e.preventDefault();
         if (!$(this).hasClass("disabled")) {
             servicesCurrentPage = parseInt($(this).attr("data-page"));
+            
             displayServices(servicesCurrentPage);
             setupServicesPagination(); // Re-render pagination
         }
     });
-
-    updateServicesPaginationControls(); // Ensure the active page is updated
-}
-
-function updateServicesPaginationControls() {
-    $(".page-link").removeClass("active");
-    $(`.page-link[data-page='${servicesCurrentPage}']`).addClass("active");
-
-    // Disable Previous button if on first page
-    if (servicesCurrentPage === 1) {
-        $(".prev").addClass("disabled").removeAttr("href");
-    } else {
-        $(".prev").removeClass("disabled").attr("href", "#");
-    }
-
-    // Disable Next button if on last page
-    const totalPages = Math.ceil(services.length / servicesPerPage);
-    if (servicesCurrentPage === totalPages) {
-        $(".next").addClass("disabled").removeAttr("href");
-    } else {
-        $(".next").removeClass("disabled").attr("href", "#");
-    }
 }
 
 

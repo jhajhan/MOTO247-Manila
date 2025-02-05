@@ -16,11 +16,11 @@
 
         <div>
             <ul id="navbar">
-                <li><a href="/views/client/index.html">Home</a></li>
-                <li><a href="/views/client/about.html">About</a></li>
-                <li><a href="/views/client/services.html">Services</a></li>
-                <li><a href="/views/client/products.html">Products</a></li>
-                <li><a href="/views/client/contact.html">Contact</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/contact">Contact</a></li>
             </ul>
         </div>
 
@@ -29,8 +29,8 @@
                 <li>
                     <input type="text" placeholder="Search..." id="search-bar">
                 </li>
-                <li><a href="#" id="account-link"><ion-icon name="person"></ion-icon></a></li>
-                <li><a href="cart.html"><ion-icon name="cart"></ion-icon></a></li>
+                <li><a id="account-link"><ion-icon name="person"></ion-icon></a></li>
+                <li><a href="/cart"><ion-icon name="cart"></ion-icon></a></li>
             </ul>
         </div>
     </section>
@@ -118,16 +118,16 @@
     </div>
     
     <!-- Account Profile or Profile Settings na visible if logged in si user -->
-    <div id="profile-settings">
+    <div id="profile-settings" style="display: none;">
         <div class="profile-sidebar">
-            <img src="files/pp1_placeholder.jpg" class="profile-pic" alt="Profile Picture">
+            <img src="/views/client/files/pp1_placeholder.jpg" class="profile-pic" alt="Profile Picture">
             <h3 id="profile-username">Tina Kitten</h3>
             <button class="p-button">Update Profile Image</button>
             <ul class="settings-menu">
-                <li><a href="#" data-section="edit-profile">Edit Profile</a></li>
-                <li><a href="#" data-section="password-settings">Password Settings</a></li>
-                <li><a href="#" data-section="display-settings">Display & Accessibility</a></li>
-                <li><a href="#" class="last-setting-menu" >Sign Out</a></li>
+                <li><a data-section="edit-profile">Edit Profile</a></li>
+                <li><a data-section="password-settings">Password Settings</a></li>
+                <li><a data-section="display-settings">Display & Accessibility</a></li>
+                <li><a id = "sign-out-client"  class="last-setting-menu" >Sign Out</a></li>
             </ul>
         </div>
     

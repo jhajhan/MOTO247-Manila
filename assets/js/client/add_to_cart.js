@@ -207,6 +207,14 @@ $(document).ready(function() {
         });
     }
 });
+// checkout button
+
+$("#check-out-btn").on('click', function(){
+    const cart = getCartDataForCheckout();
+    
+})
+
+
 
 // Handle product selection checkbox
 

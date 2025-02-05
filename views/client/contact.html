@@ -6,20 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOTO247</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/views/client/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
 <body>
     <section id="header">
-        <a href="#"><img src="files/Logo.png" class="logo" alt="logo"></a>
+        <a href="#"><img src="/views/client/files/Logo.png" class="logo" alt="logo"></a>
 
         <div>
             <ul id="navbar">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a class="active" href="contact.html">Contact</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a class="active" href="/contact">Contact</a></li>
             </ul>
         </div>
 
@@ -28,8 +29,8 @@
                 <li>
                     <input type="text" placeholder="Search..." id="search-bar">
                 </li>
-                <li><a href="account.html"><ion-icon name="person"></ion-icon></a></li>
-                <li><a href="cart.html"><ion-icon name="cart"></ion-icon></a></li>
+                <li><a href="/profile"><ion-icon name="person"></ion-icon></a></li>
+                <li><a href="/cart"><ion-icon name="cart"></ion-icon></a></li>
             </ul>
         </div>
     </section>
@@ -41,25 +42,29 @@
             <h3>???</h3>
 
             <div>
+            
                 <li>
                     <ion-icon name="map"></ion-icon>
                     <p>1955 Abad Santos Ave. Tondo, Manila</p>
                 </li>
-
+                
                 <li>
                     <ion-icon name="mail-open"></ion-icon>
                     <p>business email</p>
                 </li>
-
+                
                 <li>
                     <ion-icon name="call"></ion-icon>
                     <p>0915 801 5865/0995 380 1900</p>
                 </li>
-
+                
                 <li>
                     <ion-icon name="alarm"></ion-icon>
                     <p>11AM - 7PM (6:30PM Cutoff for accepting services)</p>
                 </li>
+                
+                
+                
             </div>
         </div>
 
@@ -82,12 +87,12 @@
 
         <div class="people">
             <div>
-                <img src="files/people_1.jpg" alt="">
+                <img src="/views/client/files/people_1.jpg" alt="">
                 <p><span>Red Javez P. Caluag</span>Auditor/Manager<br>0915 801 5865<br>redjavez@gmail.com</p>
             </div>
 
             <div>
-                <img src="files/placeholder_cp1.png" alt="">
+                <img src="/views/client/files/placeholder_cp1.png" alt="">
                 <p><span>Rich Matthew P. Caluag</span>Manager/Customer Service<br>0995 380 1900<br>rich.caluag07@gmail.com</p>
             </div>
         </div>
@@ -107,7 +112,7 @@
 
     <footer class="section-p1">
         <div class="col">
-            <img class="logo" src="files/Logo.png" alt="Logo">
+            <img class="logo" src="/views/client/files/Logo.png" alt="Logo">
             <h4>Contact</h4>
             <p><strong>Address:</strong> 1955 Abad Santos Ave. Tondo, Manila</p>
             <p><strong>Phone:</strong> 0915 801 5865/0995 380 1900</p>
@@ -148,6 +153,7 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="/assets/js/client/store.js"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

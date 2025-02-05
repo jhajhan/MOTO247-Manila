@@ -99,7 +99,10 @@ function setupPagination() {
 
     // Create page links dynamically
     for (let page = 1; page <= totalPages; page++) {
-        let pageLink = `<a href="#" class="page-link" data-page="${page}">${page}</a>`;
+        let pageLink = `<a href="#" class="page-link" data-page="${page}" 
+            style="margin: 0 5px">
+            ${page}
+        </a>`;
         pageNumbersContainer.append(pageLink);
     }
 
@@ -110,10 +113,19 @@ function setupPagination() {
         if (page !== currentPage) {
             currentPage = page;
             displayProductsClient(currentPage);
+
+            $("html, body").animate({ scrollTop: $("#product-list").offset().top - 150 }, "fast");
+        
         }
     });
 
+    // Ensure pagination stays in place
     updatePaginationControls();
+
+    // Scroll back to the top of the product list only when it's the first page
+    if (page === 1) {
+        $("html, body").animate({ scrollTop: $("#product-list").offset().top - 150 }, "fast");
+    }
 }
 
 // Update pagination (active page, disable next/prev)
@@ -133,6 +145,7 @@ $("#prevPage").click(function (e) {
     if (currentPage > 1) {
         currentPage--;
         displayProductsClient(currentPage);
+        $("html, body").animate({ scrollTop: $("#product-list").offset().top - 150 }, "fast");
     }
 });
 
@@ -143,6 +156,7 @@ $("#nextPage").click(function (e) {
     if (currentPage < totalPages) {
         currentPage++;
         displayProductsClient(currentPage);
+        $("html, body").animate({ scrollTop: $("#product-list").offset().top - 150 }, "fast");
     }
 });
 

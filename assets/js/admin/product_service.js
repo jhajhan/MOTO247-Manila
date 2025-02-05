@@ -270,3 +270,7 @@ function deleteProduct (id) {
         })
     }
 }
+
+$('#cancelBtn').on('click', function(){
+    $('.modal').css('display', 'none');
+}) 

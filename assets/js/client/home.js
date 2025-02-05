@@ -45,7 +45,7 @@ function displayTopProducts(top_products) {
         });
     }
 
-    $("#top-products").html(topHTML); // Insert products inside the container
+    $(".pro-container").first().html(topHTML); // Inserts into the first .pro-container (Best-Selling Products)
 }
 
 function displayNewProducts(new_products) {
@@ -80,5 +80,5 @@ function displayNewProducts(new_products) {
         });
     }
 
-    $("#new-products").html(newHTML); // Insert products inside the container
+    $(".pro-container").last().html(newHTML); // Inserts into the last .pro-container (New Arrivals)
 }

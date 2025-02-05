@@ -219,6 +219,10 @@ $("#close-edit-modal").on('click', function(){
     $('.modal').css('display', 'none');
 })
 
+$("#cancel-edit-order-btn").on('click', function(){
+    $('.modal').css('display', 'none');
+})
+
 function fetchSales (filters = {}) {
     $.ajax({
         url: '/admin/sales',

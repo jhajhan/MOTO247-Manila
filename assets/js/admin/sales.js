@@ -268,6 +268,7 @@ function fetchSales (filters = {}) {
                     `<td>${sale.order_id}</td>
                     <td>${sale.user_id}</td>
                     <td>${sale.customer_name}</td>
+                    <td>${sale.phone_number}</td>
                     <td>${productList}</td>
                     <td>${sale.date}</td>
                     <td>${sale.payment_method}</td>
@@ -298,6 +299,7 @@ function fetchSales (filters = {}) {
                     `<td>${sale.order_id}</td>
                     <td>${sale.user_id}</td>
                     <td>${sale.customer_name}</td>
+                    <td>${sale.phone_number}</td>
                     <td>${productList}</td>
                     <td>${sale.date}</td>
                     <td>${sale.payment_method}</td>

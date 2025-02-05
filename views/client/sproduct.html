@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOTO247</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/views/client/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -41,12 +42,12 @@
 
         <div class="single-pro-details">
             <h6>Hmm sub title kems</h6>
-            <h4>Brake Shoe Set</h4>
-            <h2>₱000.00</h2>
+            <h4 id = "cart-name">Brake Shoe Set</h4>
+            <h2 id = "cart-price">₱000.00</h2>
             <input type="number" value="1">
             <button class="normal">Add To Cart</button>
             <h4>Product Details</h4>
-            <span>TAYO AY NASA FINE DINING RESTAURANT, diba? so yung pagkaskwater natin iwan natin sa bahay. pag nalaglag andun sina miss vina sila doc yappy..
+            <span id = "cart-desc">TAYO AY NASA FINE DINING RESTAURANT, diba? so yung pagkaskwater natin iwan natin sa bahay. pag nalaglag andun sina miss vina sila doc yappy..
                 imbis na "ay sorry sorry" ano naging reaction mo? PUT- NETO NAGBIBIGAY LANG GANYAN PA E! kinang-naman.. nasa restaurant ka naman na sosyal.
                 kelan moko narinig na PU- NAMAN E nag gaganyan ako sa bisita? never. ang tawag dun pakikisama. hindi ka naman magiging peke eh pero put-
                 umadjust ka naman sa sitwasyon.</span>
@@ -54,182 +55,18 @@
     </section>
     
     <section id="product1" class="section-p1">
-        <div class="pro-container">
-            <div class="pro">
-                <img src="files/FE/FE_Product1.png" alt="">
-
-                <div class="des">
-                    <span>brand name</span>
-                    <h5>Tire-d na ako</h5>
-
-                    <div class="star">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                    </div>
-
-                    <h4>₱15</h4>
-                </div>
-
-                <a href="#" class="cart"><ion-icon name="cart"></ion-icon></a>
-            </div>
-
-            <div class="pro">
-                <img src="files/FE/FE_Product1.png" alt="">
-
-                <div class="des">
-                    <span>brand name</span>
-                    <h5>Tire-d na ako</h5>
-
-                    <div class="star">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                    </div>
-
-                    <h4>₱15</h4>
-                </div>
-
-                <a href="#" class="cart"><ion-icon name="cart"></ion-icon></a>
-            </div>
-
-            <div class="pro">
-                <img src="files/FE/FE_Product1.png" alt="">
-
-                <div class="des">
-                    <span>brand name</span>
-                    <h5>Tire-d na ako</h5>
-
-                    <div class="star">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                    </div>
-
-                    <h4>₱15</h4>
-                </div>
-
-                <a href="#" class="cart"><ion-icon name="cart"></ion-icon></a>
-            </div>
-
-            <div class="pro">
-                <img src="files/FE/FE_Product1.png" alt="">
-
-                <div class="des">
-                    <span>brand name</span>
-                    <h5>Tire-d na ako</h5>
-
-                    <div class="star">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                    </div>
-
-                    <h4>₱15</h4>
-                </div>
-
-                <a href="#" class="cart"><ion-icon name="cart"></ion-icon></a>
-            </div>
-
-            <div class="pro">
-                <img src="files/FE/FE_Product1.png" alt="">
-
-                <div class="des">
-                    <span>brand name</span>
-                    <h5>Tire-d na ako</h5>
-
-                    <div class="star">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                    </div>
-
-                    <h4>₱15</h4>
-                </div>
-
-                <a href="#" class="cart"><ion-icon name="cart"></ion-icon></a>
-            </div>
-
-            <div class="pro">
-                <img src="files/FE/FE_Product1.png" alt="">
-
-                <div class="des">
-                    <span>brand name</span>
-                    <h5>Tire-d na ako</h5>
-
-                    <div class="star">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                    </div>
-
-                    <h4>₱15</h4>
-                </div>
-
-                <a href="#" class="cart"><ion-icon name="cart"></ion-icon></a>
-            </div>
-
-            <div class="pro">
-                <img src="files/FE/FE_Product1.png" alt="">
-
-                <div class="des">
-                    <span>brand name</span>
-                    <h5>Tire-d na ako</h5>
-
-                    <div class="star">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                    </div>
-
-                    <h4>₱15</h4>
-                </div>
-
-                <a href="#" class="cart"><ion-icon name="cart"></ion-icon></a>
-            </div>
-
-            <div class="pro">
-                <img src="files/FE/FE_Product1.png" alt="">
-
-                <div class="des">
-                    <span>brand name</span>
-                    <h5>Tire-d na ako</h5>
-
-                    <div class="star">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                    </div>
-
-                    <h4>₱15</h4>
-                </div>
-
-                <a href="#" class="cart"><ion-icon name="cart"></ion-icon></a>
-            </div>
+        <div class="pro-container" id="product-list">
+           
         </div>
     </section>
+    
 
     <section id="pagination" class="section-p1">
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#"><ion-icon name="arrow-forward"></ion-icon></a>
+        <a href="#" id="prevPage">«</a>
+        <span id="pageNumbers"></span>
+        <a href="#" id="nextPage">»</a>
     </section>
+
 
     <section id="newsletter" class="section-p1 section-m1">
         <div class="newstext">
@@ -286,6 +123,7 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="/assets/js/client/product_service.js"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

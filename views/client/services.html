@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOTO247</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -40,63 +41,19 @@
     </section>
 
     <section id="services" class="section-p1">
-        <div class="cards">
-            <div class="card">
-                <div class="content">
-                    <h3>Service Name</h3>
-                    <p>Service description. TAYO AY NASA FINE DINING RESTAURANT, diba? so yung pagkaskwater natin iwan natin sa bahay. pag nalaglag andun sina miss vina sila doc yappy..
-                        imbis na "ay sorry sorry" ano naging reaction mo?</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="content">
-                    <h3>Service Name</h3>
-                    <p>Service description. TAYO AY NASA FINE DINING RESTAURANT, diba? so yung pagkaskwater natin iwan natin sa bahay. pag nalaglag andun sina miss vina sila doc yappy..
-                        imbis na "ay sorry sorry" ano naging reaction mo?</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="content">
-                    <h3>Service Name</h3>
-                    <p>Service description. TAYO AY NASA FINE DINING RESTAURANT, diba? so yung pagkaskwater natin iwan natin sa bahay. pag nalaglag andun sina miss vina sila doc yappy..
-                        imbis na "ay sorry sorry" ano naging reaction mo?</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="content">
-                    <h3>Service Name</h3>
-                    <p>Service description. TAYO AY NASA FINE DINING RESTAURANT, diba? so yung pagkaskwater natin iwan natin sa bahay. pag nalaglag andun sina miss vina sila doc yappy..
-                        imbis na "ay sorry sorry" ano naging reaction mo?</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="content">
-                    <h3>Service Name</h3>
-                    <p>Service description. TAYO AY NASA FINE DINING RESTAURANT, diba? so yung pagkaskwater natin iwan natin sa bahay. pag nalaglag andun sina miss vina sila doc yappy..
-                        imbis na "ay sorry sorry" ano naging reaction mo?</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="content">
-                    <h3>Service Name</h3>
-                    <p>Service description. TAYO AY NASA FINE DINING RESTAURANT, diba? so yung pagkaskwater natin iwan natin sa bahay. pag nalaglag andun sina miss vina sila doc yappy..
-                        imbis na "ay sorry sorry" ano naging reaction mo?</p>
-                </div>
-            </div>
-            
+        <div class="cards" id="services-list">
+            <!-- Services will be dynamically inserted here -->
         </div>
     </section>
     
+    
+    
     <section id="pagination" class="section-p1">
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#"><ion-icon name="arrow-forward"></ion-icon></a>
+        <a href="#" id="prevPage">«</a>
+        <span id="pageNumbers"></span>
+        <a href="#" id="nextPage">»</a>
     </section>
+    
 
     <section id="newsletter" class="section-p1 section-m1">
         <div class="newstext">
@@ -152,11 +109,12 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="/views/client/script.js"></script>
+    <script src="/assets/js/client/service.js"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="/assets/js/client/product_service.js"></script>
+
 </body>
 
 </html>

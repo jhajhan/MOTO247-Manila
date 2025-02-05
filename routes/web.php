@@ -52,10 +52,21 @@ switch ($uri) {
         handleController('client/product_service', 'Product_Service', 'getProducts');
         break;
 
+    case '/services':
+        handleController('client/product_service', 'Product_Service', 'getServices');
+        break;
+
+    case '/add-to-cart':
+        require_once __DIR__ . '/../views/client/sproduct.html';
+
     case '/manage-cart':
         $data = json_decode(file_get_contents('php://input'), true);
         handleController('client/addtocart', 'CartManager', 'index', $data, $authSession, $sessionManager);
         break;
+
+    case '/update-cart-product':
+        $data = json_decode(file_get_contents('php://input'), true);
+        handleController('client/addtocart', 'CartManager', 'updateCartProduct', $data);
 
     case '/cart':
 

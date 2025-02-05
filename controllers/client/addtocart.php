@@ -179,6 +179,18 @@ class CartManager {
         echo json_encode($response);
     }
 
+    function updateCartProduct($data) {
+        $cart_id = $data['cartId'];
+        $is_selected = $data['isSelected'];
+
+        global $conn;
+        $query = "UPDATE cart SET is_selected = ? WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $query);
+        $stmt->bind_param('ii', $cart_id, $is_selected);
+        $stmt->execute();
+        
+    }
+
     function index($data, $authSession, $sessionManager) {
 
     

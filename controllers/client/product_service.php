@@ -21,7 +21,7 @@ class Product_Service {
     }
     function getProducts() {
         global $conn;
-        $query = "SELECT * FROM product";  // Hardcoded 'products' table name
+        $query = "SELECT * FROM product WHERE type = 'product'";  // Hardcoded 'products' table name
         $result = mysqli_query($conn, $query);
 
         $products = [];
@@ -32,6 +32,26 @@ class Product_Service {
 
         $response = [
             'products' => $products
+        ];
+
+        header('Content-Type: application/json');
+        echo json_encode($response); 
+        
+    }
+
+    function getServices() {
+        global $conn;
+        $query = "SELECT * FROM product WHERE type = 'service'";  // Hardcoded 'products' table name
+        $result = mysqli_query($conn, $query);
+
+        $services = [];
+
+        while($row = mysqli_fetch_assoc($result)) {
+            $services[] = $row;
+        }
+
+        $response = [
+            'services' => $services
         ];
 
         header('Content-Type: application/json');

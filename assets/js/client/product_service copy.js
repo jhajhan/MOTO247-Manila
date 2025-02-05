@@ -56,14 +56,7 @@ function displayProductsClient(page) {
                     </div>
                     <h4>₱${product.price || '0.00'}</h4>
                 </div>
-                <a class="cart">
-                    <ion-icon id ="cart-icon" name="cart"  data-product-id="${product.prod_id}" 
-                    data-product-name="${product.name}" 
-                    data-product-price="${product.price}" 
-                    data-product-desc="${product.description}" 
-                    data-product-img="${product.image}" ></ion-icon>
-                </a>
-
+                <a class="cart" data-product-id = "${product.prod_id}"><ion-icon name="cart"></ion-icon></a>
             </div>
         `;
         productList.append(productHTML); 
@@ -76,22 +69,13 @@ function displayProductsClient(page) {
     updatePaginationControls();
 
     // Scroll back to the top of the product list to prevent "going down" effect
-    // Scroll back to the top of the product list only when it's the first page
-    if (page === 1) {
-        $("html, body").animate({ scrollTop: 0 }, "fast");
-    }
+    $("html, body").animate({ scrollTop: $("#product-list").offset().top - 50 }, "fast");
 
 
-    $("#cart-icon").on('click', function(){
+    $(".cart").on('click', function(){
 
-
-        let prodId = $(this).data("product-id");
-        let prodName = $(this).data("product-name");
-        let prodPrice = $(this).data("product-price");
-        let prodDesc = $(this).data("product-desc");
-        let prodImg = $(this).data("product-img");
-
-        addToCart(prodId, prodName, prodPrice, prodDesc, prodImg);
+        prodId = $(this).data("product-id");
+        addToCart(prodId);
     })
 }
 
@@ -163,21 +147,12 @@ $("#nextPage").click(function (e) {
     }
 });
 
-function addToCart(prodId, prodName, prodPrice, prodDesc, prodImg) {
-
-    alert(prodName);
-    // Create the new HTML content for the section
-    $("#cart-name").text(prodName);
-    $("#cart-price").text("₱" + prodPrice);
-    $("#cart-desc").text(prodDesc || 'No description available.');
-    // $("#MainImage").attr('src', prodImg || 'default-image.png');
-
+function addToCart() {
+    // Scroll to top before redirecting
     window.scrollTo(0, 0);
-    // Redirect to the add-to-cart page or a cart page
+    // Redirect to the add-to-cart page
     window.location.href = "/add-to-cart";
 }
-
-
 
 
 // Initialize when document is ready

@@ -579,6 +579,23 @@ footer .copyright{
     color: #192C44;
 }
 
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust spacing */
+    justify-content: center; /* Centers the single item */
+}
+
+.card {
+    width: 300px; /* Fixed width to prevent stretching */
+    max-width: 100%;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
 #pagination{
     text-align: center;
 }
@@ -591,6 +608,30 @@ footer .copyright{
     color: #222;
     font-weight: 600;
 }
+
+#pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Adds spacing between elements */
+}
+
+#pagination a {
+    display: inline-block;
+    padding: 8px 15px; /* Adjust padding for better spacing */
+    text-decoration: none;
+    color: #000;
+    background: #f5f5f5;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+#pagination a:hover,
+#pagination a.active {
+    background:#0e7fa0;
+    color: white;
+}
+
 
 /* Single Product */
 #prodetails{

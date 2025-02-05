@@ -49,15 +49,15 @@
                 <span class="icon-close"><ion-icon name="close"></ion-icon></span>
                 <div class="form-box login">
                     <h2>Login</h2>
-                    <form action="#">
+                    <form id = "login-form">
                         <div class="input-box">
                             <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                            <input type="email" required>
+                            <input id = "login-email" type="email" required>
                             <label>Email</label>
                         </div>
                         <div class="input-box">
                             <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                            <input type="password" required>
+                            <input id = "login-password" type="password" required>
                             <label>Password</label>
                         </div>
                         <div class="remember-forgot">
@@ -72,21 +72,21 @@
                 </div>
                 <div class="form-box register">
                     <h2>Register</h2>
-                    <form action="#">
+                    <form id = "register-form">
                         <div class="left-regis">
                             <div class="input-box">
                                 <span class="icon"><ion-icon name="person"></ion-icon></span>
-                                <input type="text" required>
+                                <input id ="register-username" type="text" required>
                                 <label>Username</label>
                             </div>
                             <div class="input-box">
                                 <span class="icon"><ion-icon name="call"></ion-icon></span>
-                                <input type="tel" maxlength="11" required>
+                                <input id = "register-phone" type="tel" maxlength="11" required>
                                 <label>Phone Number</label>
                             </div>
                             <div class="input-box">
                                 <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                                <input type="email" required>
+                                <input id = "register-email" type="email" required>
                                 <label>Email</label>
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                             </div>
                             <div class="input-box">
                                 <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                                <input type="password" required>
+                                <input id = "register-password" type="password" required>
                                 <label>Confirm Password</label>
                             </div>
                             <div class="remember-forgot">
@@ -125,10 +125,10 @@
             <h3 id="profile-username">Tina Kitten</h3>
             <button class="p-button">Update Profile Image</button>
             <ul class="settings-menu">
-                <li><a href="#" onclick="showSection(event, 'edit-profile')">Edit Profile</a></li>
-                <li><a href="#" onclick="showSection(event, 'password-settings')">Password Settings</a></li>
-                <li><a href="#" onclick="showSection(event, 'display-settings')">Display & Accessibility</a></li>
-                <li><a href="#" class="last-setting-menu" >Sign Out</a></li>
+                <li><a >Edit Profile</a></li>
+                <li><a >Password Settings</a></li>
+                <li><a >Display & Accessibility</a></li>
+                <li><a id = "sign-out-client" class="last-setting-menu" >Sign Out</a></li>
             </ul>
         </div>
     
@@ -137,19 +137,19 @@
                 <h2 class="profile-heading">Profile Information</h2>
                 <form id = "edit-profile-details">
                     <label>Username</label>
-                    <input type="text" id="edit-username" value="Tina Kitten">
+                    <input type="text" id="edit-username">
     
                     <label>Phone Number</label>
-                    <input type="tel" id="edit-phone" value="+639123456789">
+                    <input type="tel" id="edit-phone" >
     
                     <label>Email</label>
-                    <input type="email" id="edit-email" value="tinakitten@gmail.com">
+                    <input type="email" id="edit-email">
     
                     <label>Address</label>
-                    <input type="text" id="edit-address" value="123 sa fine dining restaurant">
+                    <input type="text" id="edit-address">
     
                     <label>Registered Date</label>
-                    <input type="text" value="January 1, 2023" disabled>
+                    <input type="text"  id = "edit-registered" disabled>
     
                     <div class="update-cancel">
                         <button class="normal">Edit</button>
@@ -198,6 +198,7 @@
     <script src="/assets/js/authentication/authentication.js"></script>
     <script src="/assets/js/client/product_service.js"></script>
     <script src="/assets/js/client/account.js"></script>
+    <script src="/assets/js/client/profile.js"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

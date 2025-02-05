@@ -374,7 +374,7 @@ function displaySalesComparison(salesComparison) {
 
 
 function displayTopSelling(topProducts, topServices) {
-    
+
         // Populate the table rows dynamically
         let tableContent = '';
         for (let i = 0; i < topProducts.length; i++) {

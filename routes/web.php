@@ -18,6 +18,8 @@ function restrictAdminAccess($authSession) {
     }
 }
 
+
+
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Get the requested URI
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -46,7 +48,8 @@ switch ($uri) {
         }
         break;
     
-
+    case '/check-login-status':
+        handleController('authentication/check-login-status', 'Login', 'index', $authSession);
 
     case '/products':
         handleController('client/product_service', 'Product_Service', 'getProducts');
@@ -57,6 +60,7 @@ switch ($uri) {
         break;
 
     case '/add-to-cart':
+
         require_once __DIR__ . '/../views/client/sproduct.html';
 
     case '/manage-cart':
@@ -73,10 +77,22 @@ switch ($uri) {
         if ($method == 'GET') {
             if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
                 handleController('client/addtocart', 'CartManager', 'getCartItems', $authSession, $sessionManager);
-        } }
+            } else {
+                // Check if the user is logged in
+                if (!$authSession->isLogged()) {
+                    // Redirect to the login page if not logged in
+                    header('Location: /login');
+                    exit(); // Make sure to stop further script execution
+                }
+                // Include the cart view if the user is logged in
+                require_once __DIR__ . '/../views/client/cart.html';
+            }
+        }
+        break;        
 
     case '/profile':
         if ($method == 'GET') {
+            handleController('client/profile', 'Profile', 'getProfileInfo', $sessionManager);
 
         } else if ($method == 'PUT') {
             $data = json_decode(file_get_contents('php://input'), true);

@@ -3,17 +3,16 @@
 class SessionManager {
 
     function start() {
-        // Set custom session cookie parameters if needed
-        session_set_cookie_params([
-            'lifetime' => 86400,  // Time in seconds; here it is set for one day
-            'path' => '/',        // Make sure this is available for the entire domain
-            'secure' => isset($_SERVER['HTTPS']),  // Secure only if HTTPS is enabled
-            'httponly' => true,   // Prevent JavaScript access to the cookie
-        ]);
-        
-        // Start the session if not already started
+        // Ensure no session has started before setting cookie parameters
         if (session_status() == PHP_SESSION_NONE) {
-            session_start();
+            session_set_cookie_params([
+                'lifetime' => 86400,  // Time in seconds; here it is set for one day
+                'path' => '/',        // Available for the entire domain
+                'secure' => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on',  // Secure only if HTTPS is enabled
+                'httponly' => true,   // Prevent JavaScript access to the cookie
+            ]);
+
+            session_start(); // Start the session
         }
     }
 

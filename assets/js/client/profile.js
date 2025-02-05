@@ -12,6 +12,7 @@ function fetchProfile() {
             $("#edit-email").val(response.email);
             $("#edit-phone").val(response.phone_number);
             $("#edit-address").val(response.address);
+            $("#edit-registered").val(response.created_at);
         }
     })
 }
@@ -50,4 +51,30 @@ $("#edit-password-details").on('click', function(){
             
         }
     })
+})
+
+$("#sign-out-client").on('click', function(e){
+
+    e.preventDefault();
+
+    if (confirm("Are you sure you want to sign out?")) {
+        
+        $.ajax({
+            url: "/logout",
+            method: "POST",
+            contentType: "application/json", // Ensure JSON response is handled correctly
+            success: function (response) {
+                console.log(response); // Debugging: Check if response is received
+                if (response.status === "success") {
+                    window.location.href = response.redirect; // Redirect on success
+                } else {
+                    alert(response.message || "Logout failed.");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX Error:", status, error); // Debugging
+                alert("An error occurred. Please try again.");
+            },
+        });
+    }
 })

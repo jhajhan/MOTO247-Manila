@@ -57,20 +57,17 @@ function displayProductsClient(page) {
                     <h4>₱${product.price || '0.00'}</h4>
                 </div>
                 <a class="cart">
-                    <ion-icon id ="cart-icon" name="cart"  data-product-id="${product.prod_id}" 
-                    data-product-name="${product.name}" 
-                    data-product-price="${product.price}" 
-                    data-product-desc="${product.description}" 
-                    data-product-img="${product.image}" ></ion-icon>
+                    <ion-icon class="cart-icon" name="cart" 
+                        data-product-id="${product.prod_id}" 
+                        data-product-name="${product.name}" 
+                        data-product-price="${product.price}" 
+                        data-product-desc="${product.description}" 
+                        data-product-img="${product.image}" ></ion-icon>
                 </a>
-
             </div>
         `;
-        productList.append(productHTML); 
-        
+        productList.append(productHTML);
     });
-
-   
 
     // Ensure pagination stays in place
     updatePaginationControls();
@@ -80,21 +77,18 @@ function displayProductsClient(page) {
     if (page === 1) {
         $("html, body").animate({ scrollTop: 0 }, "fast");
     }
-
-
-    $("#cart-icon").on('click', function(){
-
-
-        let prodId = $(this).data("product-id");
-        let prodName = $(this).data("product-name");
-        let prodPrice = $(this).data("product-price");
-        let prodDesc = $(this).data("product-desc");
-        let prodImg = $(this).data("product-img");
-
-        addToCart(prodId, prodName, prodPrice, prodDesc, prodImg);
-    })
 }
 
+// Event delegation for handling the cart icon click
+$("#product-list").on('click', '.cart-icon', function () {
+    let prodId = $(this).data("product-id");
+    let prodName = $(this).data("product-name");
+    let prodPrice = $(this).data("product-price");
+    let prodDesc = $(this).data("product-desc");
+    let prodImg = $(this).data("product-img");
+
+    addToCart(prodId, prodName, prodPrice, prodDesc, prodImg);
+});
 
 // Setup pagination dynamically
 function setupPagination() {
@@ -133,17 +127,6 @@ function updatePaginationControls() {
     $("#nextPage").toggle(currentPage < totalPages);
 }
 
-
-// Click event for numbered pages
-$(".page-link").click(function (e) {
-    e.preventDefault();
-    let page = parseInt($(this).attr("data-page"));
-    if (page !== currentPage) {
-        currentPage = page;
-        displayProductsClient(currentPage);
-    }
-});
-
 // Previous button click event
 $("#prevPage").click(function (e) {
     e.preventDefault();
@@ -163,22 +146,24 @@ $("#nextPage").click(function (e) {
     }
 });
 
-function addToCart(prodId, prodName, prodPrice, prodDesc, prodImg) {
+// Function to add a product to the cart
+function addToCart(productId, prodName, prodPrice, prodDesc, prodImg) {
+    const action = 'add';
 
-    alert(prodName);
-    // Create the new HTML content for the section
-    $("#cart-name").text(prodName);
-    $("#cart-price").text("₱" + prodPrice);
-    $("#cart-desc").text(prodDesc || 'No description available.');
-    // $("#MainImage").attr('src', prodImg || 'default-image.png');
-
-    window.scrollTo(0, 0);
-    // Redirect to the add-to-cart page or a cart page
-    window.location.href = "/add-to-cart";
+    $.ajax({
+        url: '/manage-cart',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({productId, action}),
+        success: function(response) {
+            alert(response.message);
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX Error:", status, error); // Debugging
+            alert("An error occurred. Please try again.");
+        }
+    })
 }
-
-
-
 
 // Initialize when document is ready
 $(document).ready(function () {

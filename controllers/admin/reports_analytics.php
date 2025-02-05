@@ -228,7 +228,7 @@
 
         function getTopProducts() {
             global $conn;
-            $query = 'SELECT name, SUM(quantity) as total_quantity FROM order_item JOIN product ON product.prod_id = order_item.prod_id WHERE type = "service" GROUP BY name ORDER BY total_quantity DESC LIMIT 5';
+            $query = 'SELECT name, SUM(quantity) as total_quantity FROM order_item JOIN product ON product.prod_id = order_item.prod_id WHERE type = "product" GROUP BY name ORDER BY total_quantity DESC LIMIT 5';
             $result = mysqli_query($conn, $query);
             $top_products = [];
             while ($row = mysqli_fetch_assoc($result)) {
@@ -242,7 +242,7 @@
     
         function getTopServices() {
             global $conn;
-            $query = 'SELECT name, SUM(quantity) as total_quantity FROM order_item JOIN product ON product.prod_id = order_item.prod_id WHERE type = "product" GROUP BY name ORDER BY total_quantity DESC LIMIT 5';
+            $query = 'SELECT name, SUM(quantity) as total_quantity FROM order_item JOIN product ON product.prod_id = order_item.prod_id WHERE type = "service" GROUP BY name ORDER BY total_quantity DESC LIMIT 5';
             $result = mysqli_query($conn, $query);
             $top_services = [];
             while ($row = mysqli_fetch_assoc($result)) {

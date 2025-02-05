@@ -15,10 +15,13 @@ $(document).ready(function() {
     // Function to fetch cart data and update the cart table
     function fetchCart() {
         $.ajax({
+
             url: '/cart',  // Your API endpoint to fetch cart items
             method: 'GET',
             dataType: 'json',
             success: function(data) {
+
+        
                 let cartHTML = '';
                 let subtotal = 0;
 
@@ -43,39 +46,40 @@ $(document).ready(function() {
                     `;
                 });
 
-                // Update the cart table
-                $("#cart-items").html(cartHTML);
+                        // Update the cart table
+                        $("#cart-items").html(cartHTML);
 
-                // Update cart subtotal
-                $("#cart-subtotal").text(`₱${subtotal.toFixed(2)}`);
+                        // Update cart subtotal
+                        $("#cart-subtotal").text(`₱${subtotal.toFixed(2)}`);
 
-                // Add shipping fee and total calculation
-                let shippingFee = 0;
-                let total = subtotal + shippingFee;
-                $("#shipping-fee").text(shippingFee === 0 ? "Free" : `₱${shippingFee.toFixed(2)}`);
-                $("#cart-total").text(`₱${total.toFixed(2)}`);
+                        // Add shipping fee and total calculation
+                        let shippingFee = 0;
+                        let total = subtotal + shippingFee;
+                        $("#shipping-fee").text(shippingFee === 0 ? "Free" : `₱${shippingFee.toFixed(2)}`);
+                        $("#cart-total").text(`₱${total.toFixed(2)}`);
 
-                // Listen for changes in quantity
-                $('.qty').change(function() {
-                    const cartId = $(this).data('id');
-                    const newQty = $(this).val();
+                        // Listen for changes in quantity
+                        $('.qty').change(function() {
+                            const cartId = $(this).data('id');
+                            const newQty = $(this).val();
 
-                    updateCartItem(cartId, newQty);
-                });
+                            updateCartItem(cartId, newQty);
+                        });
 
-                // Handle product selection checkbox
-                $('.select-product').change(function() {
-                    const productId = $(this).data('id');
-                    const isSelected = $(this).prop('checked') ? 1 : 0;
-                    updateProductSelection(productId, isSelected);
-                });
+                        // Handle product selection checkbox
+                        $('.select-product').change(function() {
+                            const productId = $(this).data('id');
+                            const isSelected = $(this).prop('checked') ? 1 : 0;
+                            updateProductSelection(productId, isSelected);
+                        });
 
-                // Handle item removal
-                $('.remove-item').click(function(e) {
-                    e.preventDefault();
-                    const cartId = $(this).find('ion-icon').data('id');
-                    removeItemFromCart(cartId);
-                });
+                        // Handle item removal
+                        $('.remove-item').click(function(e) {
+                            e.preventDefault();
+                            const cartId = $(this).find('ion-icon').data('id');
+                            removeItemFromCart(cartId);
+                        });
+
             },
             error: function(xhr, status, error) {
                 console.error("Error fetching cart data:", error);
@@ -87,6 +91,8 @@ $(document).ready(function() {
     function openCheckoutModal() {
         const cartData = getCartDataForCheckout();
 
+        productCount = 0;
+
         if (cartData.length > 0) {
             let checkoutHTML = '';
             let subtotal = 0;
@@ -94,6 +100,7 @@ $(document).ready(function() {
             $.each(cartData, function(index, item) {
                 if (item.isSelected) {  // Only selected items
                     subtotal += parseFloat(item.price) * parseInt(item.prod_qty);
+                    productCount++;
                     checkoutHTML += `
                         <tr>
                             <td><img src="${item.image}" alt="" width="50"></td>
@@ -169,15 +176,19 @@ $(document).ready(function() {
 
     // Update product selection status
     function updateProductSelection(cartId, isSelected) {
-        $.ajax({
-            url: '/update-cart-product',
-            method: 'PUT',
-            contentType: 'application/json',
-            data: JSON.stringify({ cartId, isSelected }),
-            success: function() {
-                fetchCart(); // Refresh cart
-            }
-        });
+        let total = 0;
+    let productCount = 0;
+
+    $('#cart-items tr').each(function() {
+        if ($(this).find('.select-product').prop('checked')) {
+            const price = parseFloat($(this).find('td:nth-child(4)').text().replace('₱', ''));
+            const quantity = parseInt($(this).find('.qty').val());
+            total += price * quantity;
+            productCount++;
+        }
+    });
+
+    $("#total-cart-amount").html(`Total (${productCount} item${productCount !== 1 ? 's' : ''}): <strong>₱${total.toFixed(2)}</strong>`);
     }
 
     // Remove item from the cart
@@ -196,3 +207,24 @@ $(document).ready(function() {
         });
     }
 });
+
+// Handle product selection checkbox
+
+
+// Function to update total cart amount dynamically
+function updateTotalCartAmount() {
+    let total = 0;
+    let productCount = 0;
+
+    $('#cart-items tr').each(function() {
+        if ($(this).find('.select-product').prop('checked')) {
+            const price = parseFloat($(this).find('td:nth-child(4)').text().replace('₱', ''));
+            const quantity = parseInt($(this).find('.qty').val());
+            total += price * quantity;
+            productCount++;
+        }
+    });
+
+    $("#total-cart-amount").html(`Total (${productCount} item${productCount !== 1 ? 's' : ''}): <strong>₱${total.toFixed(2)}</strong>`);
+}
+

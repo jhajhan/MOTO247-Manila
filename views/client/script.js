@@ -70,17 +70,17 @@ function isUserLoggedIn() {
 }
 
 // visibility
-function toggleAccountView() {
-    if (isUserLoggedIn()) {
-        // Hide login register, show account profile
-        document.getElementById('login-register-modal').style.display = 'none';
-        document.getElementById('profile-settings').style.display = 'block';
-    } else {
-        // Hide account profile, show login register
-        document.getElementById('profile-settings').style.display = 'none';
-        document.getElementById('login-register-modal').style.display = 'block';
-    }
-}
+// function toggleAccountView() {
+//     if (isUserLoggedIn()) {
+//         // Hide login register, show account profile
+//         document.getElementById('login-register-modal').style.display = 'none';
+//         document.getElementById('profile-settings').style.display = 'block';
+//     } else {
+//         // Hide account profile, show login register
+//         document.getElementById('profile-settings').style.display = 'none';
+//         document.getElementById('login-register-modal').style.display = 'block';
+//     }
+// }
 
 // Call the function to check the login status when the page loads
 window.onload = function() {

@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOTO247</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -51,68 +50,37 @@
 
             <tbody>
                 <tr>
-                    <td><a href=""></a><ion-icon name="close-circle-outline"></ion-icon></a></td>
+                    <td><input type="checkbox" id="select-product"></td>
                     <td><img src="files/products/p1.png" alt=""></td>
                     <td>Product Name</td>
                     <td>₱15</td>
                     <td><input type="number" value="1"></td>
                     <td>₱15</td>
+                    <td><a href=""></a><ion-icon name="close-circle-outline"></ion-icon></a></td>
                 </tr>
 
                 <tr>
-                    <td><a href=""></a><ion-icon name="close-circle-outline"></ion-icon></a></td>
+                    <td><input type="checkbox" id="select-product"></a></td>
                     <td><img src="files/products/p1.png" alt=""></td>
                     <td>Product Name</td>
                     <td>₱15</td>
                     <td><input type="number" value="1"></td>
                     <td>₱15</td>
+                    <td><a href=""></a><ion-icon name="close-circle-outline"></ion-icon></a></td>
                 </tr>
 
                 <tr>
-                    <td><a href=""></a><ion-icon name="close-circle-outline"></ion-icon></a></td>
+                    <td><input type="checkbox" id="select-product"></a></td>
                     <td><img src="files/products/p1.png" alt=""></td>
                     <td>Product Name</td>
                     <td>₱15</td>
                     <td><input type="number" value="1"></td>
                     <td>₱15</td>
+                    <td><a href=""></a><ion-icon name="close-circle-outline"></ion-icon></a></td>
                 </tr>
             </tbody>
         </table>
     </section>
-    
-
-    <section id="cart-add" class="section-p1">
-        <div id="coupon">
-            <h3>Apply Coupon</h3>
-            <div>
-                <input type="text" placeholder="Enter Your Coupon">
-                <button class="normal">Apply</button>
-            </div>
-        </div>
-    
-        <div id="subtotal">
-            <h3>Cart Total</h3>
-            <table>
-                <tr>
-                    <td>Cart Subtotal</td>
-                    <td id="cart-subtotal">₱0.00</td> <!-- Dynamic Subtotal -->
-                </tr>
-        
-                <tr>
-                    <td>Shipping</td>
-                    <td id="shipping-fee">Free</td> <!-- Dynamic Shipping -->
-                </tr>
-        
-                <tr>
-                    <td><strong>Total</strong></td>
-                    <td id="cart-total"><strong>₱0.00</strong></td> <!-- Dynamic Total -->
-                </tr>
-            </table>
-    
-            <button class="normal">Checkout</button>
-        </div>
-    </section>
-    
 
     <section id="sticky-bar" class="section-p1">
         <div class="cart-container">
@@ -124,13 +92,13 @@
         <div class="total">
             <span>Total (1 item): <strong>₱253</strong></span>
 
-            <button class="normal">Check Out</button>
+            <a href="checkout.html">
+                <button class="normal">Check Out</button>
+            </a>
         </div>
     </section>
 
-    <script src="/views/client/script.js"></script>
-    <script src="/assets/js/client/add_to_cart.js"></script>
-
+    <script src="script.js"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

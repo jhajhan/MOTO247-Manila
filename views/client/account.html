@@ -29,14 +29,97 @@
                 <li>
                     <input type="text" placeholder="Search..." id="search-bar">
                 </li>
-                <li><a class="active" href="account.html"><ion-icon name="person"></ion-icon></a></li>
+                <li><a href="#" id="account-link"><ion-icon name="person"></ion-icon></a></li>
                 <li><a href="cart.html"><ion-icon name="cart"></ion-icon></a></li>
             </ul>
         </div>
     </section>
 
+    <!-- Login/Register Modal Popup. Eto kapag hindi naka login si user.
+     Two scenarios:
+     1. Kapag pinindot ni user yung account icon sa navbar dapat naka display
+     dun sa last text sa dropdown is "Login/Register" tapos kapag pinindot yun
+     ni user, lalabas 'tong modal na 'to
+     2. Kapag nasa site si user tapos nag add to cart siya agad, mag p-pop up
+     'tong modal na login/register') -->
+    
+    <div class="account-container" id="login-register-modal" style="display: none;">
+        <div class="account-container">
+            <div class="wrapper">
+                <span class="icon-close"><ion-icon name="close"></ion-icon></span>
+                <div class="form-box login">
+                    <h2>Login</h2>
+                    <form action="#">
+                        <div class="input-box">
+                            <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                            <input type="email" required>
+                            <label>Email</label>
+                        </div>
+                        <div class="input-box">
+                            <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                            <input type="password" required>
+                            <label>Password</label>
+                        </div>
+                        <div class="remember-forgot">
+                            <label><input type="checkbox">Remember me</label>
+                            <a href="#">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="btn">Sign In</button>
+                        <div class="login-register">
+                            <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
+                        </div>
+                    </form>
+                </div>
+                <div class="form-box register">
+                    <h2>Register</h2>
+                    <form action="#">
+                        <div class="left-regis">
+                            <div class="input-box">
+                                <span class="icon"><ion-icon name="person"></ion-icon></span>
+                                <input type="text" required>
+                                <label>Username</label>
+                            </div>
+                            <div class="input-box">
+                                <span class="icon"><ion-icon name="call"></ion-icon></span>
+                                <input type="tel" maxlength="11" required>
+                                <label>Phone Number</label>
+                            </div>
+                            <div class="input-box">
+                                <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                                <input type="email" required>
+                                <label>Email</label>
+                            </div>
+                        </div>
+                        
+                        <div class="right-regis">
+                            <div class="input-box">
+                                <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                                <input type="password" required>
+                                <label>Password</label>
+                            </div>
+                            <div class="input-box">
+                                <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                                <input type="password" required>
+                                <label>Confirm Password</label>
+                            </div>
+                            <div class="remember-forgot">
+                                <label><input type="checkbox">I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="policy-link">Privacy Policy</a>.</label>
+                            </div>
+                        </div>
+                            
+                        <button type="submit" class="btn">Confirm & Register</button>
+                        <div class="login-register">
+                            <p>Already have an account? <a href="#" class="login-link">Login</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
     <!-- Account Profile or Profile Settings na visible if logged in si user -->
-    <div id="profile-settings">
+    <div id="profile-settings" style="display: none;">
         <div class="profile-sidebar">
             <img src="files/pp1_placeholder.jpg" class="profile-pic" alt="Profile Picture">
             <h3 id="profile-username">Tina Kitten</h3>
@@ -110,101 +193,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Login/Register Modal Popup. Eto kapag hindi naka login si user.
-     Two scenarios:
-     1. Kapag pinindot ni user yung account icon sa navbar dapat naka display
-     dun sa last text sa dropdown is "Login/Register" tapos kapag pinindot yun
-     ni user, lalabas 'tong modal na 'to
-     2. Kapag nasa site si user tapos nag add to cart siya agad, mag p-pop up
-     'tong modal na login/register') -->
-    <div class="account-container" id="account-modal">
-        <div class="wrapper">
-            <span class="icon-close" id="close-modal"><ion-icon name="close"></ion-icon></span>
-
-            <div class="form-box-login">
-                <h2>Login</h2>
-
-                <form action="#">
-                    <div class="input-box">
-                        <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                        <input id = "login-email" type="email" required>
-                        <label>Email</label>
-                    </div>
-
-                    <div class="input-box">
-                        <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                        <input id = "login-password" type="password" required>
-                        <label>Password</label>
-                    </div>
-
-                    <div class="remember-forgot">
-                        <label><input type="checkbox">Remember me</label>
-
-                        <a href="#">Forgot Password?</a>
-                    </div>
-
-                    <button type="submit" class="btn">Sign In</button>
-
-                    <div class="login-register">
-                        <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
-                    </div>
-                </form>
-            </div>
-
-            <div class="form-box-register">
-                <h2>Register</h2>
-
-                <form action="#">
-                    <div class="left-regis">
-                        <div class="input-box">
-                            <span class="icon"><ion-icon name="person"></ion-icon></span>
-                            <input id = "register-username" type="text" required>
-                            <label>Username</label>
-                        </div>
-
-                        <div class="input-box">
-                            <span class="icon"><ion-icon name="call"></ion-icon></span>
-                            <input id = "register-phone" type="tel" maxlength="11" required>
-                            <label>Phone Number</label>
-                        </div>
-
-                        <div class="input-box">
-                            <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                            <input id = "register-email" type="email" required>
-                            <label>Email</label>
-                        </div>
-                    </div>
-                    
-                    <div class="right-regis">
-                        <div class="input-box">
-                            <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                            <input type="password" required>
-                            <label>Password</label>
-                        </div>
-
-                        <div class="input-box">
-                            <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                            <input id = "register-password" type="password" required>
-                            <label>Confirm Password</label>
-                        </div>
-
-                        <div class="remember-forgot">
-                            <label><input type="checkbox">I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="policy-link">Privacy Policy</a>.</label>
-                        </div>
-                    </div>
-                        
-                    <button type="submit" class="btn">Confirm & Register</button>
-
-                    <div class="login-register">
-                        <p>Already have an account? <a href="#" class="login-link">Login</a></p>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-        
-
 
     <script src="/views/client/script.js"></script>
     <script src="/assets/js/authentication/authentication.js"></script>

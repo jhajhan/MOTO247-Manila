@@ -35,6 +35,7 @@
         </div>
     </section>
     
+    <!--Cart (Main) Page-->
     <section id="cart" class="section-p1">
         <table width="100%">
             <thead>
@@ -48,7 +49,7 @@
                     <td>Remove/Delete</td>
                 </tr>
             </thead>
-    
+
             <tbody id="cart-items">
                 <!-- Cart items will be dynamically injected here -->
             </tbody>
@@ -59,8 +60,8 @@
             <p>Shipping Fee: <span id="shipping-fee">Free</span></p>
             <p>Total: <span id="cart-total">₱0.00</span></p>
         </div> -->
+        </table>
     </section>
-    
 
     <section id="sticky-bar" class="section-p1">
         <div class="cart-container">
@@ -70,16 +71,88 @@
         </div>   
 
         <div class="total">
-            <span id = 'total-cart-amount'>Total (1 item): <strong>₱0.00</strong></span>
+            <span>Total (1 item): <strong>₱253</strong></span>
 
-            <a>
-                <button class="normal" id = "checkout-btn">Check Out</button>
-            </a>
+            <button class="normal" id="checkout-btn">Check Out</button>
         </div>
     </section>
 
-    <script src="/views/client/script.js"></script>
-    <script src="/assets/js/client/add_to_cart.js"></script>
+    <!--Checkout Page (hidden sa una, lalabas lang kapag pinindot checkout button)-->
+    <section id="checkout" class="section-p1" style="display: none;">
+        <div class="checkout-container">
+            <!-- Delivery Information -->
+            <div class="checkout-box full-width">
+                <h3>Delivery Address</h3>
+                <p><strong>Name:</strong> Nikki Manginsay</p>
+                <p><strong>Contact Number:</strong> (+63) 9926293624</p>
+                <p><strong>Address:</strong> Blk 30 Lot 31 Purok 4 Martizano Street, Matro Residence, Central Bicutan, Taguig City, Metro Manila, 1633</p>
+            </div>
+            
+            <!-- Products Ordered -->
+            <div class="checkout-box full-width">
+                <h3>Products Ordered</h3>
+                <table width="100%">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Unit Price</th>
+                            <th>Quantity</th>
+                            <th>Item Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="checkout-items">
+                        <!-- Items will be inserted here dynamically -->
+                    </tbody>
+                </table>
+                
+            </div>
+    
+            <!-- Payment Method -->
+            <div class="checkout-box full-width">
+                <h3>Payment Method</h3>
+                <p>Cash on Delivery (COD)</p>
+            </div>
+    
+            <!-- Order Summary -->
+            <div class="checkout-box full-width">
+                <h3>Order Summary</h3>
+                <p><strong>Cart Subtotal:</strong> ₱253</p>
+                <p><strong>Shipping Fee:</strong> ₱36</p>
+                <p><strong>Total:</strong> <span class="total-price">₱289</span></p>
+            </div>
+    
+            <div class="checkout-buttons">
+                <button id = "check-out-btn" class="normal">Place Order</button>
+
+                <a href="/cart">
+                    <button class="normal" id="back-to-cart">Back to Cart</button>
+                </a>
+                
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // document.getElementById('checkout-btn').addEventListener('click', function() {
+        //     document.getElementById('cart').style.display = 'none';  // Hide cart page
+        //     document.getElementById('checkout').style.display = 'block';  // Show checkout page
+        // });
+
+        // document.getElementById('checkout-btn').addEventListener('click', function() {
+        //     // Hide the cart section
+        //     document.getElementById('cart').style.display = 'none';  
+            
+        //     // Show the checkout section
+        //     document.getElementById('checkout').style.display = 'block';  
+            
+        //     // Hide the sticky bar
+        //     document.getElementById('sticky-bar').style.display = 'none';  // Hides the entire sticky bar section
+        // });
+
+    </script>
+
+    <script src = "/assets/js/client/add_to_cart.js"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

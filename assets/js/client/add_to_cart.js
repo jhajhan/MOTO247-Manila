@@ -3,9 +3,18 @@ $(document).ready(function() {
     fetchCart();
 
     // Open the checkout modal when clicking "Checkout"
-    $("#checkout-btn").click(function() {
+    $("#checkout-btn").on('click', function(){
         openCheckoutModal();
-    });
+    
+        // Hide the sticky bar
+        $('#sticky-bar').hide();
+     
+       
+    
+    })
+
+    
+
 
     // Close the checkout modal
     $("#close-checkout-btn").click(function() {
@@ -58,6 +67,7 @@ $(document).ready(function() {
                         $("#shipping-fee").text(shippingFee === 0 ? "Free" : `₱${shippingFee.toFixed(2)}`);
                         $("#cart-total").text(`₱${total.toFixed(2)}`);
 
+                        
                         // Listen for changes in quantity
                         $('.qty').change(function() {
                             const cartId = $(this).data('id');
@@ -80,6 +90,22 @@ $(document).ready(function() {
                             removeItemFromCart(cartId);
                         });
 
+                        // Handle 'select-all' checkbox
+                    $('#select-all').on('change', function() {
+                        const isChecked = $(this).prop('checked');
+                        $('.select-product').prop('checked', isChecked);  // Set all checkboxes based on the 'select-all' checkbox
+                        updateTotalCartAmount();  // Update the cart total
+                    });
+
+                    // Handle individual product checkbox change
+                    $('.select-product').on('change', function() {
+                        const allSelected = $('.select-product').length === $('.select-product:checked').length;
+                        $('#select-all').prop('checked', allSelected);  // Update 'select-all' checkbox
+                        updateTotalCartAmount();  // Update the cart total
+                    });
+
+                    
+
             },
             error: function(xhr, status, error) {
                 console.error("Error fetching cart data:", error);
@@ -87,47 +113,59 @@ $(document).ready(function() {
         });
     }
 
-    // Open checkout modal
+    // Open checkout modal with updated HTML
     function openCheckoutModal() {
         const cartData = getCartDataForCheckout();
-
-        productCount = 0;
-
-        if (cartData.length > 0) {
-            let checkoutHTML = '';
-            let subtotal = 0;
-
-            $.each(cartData, function(index, item) {
-                if (item.isSelected) {  // Only selected items
-                    subtotal += parseFloat(item.price) * parseInt(item.prod_qty);
-                    productCount++;
-                    checkoutHTML += `
-                        <tr>
-                            <td><img src="${item.image}" alt="" width="50"></td>
-                            <td>${item.name}</td>
-                            <td>₱${item.price}</td>
-                            <td>${item.prod_qty}</td>
-                            <td>₱${(item.price * item.prod_qty).toFixed(2)}</td>
-                        </tr>
-                    `;
-                }
-            });
-
-            // Update the checkout table
-            $("#checkout-items").html(checkoutHTML);
-
-            // Calculate and update subtotal, shipping, and total
-            let shippingFee = 0;  // Assuming free shipping
-            let total = subtotal + shippingFee;
-
-            $("#checkout-subtotal").text(`₱${subtotal.toFixed(2)}`);
-            $("#checkout-shipping-fee").text(shippingFee === 0 ? "Free" : `₱${shippingFee.toFixed(2)}`);
-            $("#checkout-total").text(`₱${total.toFixed(2)}`);
-
-            // Show the modal
-            $("#checkout-modal").show();
-        }
+        let checkoutHTML = '';
+        let subtotal = 0;
+    
+        console.log(cartData);  // Debugging cartData
+    
+        // Loop through selected items and build the checkout table rows
+        $.each(cartData, function(index, item) {
+            if (item.isSelected) {  // Only add selected items
+                console.log(item.name);  // Debugging the item name
+                subtotal += parseFloat(item.price) * parseInt(item.prod_qty);
+                checkoutHTML += `
+                    <tr>
+                        <td><img src="${item.image}" alt="Product Image" width="50"></td>
+                        <td>${item.name}</td>
+                        <td>₱${item.price}</td>
+                        <td>${item.prod_qty}</td>
+                        <td>₱${(item.price * item.prod_qty).toFixed(2)}</td>
+                    </tr>
+                `;
+            }
+        });
+    
+        // Update the checkout table with the dynamic HTML
+        $("#checkout-items").html(checkoutHTML);
+    
+        // Calculate the subtotal, shipping, and total
+        let shippingFee = 36;  // Fixed shipping fee
+        let total = subtotal + shippingFee;
+    
+        // Update the order summary
+        $(".checkout-box p:contains('Cart Subtotal:')").html(`<strong>Cart Subtotal:</strong> ₱${subtotal.toFixed(2)}`);
+        $(".checkout-box p:contains('Shipping Fee:')").html(`<strong>Shipping Fee:</strong> ₱${shippingFee}`);
+        $(".checkout-box .total-price").text(`₱${total.toFixed(2)}`);
+    
+        // Update delivery information
+        const deliveryInfo = `
+            <h3>Delivery Address</h3>
+            <p><strong>Name:</strong> Nikki Manginsay</p>
+            <p><strong>Contact Number:</strong> (+63) 9926293624</p>
+            <p><strong>Address:</strong> Blk 30 Lot 31 Purok 4 Martizano Street, Matro Residence, Central Bicutan, Taguig City, Metro Manila, 1633</p>
+        `;
+        $(".checkout-box .delivery-info").html(deliveryInfo);
+    
+        // Show the modal and hide the cart
+        $("#checkout").show();
+        $("#cart").hide();
     }
+    
+
+
 
     // Get the selected items for the checkout modal
     function getCartDataForCheckout() {
@@ -209,30 +247,28 @@ $(document).ready(function() {
 });
 // checkout button
 
-$("#check-out-btn").on('click', function(){
-    const cart = getCartDataForCheckout();
-    
-})
+
 
 
 
 // Handle product selection checkbox
 
 
-// Function to update total cart amount dynamically
+// Dynamically update the cart total in the sticky bar
 function updateTotalCartAmount() {
     let total = 0;
     let productCount = 0;
 
-    $('#cart-items tr').each(function() {
-        if ($(this).find('.select-product').prop('checked')) {
-            const price = parseFloat($(this).find('td:nth-child(4)').text().replace('₱', ''));
-            const quantity = parseInt($(this).find('.qty').val());
-            total += price * quantity;
-            productCount++;
-        }
+    // Iterate over all selected items to calculate the total
+    $('.select-product:checked').each(function() {
+        const price = parseFloat($(this).closest('tr').find('td:nth-child(4)').text().replace('₱', ''));
+        const quantity = parseInt($(this).closest('tr').find('.qty').val());
+        total += price * quantity;
+        productCount++;
     });
 
-    $("#total-cart-amount").html(`Total (${productCount} item${productCount !== 1 ? 's' : ''}): <strong>₱${total.toFixed(2)}</strong>`);
+    // Update the total in the sticky bar
+    $(".total span").html(`Total (${productCount} item${productCount !== 1 ? 's' : ''}): <strong>₱${total.toFixed(2)}</strong>`);
 }
+
 

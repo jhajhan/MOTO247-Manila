@@ -72,11 +72,7 @@ function displayProductsClient(page) {
     // Ensure pagination stays in place
     updatePaginationControls();
 
-    // Scroll back to the top of the product list to prevent "going down" effect
-    // Scroll back to the top of the product list only when it's the first page
-    if (page === 1) {
-        $("html, body").animate({ scrollTop: 0 }, "fast");
-    }
+
 }
 
 // Event delegation for handling the cart icon click
@@ -114,7 +110,7 @@ function setupPagination() {
             currentPage = page;
             displayProductsClient(currentPage);
 
-            $("html, body").animate({ scrollTop: $("#product-list").offset().top - 150 }, "fast");
+            $("html, body").animate({ scrollTop: $("#product-list").offset().top - 100 }, "fast");
         
         }
     });
@@ -124,7 +120,7 @@ function setupPagination() {
 
     // Scroll back to the top of the product list only when it's the first page
     if (page === 1) {
-        $("html, body").animate({ scrollTop: $("#product-list").offset().top - 150 }, "fast");
+        $("html, body").animate({ scrollTop: $("#product-list").offset().top - 100 }, "fast");
     }
 }
 
@@ -145,7 +141,7 @@ $("#prevPage").click(function (e) {
     if (currentPage > 1) {
         currentPage--;
         displayProductsClient(currentPage);
-        $("html, body").animate({ scrollTop: $("#product-list").offset().top - 150 }, "fast");
+        $("html, body").animate({ scrollTop: $("#product-list").offset().top - 100 }, "fast");
     }
 });
 
@@ -156,7 +152,7 @@ $("#nextPage").click(function (e) {
     if (currentPage < totalPages) {
         currentPage++;
         displayProductsClient(currentPage);
-        $("html, body").animate({ scrollTop: $("#product-list").offset().top - 150 }, "fast");
+        $("html, body").animate({ scrollTop: $("#product-list").offset().top - 100 }, "fast");
     }
 });
 

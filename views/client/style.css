@@ -743,221 +743,12 @@ footer .copyright{
 }
 
 /* Account Page */
-
-/* Dropdown menu styling */
-.dropdown{
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-menu{
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 60px;
-    background: #108FB6;
-    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
-    list-style: none;
-    padding: 15px 0;
-    min-width: 200px;
-    z-index: 1000;
-}
-
-.dropdown-menu li{
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-.dropdown-menu li a{
-    text-decoration: none;
-    color: #fff !important;
-    display: block;
-}
-
-.dropdown-menu li:not(:last-child){
-    margin-bottom: 5px;
-}
-
-.dropdown-menu li a:hover,
-.dropdown-menu li a.active{
-    color: #192C44 !important;
-    position: relative;
-    transition: color 0.3s ease;
-}
-
-.dropdown-menu.show{
-    display: block;
-}
-
-/* Account Profile Settings Layout */
-/* General Styles */
-#profile-settings {
-    display: flex;
-    width: 100%;
-    height: 90vh;
-    background-color: #f4f4f4;
-}
-
-/* Sidebar */
-.profile-sidebar {
-    width: 250px;
-    height: 100vh;
-    background: #192C44;
-    color: white;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 50px;
-}
-
-.profile-pic {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 2px solid white;
-    margin-bottom: 10px;
-}
-
-#profile-username {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.p-button {
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    transition: 0.2s;
-    background-color: #D7E7EB;
-    color: #192C44;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-bottom: 50px;
-}
-
-.settings-menu {
-    list-style: none;
-    padding: 0;
-    width: 100%;
-}
-
-.settings-menu li {
-    width: 100%;
-    text-align: center;
-    padding: 10px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.settings-menu li a {
-    color: white;
-    text-decoration: none;
-    display: block;
-}
-
-.settings-menu li a:hover {
-    color: #D7E7EB !important;
-    position: relative;
-    transition: color 0.3s ease;
-    font-weight: bold;
-}
-
-.last-setting-menu{
-    width: 100%;
-    text-align: center;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Content Section */
-.profile-content{
-    flex: 1;
-    padding: 30px;
-    background: white;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.profile-section{
-    display: none;
-}
-
-.profile-section h2{
-    font-size: 30px;
-    margin-bottom: 5px;
-    color: #192C44;
-    border-bottom: 2px solid #192C44;
-}
-
-.profile-section form{
-    display: flex;
-    flex-direction: column;
-}
-
-.profile-section label{
-    margin-top: 10px;
-    margin-bottom: 5px;
-}
-
-.profile-section input{
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.hidden{
-    display: none;
-}
-
-.profile-content .normal{
-    margin-top: 10px;
-    margin-bottom: 15px;
-}
-
-.password-container {
-    position: relative;
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-
-.password-container input {
-    width: 100%;
-    padding-right: 40px;
-}
-
-.eye-icon {
-    position: absolute;
-    right: 10px;
-    top: 40%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 20px;
-    color: #555;
-}
-
-
-/* For dropdown 'to */
 .account-container{
-    display: none; /* Hidden lang muna, shown via JS */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5); /* Dark overlay for modal effect */
-    z-index: 1000;
+    display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.account-container.active {
-    display: flex;
+    height: 90vh;
+    width: 100%;
 }
 
 .wrapper{
@@ -1130,7 +921,7 @@ footer .copyright{
     text-decoration: underline;
 }
 
-.form-box.register {
+.form-box.register{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1140,28 +931,178 @@ footer .copyright{
     margin: 0 auto;
 }
 
-.form-box.register form {
+.form-box.register form{
     display: flex;
     justify-content: space-between;
     width: 100%;
     flex-wrap: wrap;
 }
 
-.left-regis {
+.left-regis{
     width: 46%;
 }
 
-.right-regis {
+.right-regis{
     width: 46%;
 }
 
-.terms-link, .policy-link {
+.terms-link, .policy-link{
     color: #222;
     text-decoration: none;
     font-weight: 650;
 }
 
-/* Additional styling for modal effect */
+/* Account Profile Settings Layout */
+/* General Styles */
+#profile-settings {
+    display: flex;
+    width: 100%;
+    height: 90vh;
+    background-color: #f4f4f4;
+}
+
+/* Sidebar */
+.profile-sidebar {
+    width: 250px;
+    height: 100vh;
+    background: #192C44;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-bottom: 10px;
+}
+
+#profile-username {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.p-button {
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: 0.2s;
+    background-color: #D7E7EB;
+    color: #192C44;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 50px;
+}
+
+.settings-menu {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.settings-menu li {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.settings-menu li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.settings-menu li a:hover {
+    color: #D7E7EB !important;
+    position: relative;
+    transition: color 0.3s ease;
+    font-weight: bold;
+}
+
+.last-setting-menu{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Content Section */
+.profile-content{
+    flex: 1;
+    padding: 30px;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section{
+    display: none;
+}
+
+.profile-section h2{
+    font-size: 30px;
+    margin-bottom: 5px;
+    color: #192C44;
+    border-bottom: 2px solid #192C44;
+}
+
+.profile-section form{
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-section label{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.profile-section input{
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.hidden{
+    display: none;
+}
+
+.profile-content .normal{
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.password-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 40%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    color: #555;
+}
+
+/* FOR MODAL WAIT LANG
 .modal-overlay {
     display: none;
     position: fixed;
@@ -1176,6 +1117,7 @@ footer .copyright{
 .modal-overlay.active {
     display: block;
 }
+*/
 
 /* Cart Page */
 #cart{

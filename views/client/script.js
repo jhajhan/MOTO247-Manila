@@ -29,19 +29,16 @@ document.addEventListener("DOMContentLoaded", function () {
     function showSection(event, sectionId) {
         event.preventDefault();
 
-        // Hide all sections
         sections.forEach(section => {
             section.style.display = "none";
         });
 
-        // Show the selected section
         const selectedSection = document.getElementById(sectionId);
         if (selectedSection) {
             selectedSection.style.display = "block";
         }
     }
 
-    // Attach event listeners to all menu links
     menuLinks.forEach(link => {
         link.addEventListener("click", function (event) {
             const sectionId = this.getAttribute("onclick").match(/'([^']+)'/)[1];
@@ -49,11 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Ensure the default section is visible
     document.getElementById("edit-profile").style.display = "block";
 });
 
-/* Password settings eye icon */
 document.querySelectorAll('.eye-icon').forEach(icon => {
     icon.addEventListener('click', function() {
         const targetId = this.getAttribute('data-toggle');
@@ -69,3 +64,36 @@ document.querySelectorAll('.eye-icon').forEach(icon => {
     });
 });
 
+function isUserLoggedIn() {
+    // Example: check if a session or cookie exists. You should replace this with your actual check.
+    return localStorage.getItem('userLoggedIn') === 'true';
+}
+
+// visibility
+function toggleAccountView() {
+    if (isUserLoggedIn()) {
+        // Hide login register, show account profile
+        document.getElementById('login-register-modal').style.display = 'none';
+        document.getElementById('profile-settings').style.display = 'block';
+    } else {
+        // Hide account profile, show login register
+        document.getElementById('profile-settings').style.display = 'none';
+        document.getElementById('login-register-modal').style.display = 'block';
+    }
+}
+
+// Call the function to check the login status when the page loads
+window.onload = function() {
+    toggleAccountView();
+};
+
+// Example of setting a user as logged in (you can remove or modify this as per your logic)
+document.getElementById('account-link').addEventListener('click', function() {
+    localStorage.setItem('userLoggedIn', 'true');
+    toggleAccountView();
+});
+
+document.querySelector('.last-setting-menu').addEventListener('click', function() {
+    localStorage.setItem('userLoggedIn', 'false');
+    toggleAccountView();
+});

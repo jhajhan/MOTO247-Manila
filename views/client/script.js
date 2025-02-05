@@ -22,31 +22,32 @@ loginLink.addEventListener('click', () => {
     clearInputs(registerForm); // Clear register form if the user switches to login
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const menuLinks = document.querySelectorAll(".settings-menu a");
-    const sections = document.querySelectorAll(".profile-section");
+$(document).ready(function() {
+    // Initially show the edit profile section
+    $("#edit-profile").show();
 
-    function showSection(event, sectionId) {
-        event.preventDefault();
+    // Hide other profile sections
+    $("#password-settings, #display-settings").hide();
 
-        sections.forEach(section => {
-            section.style.display = "none";
-        });
+    // Sidebar navigation
+    $(".settings-menu a").click(function(e) {
+        e.preventDefault(); // Prevent default link behavior
 
-        const selectedSection = document.getElementById(sectionId);
-        if (selectedSection) {
-            selectedSection.style.display = "block";
-        }
-    }
+        const targetSection = $(this).data("section");
 
-    menuLinks.forEach(link => {
-        link.addEventListener("click", function (event) {
-            const sectionId = this.getAttribute("onclick").match(/'([^']+)'/)[1];
-            showSection(event, sectionId);
-        });
+        // Hide all sections
+        $(".profile-section").hide();
+
+        // Show the target section
+        $("#" + targetSection).show();
+
+        //remove active class from all links
+        $('.settings-menu a').removeClass('active');
+        //add active class to the clicked link
+        $(this).addClass('active');
+
+
     });
-
-    document.getElementById("edit-profile").style.display = "block";
 });
 
 document.querySelectorAll('.eye-icon').forEach(icon => {
@@ -96,4 +97,22 @@ document.getElementById('account-link').addEventListener('click', function() {
 document.querySelector('.last-setting-menu').addEventListener('click', function() {
     localStorage.setItem('userLoggedIn', 'false');
     toggleAccountView();
+});
+
+// Wow yey verified na si user
+document.querySelector('form[action="#"]').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting for now
+    
+    // Simulate successful registration (you can replace this with your actual registration logic)
+    let registrationSuccess = true;  // Set this flag based on actual registration result
+    
+    if (registrationSuccess) {
+        // Show the verification modal
+        document.getElementById('verificationModal').style.display = 'block';
+    }
+});
+
+// Close the modal when the close icon is clicked
+document.querySelector('.icon-close').addEventListener('click', function() {
+    document.getElementById('verificationModal').style.display = 'none';
 });

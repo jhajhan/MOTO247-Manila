@@ -1558,24 +1558,17 @@ canvas {
     margin-top: 5px;
 }
 
-#product-dropdown-container {
+.product-dropdown-container {
     display: flex;
-    flex-direction: row;  /* Stack the dropdown and button horizontally */
-    align-items: flex-start;  /* Align items to the top */
-    gap: 10px;  /* Adds space between the dropdown and remove button */
-    margin-bottom: 10px;  /* Adds spacing between dropdown groups */
-}
-
-
-/* .product-dropdown-container {
-    display: flex;
-    align-items: center;   Align dropdown and button vertically 
+    align-items: center;   
     justify-content: center;
-    gap: 10px;   Space between dropdown and remove button 
-} */
+    gap: 10px;   
+}
 
 #product-dropdown-container select {
     flex: 1;  /* Make the dropdown take up available space */
+    width: 48%;  /* Makes the dropdown fill the container */
+    margin-right: 5px;
 }
 
 .remove-product-btn {
@@ -1588,6 +1581,7 @@ canvas {
     transition: background-color 0.3s ease;
     margin-top: 0px;
     margin-bottom: 0px;
+    margin-left: 5px; /* Adds space between the dropdown and the button */
 }
 
 .remove-product-btn:hover {

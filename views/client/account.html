@@ -117,17 +117,16 @@
         </div>
     </div>
     
-    
     <!-- Account Profile or Profile Settings na visible if logged in si user -->
-    <div id="profile-settings" style="display: none;">
+    <div id="profile-settings">
         <div class="profile-sidebar">
             <img src="files/pp1_placeholder.jpg" class="profile-pic" alt="Profile Picture">
             <h3 id="profile-username">Tina Kitten</h3>
             <button class="p-button">Update Profile Image</button>
             <ul class="settings-menu">
-                <li><a href="#" onclick="showSection(event, 'edit-profile')">Edit Profile</a></li>
-                <li><a href="#" onclick="showSection(event, 'password-settings')">Password Settings</a></li>
-                <li><a href="#" onclick="showSection(event, 'display-settings')">Display & Accessibility</a></li>
+                <li><a href="#" data-section="edit-profile">Edit Profile</a></li>
+                <li><a href="#" data-section="password-settings">Password Settings</a></li>
+                <li><a href="#" data-section="display-settings">Display & Accessibility</a></li>
                 <li><a href="#" class="last-setting-menu" >Sign Out</a></li>
             </ul>
         </div>
@@ -135,7 +134,7 @@
         <div class="profile-content">
             <div id="edit-profile" class="profile-section">
                 <h2 class="profile-heading">Profile Information</h2>
-                <form id = "edit-profile-details">
+                <form id="edit-profile-details">
                     <label>Username</label>
                     <input type="text" id="edit-username" value="Tina Kitten">
     
@@ -191,6 +190,15 @@
                 <p>Customize your theme and accessibility settings.</p>
                 <button class="normal">Toggle Dark Mode</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="verificationModal" class="modal">
+        <div class="modal-content">
+            <span class="icon-close"><ion-icon name="close"></ion-icon></span>
+          <h2>Thank you for registering!</h2>
+          <p>We've sent a verification link to your email.<br>Please check your inbox and click the link to verify your account.</p>
         </div>
     </div>
 

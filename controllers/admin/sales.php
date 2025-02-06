@@ -39,7 +39,7 @@
             global $conn;
         
             $query = "SELECT o.order_id, o.user_id, c.full_name AS customer_name, c.phone_number, o.date_ordered AS date, 
-                             o.payment_method, o.payment_status, o.status, o.total_amount, 
+                             o.payment_method, o.payment_status, o.status, o.total_amount, c.address, o.delivery_option, 
                              p.name AS product_name, oi.quantity AS quantity
                       FROM `order` o 
                       JOIN user c ON o.user_id = c.user_id
@@ -96,6 +96,8 @@
                         'user_id' => $row['user_id'],
                         'customer_name' => $row['customer_name'],
                         'phone_number' => $row['phone_number'],
+                        'address' => $row['address'],
+                        'delivery_option' => $row['delivery_option'],
                         'date' => $row['date'],
                         'payment_method' => $row['payment_method'],
                         'payment_status' => $row['payment_status'],
@@ -120,7 +122,7 @@
             global $conn;
         
             $query = "SELECT o.order_id, o.user_id, c.full_name AS customer_name, c.phone_number, o.date_ordered AS date, 
-                             o.payment_method, o.payment_status, o.status, o.total_amount, 
+                             o.payment_method, o.payment_status, o.status, o.total_amount, c.address, o.delivery_option,
                              p.name AS product_name, oi.quantity AS quantity
                       FROM `order` o 
                       JOIN user c ON o.user_id = c.user_id
@@ -177,6 +179,8 @@
                         'user_id' => $row['user_id'],
                         'customer_name' => $row['customer_name'],
                         'phone_number' => $row['phone_number'],
+                        'address' => $row['address'],
+                        'delivery_option' => $row['delivery_option'],
                         'date' => $row['date'],
                         'payment_method' => $row['payment_method'],
                         'payment_status' => $row['payment_status'],

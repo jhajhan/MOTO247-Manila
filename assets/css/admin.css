@@ -356,7 +356,7 @@ body {
     color: var(--charcoal);
 }
 
-/*---------------------------------------------------- dashboard recent order style ------------------------------------------------*/
+/*---------------------------------------------------- dashboard recent   style ------------------------------------------------*/
 
 
 .details {
@@ -1330,6 +1330,7 @@ canvas {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
     margin-left: 0px;
+    overflow-x: auto;
 }
 
 .table-wrapper {

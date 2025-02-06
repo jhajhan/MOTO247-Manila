@@ -53,6 +53,7 @@ function fetchSettings() {
             $('#business-hours').val(response.store_info.business_hours);
             $('#gcash-name').val(response.store_info.account_name);
             $('#gcash-number').val(response.store_info.account_no);
+            $('#admin-name').text(response.personal_info.username);
 
             if (response.admins) {
                 const adminList = $('#admin-list');

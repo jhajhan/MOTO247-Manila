@@ -518,7 +518,7 @@ body {
     font-weight: 500;
 }
 
-.status.readyForPickUp {
+.status.ready {
     padding: 2px 4px;
     background: var(--ceru);
     color: var(--white);
@@ -527,7 +527,7 @@ body {
     font-weight: 500;
 }
 
-.status.pickedUp {
+.status.picked-up {
     padding: 2px 4px;
     background: rgb(49, 70, 188);
     color: var(--white);

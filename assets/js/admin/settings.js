@@ -62,7 +62,7 @@ function fetchSettings() {
                 response.admins.forEach(admin => {
                     const listItem = `
                         <li>
-                            ${admin.full_name} 
+                            ${admin.username} 
                             <button type="submit" class="submit-btn remove-admin-btn" data-id="${admin.user_id}">
                                 Remove
                             </button>
@@ -119,6 +119,7 @@ $('#add-admin-form').on('submit', function(event){
         contentType: 'application/json',
         data: JSON.stringify({name, username, email, password}),
         success: function(response) {
+            console.log(response);
             alert(response['success']);
 
             $('#settings-name').val('');
@@ -126,6 +127,7 @@ $('#add-admin-form').on('submit', function(event){
             $('#settings-oldpassword').val('');
             $('#settings-newpassword').val('');
             $('#settings-confirm-password').val('');
+            fetchSettings();
 
         }
     })

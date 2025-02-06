@@ -116,3 +116,4 @@ document.querySelector('form[action="#"]').addEventListener('submit', function(e
 document.querySelector('.icon-close').addEventListener('click', function() {
     document.getElementById('verificationModal').style.display = 'none';
 });
+

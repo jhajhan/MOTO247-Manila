@@ -1567,6 +1567,12 @@ button {
     color: #fff;
 }
 
+.delivery-button.selected {
+    background-color: #192C44;
+    color: white;
+    border-color:#192C44;
+}
+
 /* Payment Modal */
 #paymentModal .modal{
     display: none;

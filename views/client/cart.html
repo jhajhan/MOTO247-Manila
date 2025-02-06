@@ -93,11 +93,11 @@
                 <h3>Delivery Options</h3>
                 
                 <div class="delivery-buttons">
-                    <button class="normal delivery-button">Lalamove</button>
-                    <button class="normal delivery-button">Pickup</button>
-                    <button class="normal delivery-button">Standard Shipping</button>
+                    <button class="normal delivery-button" onclick="selectDelivery(this)">Lalamove</button>
+                    <button class="normal delivery-button" onclick="selectDelivery(this)">Pickup</button>
+                    <button class="normal delivery-button" onclick="selectDelivery(this)">Standard Shipping</button>
                 </div>
-            </div>
+            </div>            
             
             <!-- Products Ordered -->
             <div class="checkout-box full-width">
@@ -199,6 +199,16 @@
             event.preventDefault(); // Prevents default form submission behavior
             openPaymentModal(); // Opens the modal
         });
+
+        function selectDelivery(selectedButton) {
+            // Remove 'selected' class from all buttons
+            document.querySelectorAll(".delivery-button").forEach(button => {
+                button.classList.remove("selected");
+            });
+
+            // Add 'selected' class to the clicked button
+            selectedButton.classList.add("selected");
+        }
     </script>
 
     <script src = "/assets/js/client/add_to_cart.js"></script>

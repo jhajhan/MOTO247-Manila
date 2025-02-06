@@ -124,8 +124,8 @@
                     <h3>Payment Method</h3>
                     
                     <div class="payment-method checkout-buttons">
-                        <button id = "check-out-btn" class="normal payment-button">Gcash</button>
-                        <button class="normal payment-button">Cash On Delivery</button>
+                        <button class="normal payment-button" onclick="selectPayment(this)">Gcash</button>
+                        <button class="normal payment-button" onclick="selectPayment(this)">Cash On Delivery</button>
                     </div>
                 </div>
         
@@ -138,13 +138,11 @@
             </div>
 
             <div class="checkout-buttons">
-                <button id = "place-order-btn" class="normal">Place Order</button>
+                <button id = "check-out-btn" class="normal">Place Order</button>
 
                 <a href="/cart">
                     <button class="normal" id="back-to-cart">Back to Cart</button>
                 </a>
-
-                <button id = "ordered-successfully" class="normal">Place Order</button>
             </div>
         </div>
     </section>
@@ -211,6 +209,17 @@
             // Add 'selected' class to the clicked button
             selectedButton.classList.add("selected");
         }
+
+        function selectPayment(selectedButton) {
+            // Remove 'selected' class from all payment buttons
+            document.querySelectorAll(".payment-button").forEach(button => {
+                button.classList.remove("selected");
+            });
+
+            // Add 'selected' class to the clicked button
+            selectedButton.classList.add("selected");
+        }
+
     </script>
 
     <script src = "/assets/js/client/add_to_cart.js"></script>

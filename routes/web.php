@@ -89,6 +89,16 @@ switch ($uri) {
 
         break;
 
+    case '/track-order':
+   
+        if ($method == 'GET') {
+            isAjaxRequest() ? handleController('client/orders', 'Orders', 'getOrders', $sessionManager) : require_once __DIR__ . '/../views/client/trackorder.html'; 
+        }
+
+        break;
+
+    
+
     case '/profile':
         if ($method == 'GET') {
             isAjaxRequest() ? handleController('client/profile', 'Profile', 'getProfileInfo', $sessionManager) : require_once __DIR__ . '/../views/client/account.html';

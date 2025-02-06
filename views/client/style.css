@@ -1193,7 +1193,7 @@ footer .copyright{
 }
 
 /* Close Button */
-.modal-content .icon-close{
+.modal-content .icon-close, .icon-close1{
     position: absolute;
     top: 0px;
     right: 0px;
@@ -1626,7 +1626,7 @@ button {
     margin: 0;
 }
 
-#paymentModal .modal-content .icon-close{
+#paymentModal .modal-content .icon-close, #paymentModal .modal-content .icon-close1{
     position: absolute;
     top: 0px;
     right: 0px;
@@ -1645,6 +1645,10 @@ button {
 }
 
 #paymentModal .modal-content .icon-close:hover{
+    background: #444;
+}
+
+#paymentModal .modal-content .icon-close1:hover{
     background: #444;
 }
 
@@ -1703,7 +1707,7 @@ button {
     margin: 0;
 }
 
-#codModal .modal-content .icon-close{
+#codModal .modal-content .icon-close, #codModal .modal-content .icon-close1{
     position: absolute;
     top: 0px;
     right: 0px;

@@ -103,42 +103,42 @@
     </footer>
 
     <script>
-        // Example order data
-        const orderData = {
-            orderId: "#123456789",
-            products: [
-                { name: "Laptop", qty: 1 },
-                { name: "Mouse", qty: 1 },
-                { name: "Mouse", qty: 1 },
-                { name: "Mouse", qty: 1 },
-                { name: "Mouse", qty: 1 },
-                { name: "Mouse", qty: 1 },
-                { name: "Mouse", qty: 1 }
-            ],
-            deliveryOption: "Standard Delivery",
-            paymentMethod: "Credit Card",
-            orderStatus: "Shipped",
-            amount: "$999.99"
-        };
+        // // Example order data
+        // const orderData = {
+        //     orderId: "#123456789",
+        //     products: [
+        //         { name: "Laptop", qty: 1 },
+        //         { name: "Mouse", qty: 1 },
+        //         { name: "Mouse", qty: 1 },
+        //         { name: "Mouse", qty: 1 },
+        //         { name: "Mouse", qty: 1 },
+        //         { name: "Mouse", qty: 1 },
+        //         { name: "Mouse", qty: 1 }
+        //     ],
+        //     deliveryOption: "Standard Delivery",
+        //     paymentMethod: "Credit Card",
+        //     orderStatus: "Shipped",
+        //     amount: "$999.99"
+        // };
 
         // Function to display order details in the table
-        function displayOrderDetails() {
-            let tableContent = '';
-            orderData.products.forEach(product => {
-                tableContent += `
-                    <tr>
-                        <td>${orderData.orderId}</td>
-                        <td>${product.name}</td>
-                        <td>${product.qty}</td>
-                        <td>${orderData.deliveryOption}</td>
-                        <td>${orderData.paymentMethod}</td>
-                        <td>${orderData.orderStatus}</td>
-                        <td>${orderData.amount}</td>
-                    </tr>
-                `;
-            });
-            document.getElementById('cart-items').innerHTML = tableContent;
-        }
+        // function displayOrderDetails() {
+        //     let tableContent = '';
+        //     orderData.products.forEach(product => {
+        //         tableContent += `
+        //             <tr>
+        //                 <td>${orderData.orderId}</td>
+        //                 <td>${product.name}</td>
+        //                 <td>${product.qty}</td>
+        //                 <td>${orderData.deliveryOption}</td>
+        //                 <td>${orderData.paymentMethod}</td>
+        //                 <td>${orderData.orderStatus}</td>
+        //                 <td>${orderData.amount}</td>
+        //             </tr>
+        //         `;
+        //     });
+        //     document.getElementById('cart-items').innerHTML = tableContent;
+        // }
 
         // Call the function to populate the table
         displayOrderDetails();
@@ -158,7 +158,8 @@
         });
     </script>
 
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
+    <script src="/assets/js/client/track_order.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

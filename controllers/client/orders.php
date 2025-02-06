@@ -17,7 +17,7 @@ class Orders {
                       JOIN user c ON o.user_id = c.user_id
                       JOIN order_item oi ON oi.order_id = o.order_id
                       JOIN product p ON p.prod_id = oi.prod_id
-                      WHERE user_id = ?';
+                      WHERE o.user_id = ?';
 
         $stmt = mysqli_prepare($conn, $query);
         $stmt->bind_param('i', $user_id);

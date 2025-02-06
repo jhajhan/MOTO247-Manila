@@ -1,6 +1,6 @@
 $(document).ready(function(){
-    fetchHome()
-})
+    fetchHome();
+});
 
 function fetchHome() {
     $.ajax({
@@ -39,13 +39,16 @@ function displayTopProducts(top_products) {
                         <h4>₱${product.price}</h4>
                     </div>
 
-                    <a href="#" class="cart"><ion-icon name="cart"></ion-icon></a>
+                      <a class="cart" data-product-id="${product.prod_id}" data-product-name="${product.name}" data-product-price="${product.price}" data-product-desc="${product.description}" data-product-img="${product.image}">
+                        <ion-icon name="cart"></ion-icon>
+                    </a>
                 </div>
             `;
         });
     }
 
     $(".pro-container").first().html(topHTML); // Inserts into the first .pro-container (Best-Selling Products)
+    
 }
 
 function displayNewProducts(new_products) {
@@ -55,6 +58,7 @@ function displayNewProducts(new_products) {
         newHTML = `<p class="no-products">No products available.</p>`;
     } else {
         $.each(new_products, function(index, product) {
+
             newHTML += `
                 <div class="pro">
                     <img src="${product.image}" alt="">
@@ -74,11 +78,46 @@ function displayNewProducts(new_products) {
                         <h4>₱${product.price}</h4>
                     </div>
 
-                    <a href="#" class="cart"><ion-icon name="cart"></ion-icon></a>
+                    <a class="cart" data-product-id="${product.prod_id}" data-product-name="${product.name}" data-product-price="${product.price}" data-product-desc="${product.description}" data-product-img="${product.image}">
+                        <ion-icon name="cart"></ion-icon>
+                    </a>
+
                 </div>
             `;
         });
     }
 
     $(".pro-container").last().html(newHTML); // Inserts into the last .pro-container (New Arrivals)
+
+    // Event delegation to catch clicks on dynamically added .cart elements
+    $(document).on('click', '.cart', function (e) {
+        e.preventDefault();
+
+        let prodId = $(this).data("product-id");
+        let prodName = $(this).data("product-name");
+        let prodPrice = $(this).data("product-price");
+        let prodDesc = $(this).data("product-desc");
+        let prodImg = $(this).data("product-img");
+
+        addToCart(prodId, prodName, prodPrice, prodDesc, prodImg);
+    });
+}
+
+// Function to add a product to the cart
+function addToCart(productId, prodName, prodPrice, prodDesc, prodImg) {
+    const action = 'add';
+
+    $.ajax({
+        url: '/manage-cart',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({productId, action}),
+        success: function(response) {
+            alert('Item added to cart.');
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX Error:", status, error); // Debugging
+            alert("An error occurred. Please try again.");
+        }
+    });
 }

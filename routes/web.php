@@ -20,6 +20,14 @@ function isAjaxRequest() {
     return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
 }
 
+function restrictAdminAccess() {
+    global $authSession;
+    
+    if (!$authSession->isAdmin()) {
+        header('Location: /login');
+    }
+}
+
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -89,15 +97,37 @@ switch ($uri) {
 
         break;
 
+    case '/track-order':
+   
+        if ($method == 'GET') {
+            if (!$authSession->isLogged()) {
+                header('Location: /login');
+                exit();
+            }
+
+            isAjaxRequest() ? handleController('client/orders', 'Orders', 'getOrders', $sessionManager) : require_once __DIR__ . '/../views/client/trackorder.html'; 
+        }
+
+        break;
+
+    
+
     case '/profile':
         if ($method == 'GET') {
             isAjaxRequest() ? handleController('client/profile', 'Profile', 'getProfileInfo', $sessionManager) : require_once __DIR__ . '/../views/client/account.html';
         } elseif ($method == 'PUT') {
             $data = json_decode(file_get_contents('php://input'), true);
             $action = $data['action'] == 'edit_details' ? 'editProfileInfo' : 'editPassword';
-            handleController('client/profile', 'Profile', $action, $data, $sessionManager);
+            
+            // Pass only $sessionManager to editPassword method
+            if ($action == 'editPassword') {
+                handleController('client/profile', 'Profile', $action, $sessionManager);
+            } else {
+                handleController('client/profile', 'Profile', $action, $data, $sessionManager);
+            }
         }
         break;
+        
 
     case '/get-store-info':
         handleController('client/store', 'Store', 'getStoreInfo');
@@ -133,6 +163,7 @@ switch ($uri) {
 
     // Admin Routes
     case '/admin':
+        restrictAdminAccess();
         require_once __DIR__ . '/../views/admin/admin.php';
         break;
 
@@ -146,6 +177,7 @@ switch ($uri) {
         break;
 
     case '/admin/product-service':
+        restrictAdminAccess();
         if ($method == 'GET') {
             isAjaxRequest() ? handleController('admin/product_service', 'Product_Service', 'index') : require_once __DIR__ . '/../views/admin/admin.php';
         } elseif ($method == 'POST') {
@@ -161,12 +193,14 @@ switch ($uri) {
         break;
 
     case '/admin/reports-analytics':
+        restrictAdminAccess();
         $aggregation = $_GET['aggregation'] ?? '';
         $data = ['aggregation' => $aggregation];
         isAjaxRequest() ? handleController('admin/reports_analytics', 'Reports_Analytics', 'index', $data) : require_once __DIR__ . '/../views/admin/admin.php';
         break;
 
     case '/admin/sales':
+        restrictAdminAccess();
         if ($method == 'GET') {
             isAjaxRequest() ? handleController('admin/sales', 'Sales', 'index') : require_once __DIR__ . '/../views/admin/admin.php';
         } elseif ($method == 'POST') {
@@ -182,6 +216,7 @@ switch ($uri) {
         break;
 
     case '/admin/settings':
+        restrictAdminAccess();
         if ($method == 'GET') {
             isAjaxRequest() ? handleController('admin/settings', 'Settings', 'index', $sessionManager) : require_once __DIR__ . '/../views/admin/admin.php';
         } elseif ($method == 'PUT') {
@@ -203,10 +238,12 @@ switch ($uri) {
         break;
 
     case '/admin/backup':
+        restrictAdminAccess();
         require_once __DIR__ . '/../config/backup.php';
         break;
 
     case '/upload-image':
+        restrictAdminAccess();
         require_once __DIR__ . '/../controllers/admin/upload_product_image.php';
         break;
 

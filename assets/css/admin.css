@@ -518,7 +518,7 @@ body {
     font-weight: 500;
 }
 
-.status.readyForPickUp {
+.status.ready {
     padding: 2px 4px;
     background: var(--ceru);
     color: var(--white);
@@ -527,7 +527,7 @@ body {
     font-weight: 500;
 }
 
-.status.pickedUp {
+.status.picked-up {
     padding: 2px 4px;
     background: rgb(49, 70, 188);
     color: var(--white);
@@ -952,7 +952,7 @@ canvas {
 }
 
 .product-table .editBtn,
-.product-table .deleteBtn {
+.product-table .deleteProductsBtn {
     padding: 5px 10px;
     border: none;
     border-radius: 3px;
@@ -970,11 +970,11 @@ canvas {
     background-color: var(--eerie);
 }
 
-.product-table .deleteBtn {
+.product-table .deleteProductsBtn {
     background-color: var(--charcoal);
 }
 
-.product-table .deleteBtn:hover {
+.product-table .deleteProductsBtn:hover {
     background-color: var(--eerie);
 }
 
@@ -1387,6 +1387,25 @@ canvas {
 }
 
 .sales-table .actions button:hover {
+    background-color: var(--eerie);
+}
+
+.sales-table .deleteSalesBtn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: 1px solid var(--charcoal);
+}
+
+
+.sales-table .deleteSalesBtn {
+    background-color: var(--charcoal);
+}
+
+.sales-table .deleteSalesBtn:hover {
     background-color: var(--eerie);
 }
 
@@ -2389,3 +2408,39 @@ h3 {
         margin-left: 50px;
     }
 }
+
+/* Force Alertify notifications to appear in the top-right corner */
+.alertify-notifier {
+    top: 60px !important;
+    right: 20px !important;
+    left: auto !important;
+    bottom: auto !important;
+}
+
+/* Style the alert box */
+.ajs-message {
+    max-width: 1300px !important;  /* Prevent it from being too wide */
+    font-size: 12px !important;   /* Keep text readable */
+    padding: 5x 5px !important; /* Increase padding for height */
+    line-height: .76 !important;  /* Increase space between lines */
+    border-radius: 6px !important; /* Smooth rounded corners */
+    opacity: 0;
+    text-transform: uppercase;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease-in forwards, fadeOut 2s ease-out forwards 2s;
+}
+
+/* Keyframes for fade-in effect */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Keyframes for fade-out effect */
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+
+

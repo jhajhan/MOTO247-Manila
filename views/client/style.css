@@ -1236,7 +1236,7 @@ footer .copyright{
 }
 
 /* Close Button */
-.modal-content .icon-close{
+.modal-content .icon-close, .icon-close1{
     position: absolute;
     top: 0px;
     right: 0px;
@@ -1697,6 +1697,10 @@ button {
     background: #444;
 }
 
+#paymentModal .modal-content .icon-close1:hover{
+    background: #444;
+}
+
 .total-price{
     color: #192C44;
     font-size: 13px;
@@ -1752,7 +1756,7 @@ button {
     margin: 0;
 }
 
-#codModal .modal-content .icon-close{
+#codModal .modal-content .icon-close, #codModal .modal-content .icon-close1{
     position: absolute;
     top: 0px;
     right: 0px;

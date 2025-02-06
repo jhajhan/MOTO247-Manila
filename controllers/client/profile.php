@@ -24,15 +24,15 @@ class Profile {
     function editProfileInfo ($data, $sessionManager) {
         $user_id = $sessionManager->get('user_id');
         $username = $data['username'];
-        $phone_number = $data['phone_number'];
+        $phone_number = $data['phone_no'];
         $email = $data['email'];
         $address = $data['address'];
         $img = $data['img'];
 
         global $conn;
-        $query = 'UPDATE user SET username = ?, phone_number = ?, email = ?, address = ?, image = ? WHERE user_id = ?';
+        $query = 'UPDATE user SET username = ?, phone_number = ?, email = ?, address = ?  WHERE user_id = ?';
         $stmt = mysqli_prepare($conn, $query);
-        $stmt->bind_param('sssssi',  $username, $phone_number, $email, $address, $img, $user_id);
+        $stmt->bind_param('ssssi',  $username, $phone_number, $email, $address, $user_id);
         $stmt->execute();
      
 
@@ -49,8 +49,14 @@ class Profile {
         
     }
 
-    function editPassword($data, $sessionManager) {
+    function editPassword($sessionManager) {
         global $conn;
+    
+        // Set response header for JSON
+        header("Content-Type: application/json");
+    
+        // Decode the JSON data from the request
+        $data = json_decode(file_get_contents("php://input"), true);
     
         $user_id = $sessionManager->get('user_id');
         $old_password = $data['old_password'];
@@ -59,7 +65,8 @@ class Profile {
     
         // Check if new passwords match
         if ($new_password !== $confirm_password) {
-            return ['status' => 'error', 'message' => 'New passwords do not match.'];
+            echo json_encode(['status' => 'error', 'message' => 'New passwords do not match.']);
+            return;  // Stops further execution
         }
     
         // Retrieve the current hashed password from the database
@@ -71,12 +78,14 @@ class Profile {
         $user = mysqli_fetch_assoc($result);
     
         if (!$user) {
-            return ['status' => 'error', 'message' => 'User not found.'];
+            echo json_encode(['status' => 'error', 'message' => 'User not found.']);
+            return;
         }
     
         // Verify old password
         if (!password_verify($old_password, $user['password'])) {
-            return ['status' => 'error', 'message' => 'Incorrect old password.'];
+            echo json_encode(['status' => 'error', 'message' => 'Incorrect old password.']);
+            return;
         }
     
         // Hash the new password
@@ -90,9 +99,10 @@ class Profile {
     
         // Check if update was successful
         if (mysqli_affected_rows($conn) > 0) {
-            return ['status' => 'success', 'message' => 'Password updated successfully.'];
+            echo json_encode(['status' => 'success', 'message' => 'Password updated successfully.']);
         } else {
-            return ['status' => 'error', 'message' => 'No changes made.'];
+            echo json_encode(['status' => 'error', 'message' => 'No changes made.']);
         }
     }
+    
 }    

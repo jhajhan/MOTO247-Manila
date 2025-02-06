@@ -93,6 +93,8 @@ function setupPagination() {
     const pageNumbersContainer = $("#pageNumbers");  // The element to hold page numbers
     pageNumbersContainer.empty();  // Clear previous page numbers
 
+    let page = '';
+
     // Create page links dynamically
     for (let page = 1; page <= totalPages; page++) {
         let pageLink = `<a href="#" class="page-link" data-page="${page}" 
@@ -166,7 +168,7 @@ function addToCart(productId, prodName, prodPrice, prodDesc, prodImg) {
         contentType: 'application/json',
         data: JSON.stringify({productId, action}),
         success: function(response) {
-            alert(response.message);
+            alert('Item added to cart.');
         },
         error: function (xhr, status, error) {
             console.error("AJAX Error:", status, error); // Debugging

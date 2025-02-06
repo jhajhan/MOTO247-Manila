@@ -82,7 +82,7 @@ function fetchProducts(filters = {}) {
                         <td>${product.price}</td>
                         <td>${product.unit_price}</td>
                         <td>${product.stock}</td>
-                        <td><button class="editBtn" data-id="${product.prod_id}" data-name = "${product.name}" data-type = "${product.type}", data-price = "${product.price}" data-unit-price = "${product.unit_price}" data-stock = "${product.stock}" data-desc = "${product.description}">Edit</button>  <button class="deleteBtn" data-id="${product.prod_id}">Delete</button></td>
+                        <td><button class="editBtn" data-id="${product.prod_id}" data-name = "${product.name}" data-type = "${product.type}", data-price = "${product.price}" data-unit-price = "${product.unit_price}" data-stock = "${product.stock}" data-desc = "${product.description}">Edit</button>  <button class="deleteProductsBtn" data-id="${product.prod_id}">Delete</button></td>
                     </tr>
                 `); //  
 
@@ -116,7 +116,7 @@ function fetchProducts(filters = {}) {
 
             });
 
-            $("#productServiceTableBody").on("click", ".deleteBtn", function() {
+            $("#productServiceTableBody").on("click", ".deleteProductsBtn", function() {
                 const id = $(this).data('id');
                 deleteProduct(id);
             });
@@ -253,8 +253,9 @@ function editProduct () {
 
 }
 
+/*
 function deleteProduct (id) {
-    if (confirm('Are you sure you want to delete this item?')) {
+    if (confirm('Are you sure you want to delete this product/service?')) {
         $.ajax ({
             url: "/admin/product-service",
             method: "DELETE",
@@ -269,6 +270,29 @@ function deleteProduct (id) {
 
         })
     }
+}*/
+
+function deleteProduct(id) {
+    alertify.confirm(
+        'Confirm Deletion',
+        'Are you sure you want to delete this product/service?',
+        function() {
+            $.ajax({
+                url: '/admin/product-service',
+                method: 'DELETE',
+                data: JSON.stringify({id}),
+                success: function(data) {
+                    fetchProducts();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        },
+        function() {
+            alertify.error('Deletion canceled');
+        }
+    ).set('labels', { ok: 'Yes', cancel: 'No' });
 }
 
 $('#cancelBtn').on('click', function(){

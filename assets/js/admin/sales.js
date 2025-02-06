@@ -1,5 +1,24 @@
 $(document).ready(function(){
 
+    $(document).on('click', '.editBtn', function() {
+        const id = $(this).data('id');
+        const payment_method = $(this).data('payment-method');
+        const payment_status = $(this).data('payment-status');
+        const status = $(this).data('status');
+
+        $("#edit-id").val(id);
+        $("#edit-payment-method").val(payment_method.toUpperCase()).change();
+        $("#edit-payment-status").val(payment_status.toUpperCase()).change();
+        $("#edit-status").val(status.toUpperCase()).change();
+
+        $("#edit-modal").show();
+    });
+
+    $(document).on('click', '.deleteSalesBtn', function() {
+        const id = $(this).data('id');
+        deleteSale(id);
+    });
+
     fetchSales();
 
     $("#online-sales").hide();
@@ -47,11 +66,11 @@ $('#add-physical-form').on('submit', function(event) {
         }
     });
 
-    // Validate fields before submitting
-    if (!customer_name|| products.length === 0 || total_amount === 0) {
-        alert("Please fill out all fields correctly.");
-        return;
-    }
+    // // Validate fields before submitting
+    // if (!customer_name|| products.length === 0 || total_amount === 0) {
+    //     alert("Please fill out all fields correctly.");
+    //     return;
+    // }
 
     const date = $('#physical-order-date').val();
     const payment_method = $('#physical-payment').val();
@@ -277,7 +296,7 @@ function fetchSales (filters = {}) {
                     <td>${sale.payment_status}</td>
                     <td>${sale.status}</td>
                     <td>${sale.total}</td>
-                    <td><button id = 'editPSales' class = 'editBtn' data-id = ${sale.order_id}  data-payment-method = ${sale.payment_method} data-payment-status = ${sale.payment_status} data-status = ${sale.status}>Edit</button>    <button class = 'deleteBtn' data-id = ${sale.order_id}>Delete</button></td>
+                    <td><button id = 'editPSales' class = 'editBtn' data-id = ${sale.order_id}  data-payment-method = ${sale.payment_method} data-payment-status = ${sale.payment_status} data-status = ${sale.status}>Edit</button>    <button class = 'deleteSalesBtn' data-id = ${sale.order_id}>Delete</button></td>
                     `
                 );
 
@@ -310,7 +329,7 @@ function fetchSales (filters = {}) {
                     <td>${sale.payment_status}</td>
                     <td>${sale.status}</td>
                     <td>${sale.total}</td>
-                    <td><button id = 'editOSales' class = 'editBtn' data-id = ${sale.order_id} data-payment-method = ${sale.payment_method} data-payment-status = ${sale.payment_status} data-status = ${sale.status}>Edit</button>  <button class = 'deleteBtn' data-id = ${sale.order_id}>Delete</button></td>
+                    <td><button id = 'editOSales' class = 'editBtn' data-id = ${sale.order_id} data-payment-method = ${sale.payment_method} data-payment-status = ${sale.payment_status} data-status = ${sale.status}>Edit</button>  <button class = 'deleteSalesBtn' data-id = ${sale.order_id}>Delete</button></td>
                     `
                 );
 
@@ -352,7 +371,7 @@ function fetchSales (filters = {}) {
                 
             });
 
-            $(".deleteBtn").on('click', function() {
+            $(".deleteSalesBtn").on('click', function() {
                 const id = $(this).data('id');
                 deleteSale(id);
             });
@@ -387,7 +406,7 @@ function editSale() {
     });
 
 }
-
+/*
 function deleteSale(id) {
     if(confirm('Are you sure you want to delete this sale?')) {
         $.ajax({
@@ -402,6 +421,29 @@ function deleteSale(id) {
             }
         })
     }
+}*/
+
+function deleteSale(id) {
+    alertify.confirm(
+        'Confirm Deletion',
+        'Are you sure you want to delete this sale?',
+        function() {
+            $.ajax({
+                url: '/admin/sales',
+                method: 'DELETE',
+                data: JSON.stringify({id}),
+                success: function(data) {
+                    fetchSales();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        },
+        function() {
+            alertify.error('Deletion canceled');
+        }
+    ).set('labels', { ok: 'Yes', cancel: 'No' });
 }
 
 

@@ -156,12 +156,12 @@ $(document).ready(function() {
     
         // Calculate the subtotal, shipping, and total
         let shippingFee = 36;  // Fixed shipping fee
-        let total = subtotal + shippingFee;
+        let total = subtotal;
     
         // Update the order summary
-        $(".checkout-box p:contains('Cart Subtotal:')").html(`<strong>Cart Subtotal:</strong> ₱${subtotal.toFixed(2)}`);
-        $(".checkout-box p:contains('Shipping Fee:')").html(`<strong>Shipping Fee:</strong> ₱${shippingFee}`);
-        $(".checkout-box .total-price").text(`₱${total.toFixed(2)}`);
+        $(".checkout-box p:contains('Cart Subtotal:')").html(`<strong>Cart Total:</strong> ₱${total.toFixed(2)}`);
+        // $(".checkout-box p:contains('Shipping Fee:')").html(`<strong>Shipping Fee:</strong> ₱${shippingFee}`);
+        // $(".checkout-box .total-price").text(`₱${total.toFixed(2)}`);
     
         // Update delivery information
         const deliveryInfo = `
@@ -273,7 +273,7 @@ $(document).ready(function() {
 function placeOrder(cart, total_amount) {
 
     if (selectedDeliveryMethod == '' || selectedPaymentMethod == '') {
-        alert('Select delivery option and/or payment method.');
+        $("#errorPaymentModal").show();
         return;
     }
 
@@ -299,11 +299,11 @@ function placeOrder(cart, total_amount) {
             if (selectedPaymentMethod == 'gcash') {
                 $("#paymentModal").show();
             } else {
+
+               
                 $("#checkout").hide();
-                
-                $('#sticky-bar').show();
-                $("#cart").show();
-                fetchCart();
+                $("#codModal").show();
+
             }
         }
     })
@@ -362,12 +362,14 @@ function selectDelivery(selectedButton) {
     // $('#selectedDeliveryDisplay').text(selectedDeliveryMethod);
 }
 
-$(".icon-close").on('click', function(){
-    $("#checkout").hide();
-    
-    $("#cart").show();
-    $('#sticky-bar').show();
-fetchCart();
+$(".icon-close").on('click', function() {
+    window.location.href = "/track-order";
+});
+
+
+$(".icon-close1").on('click', function(){
+    $("#errorPaymentModal").hide();
+
 })
 
 

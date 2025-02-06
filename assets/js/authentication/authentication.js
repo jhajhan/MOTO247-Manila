@@ -81,7 +81,8 @@ $("#register-form").on('submit', function(event) {
             if (response.status === 'success') {
                 alert(response.message);  // Show success message
                 $('#login-register-modal').hide();
-                $('#profile-settings').show();
+                // $('#profile-settings').show();
+                $(".modal").show();
                 window.location.href = response.redirect;  // Redirect to the appropriate page
             } else {
                 alert(response.message);  // Show error message if registration fails

@@ -121,33 +121,39 @@
         }
         
 
-        function verifyEmail ($token) {
-
-            echo 'Yow';
-
+        function verifyEmail($token) {
             global $conn;
-
+        
+            // Prepare the query to check if the token exists in the database
             $query = "SELECT user_id FROM user WHERE token = ?";
             $stmt = $conn->prepare($query);
             $stmt->bind_param("s", $token);
-            echo $stmt->execute();
+            
+            if (!$stmt->execute()) {
+                echo "Error executing query.";
+                return;
+            }
+            
             $result = $stmt->get_result();
-
+        
             if ($result->num_rows > 0) {
-
                 // Update the user's verification status
                 $updateQuery = "UPDATE user SET verified = 1, token = NULL WHERE token = ?";
                 $updateStmt = $conn->prepare($updateQuery);
                 $updateStmt->bind_param("s", $token);
-                $updateStmt->execute();
-
-                echo "Email verified! You can now log in.";
-                header('/login');
+                
+                if ($updateStmt->execute()) {
+                    // Redirect the user to the login page after successful email verification
+                    header('Location: /login');  // Ensure the URL is correct
+                    exit();  // Stop further execution
+                } else {
+                    echo "Error updating verification status.";
+                }
             } else {
                 echo "Invalid or expired token.";
             }
-
         }
+        
 
         function logout() {
             try {

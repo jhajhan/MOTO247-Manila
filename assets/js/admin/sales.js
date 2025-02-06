@@ -337,39 +337,39 @@ function fetchSales (filters = {}) {
 
             });
 
-            // $("#editPSales").on('click', function() {
-            //     const id = $(this).data('id');
-            //     const payment_method = $(this).data('payment-method');
-            //     const payment_status = $(this).data('payment-status');
-            //     const status = $(this).data('status');
+            $("#editPSales").on('click', function() {
+                const id = $(this).data('id');
+                const payment_method = $(this).data('payment-method');
+                const payment_status = $(this).data('payment-status');
+                const status = $(this).data('status');
 
-            //     $("#edit-id").val(id);
-            //     $("#edit-payment-method").val(payment_method.toUpperCase()).change();
-            //     $("#edit-payment-status").val(payment_status.toUpperCase()).change();
-            //     $("#edit-status").val(status.toUpperCase()).val();
+                $("#edit-id").val(id);
+                $("#edit-payment-method").val(payment_method.toUpperCase()).change();
+                $("#edit-payment-status").val(payment_status.toUpperCase()).change();
+                $("#edit-status").val(status.toUpperCase()).val();
 
-            //     $("#edit-modal").show();
+                $("#edit-modal").show();
 
                 
-            // });
+            });
 
-            // $("#editOSales").on('click', function() {
-            //     const id = $(this).data('id');
-            //     const payment_method = $(this).data('payment-method');
-            //     const payment_status = $(this).data('payment-status');
-            //     const status = $(this).data('status');
+            $("#editOSales").on('click', function() {
+                const id = $(this).data('id');
+                const payment_method = $(this).data('payment-method');
+                const payment_status = $(this).data('payment-status');
+                const status = $(this).data('status');
 
           
 
-            //     $("#edit-id").val(id);
-            //     $("#edit-payment-method").val(payment_method.toUpperCase()).change();
-            //     $("#edit-payment-status").val(payment_status.toUpperCase()).change();
-            //     $("#edit-status").val(status.toUpperCase()).change();
+                $("#edit-id").val(id);
+                $("#edit-payment-method").val(payment_method.toUpperCase()).change();
+                $("#edit-payment-status").val(payment_status.toUpperCase()).change();
+                $("#edit-status").val(status.toUpperCase()).change();
 
-            //     $("#edit-modal").show();
+                $("#edit-modal").show();
 
                 
-            // });
+            });
 
             $(".deleteSalesBtn").on('click', function() {
                 const id = $(this).data('id');
@@ -406,7 +406,7 @@ function editSale() {
     });
 
 }
-
+/*
 function deleteSale(id) {
     if(confirm('Are you sure you want to delete this sale?')) {
         $.ajax({
@@ -421,30 +421,31 @@ function deleteSale(id) {
             }
         })
     }
-}
+}*/
 
-// function deleteSale(id) {
-//     alertify.confirm(
-//         'Confirm Deletion',
-//         'Are you sure you want to delete this sale?',
-//         function() {
-//             $.ajax({
-//                 url: '/admin/sales',
-//                 method: 'DELETE',
-//                 data: JSON.stringify({id}),
-//                 success: function(data) {
-//                     fetchSales();
-//                 },
-//                 error: function(error) {
-//                     console.log(error);
-//                 }
-//             });
-//         },
-//         function() {
-//             alertify.error('Deletion canceled');
-//         }
-//     ).set('labels', { ok: 'Yes', cancel: 'No' });
-// }
+/*comment ko 'to hehehhe*/
+function deleteSale(id) {
+    alertify.confirm(
+        'Confirm Deletion',
+        'Are you sure you want to delete this sale?',
+        function() {
+            $.ajax({
+                url: '/admin/sales',
+                method: 'DELETE',
+                data: JSON.stringify({id}),
+                success: function(data) {
+                    fetchSales();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        },
+        function() {
+            alertify.error('Deletion canceled');
+        }
+    ).set('labels', { ok: 'Yes', cancel: 'No' });
+}
 
 
 

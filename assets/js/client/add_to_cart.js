@@ -156,12 +156,12 @@ $(document).ready(function() {
     
         // Calculate the subtotal, shipping, and total
         let shippingFee = 36;  // Fixed shipping fee
-        let total = subtotal + shippingFee;
+        let total = subtotal;
     
         // Update the order summary
-        $(".checkout-box p:contains('Cart Subtotal:')").html(`<strong>Cart Subtotal:</strong> ₱${subtotal.toFixed(2)}`);
-        $(".checkout-box p:contains('Shipping Fee:')").html(`<strong>Shipping Fee:</strong> ₱${shippingFee}`);
-        $(".checkout-box .total-price").text(`₱${total.toFixed(2)}`);
+        $(".checkout-box p:contains('Cart Subtotal:')").html(`<strong>Cart Total:</strong> ₱${subtotal.toFixed(2)}`);
+        // $(".checkout-box p:contains('Shipping Fee:')").html(`<strong>Shipping Fee:</strong> ₱${shippingFee}`);
+        // $(".checkout-box .total-price").text(`₱${total.toFixed(2)}`);
     
         // Update delivery information
         const deliveryInfo = `

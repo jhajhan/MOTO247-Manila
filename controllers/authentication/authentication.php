@@ -105,6 +105,7 @@
 
                     $response['status'] = 'success';
                     $response['redirect'] = ($user['role'] === 'admin') ? '/admin' : '/';
+                    $response['role'] = $user['role'];
                 } else {
                     $response['status'] = 'error';
                     $response['message'] = 'Invalid email or password';

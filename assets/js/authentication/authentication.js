@@ -44,14 +44,19 @@ $("#login-form").on('submit', function(event) {
         success: function(response) {
             console.log(response);  // Debugging line: Log the response to check
 
-            if (response.status === 'success') {
+            if (response.status === 'success' && response.role != 'admin') {
                 // Hide the login/register modal and show profile settings
                 $('#login-register-modal').hide();
                 $('#profile-settings').show();
 
                 // Optionally redirect if needed
                 window.location.href = response.redirect;  // Redirect to the appropriate page
-            } else {
+            } else if(response.role == 'admin'){
+                $('#login-register-modal').hide();
+                window.location.href = response.redirect;
+            }
+            
+            else {
                 alert(response.message);  // Show error message if login fails
             }
         },

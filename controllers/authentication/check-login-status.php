@@ -10,7 +10,7 @@ class Login {
         $response = [
             "message" => $authSession->isLogged() ? "success" : "yoww",
             "status" => $authSession->isLogged() ? "success" : "error",
-            "isLoggedIn" => $authSession->isLogged()
+            "isLoggedIn" => $authSession->isLogged(),
         ];
 
         echo json_encode($response);

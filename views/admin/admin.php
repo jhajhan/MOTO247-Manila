@@ -110,7 +110,7 @@
     
                     <div class="user">
                         <img src="/assets/img/jali.jpg" alt="">
-                        <span id = 'admin-name' class="user-name">Bini Sheena</span>
+                        <span id = 'admin-name' class="user-name"></span>
                     </div>
                 </div>
                 <!-------------------------------------------end of top bar-------------------->

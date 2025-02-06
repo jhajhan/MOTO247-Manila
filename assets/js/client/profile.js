@@ -20,27 +20,37 @@ function fetchProfile() {
 
 $("#edit-profile-details").on('submit', function(e){
     e.preventDefault();
-       const $username = $("#edit-username").val();
-       const $email = $("#edit-email").val();
-       const $phone_no = $("#edit-phone").val();
-       const $address = $("#edit-address").val();
-       const $action = "edit_details";
+
+
+    
+       const username = $("#edit-username").val();
+       const email = $("#edit-email").val();
+       const phone_no = $("#edit-phone").val();
+       const address = $("#edit-address").val();
+       const action = "edit_details";
+       
+       alert(phone_no);
 
     $.ajax({
         url: '/profile',
         method: 'PUT',
         contentType: 'application/json',
-        data: JSON.stringify({$username, $email, $phone_no, $address, $action}),
+        data: JSON.stringify({username, email, phone_no, address, action}),
         success: function(response) {
+            console.log(response);
+            alert(response.message);
             fetchProfile();
         }
     })
 })
 
-$("#edit-password-details").on('click', function(){
-    const old_password = $("#edit-password");
-    const new_password = $("#new-password");
-    const confirm_password = $("#confirm-password");
+$("#edit-password-details").on('submit', function(e){
+
+    e.preventDefault();
+    
+    const old_password = $("#old-password").val();
+    const new_password = $("#new-password").val();
+    const confirm_password = $("#confirm-password").val();
     const action = "edit_password";
 
     $.ajax({
@@ -48,8 +58,15 @@ $("#edit-password-details").on('click', function(){
         method: 'PUT',
         contentType: 'application/json',
         data: JSON.stringify({old_password, new_password, confirm_password, action}),
-        success: function(){
-            
+        success: function(response){
+            alert(response.message);
+            $("#old-password").val('');
+            $("#new-password").val('');
+            $("#confirm-password").val('');
+
+        },
+        error: function(xhr) {
+            console.log(xhr.responseText);  // Error handling
         }
     })
 })

@@ -1,6 +1,6 @@
 let services = [];
 let servicesCurrentPage = 1;
-const servicesPerPage = 6; // Adjust based on your layout
+const servicesPerPage = 8; // Adjust based on your layout
 
 // Fetch Services from API
 function fetchServices() {

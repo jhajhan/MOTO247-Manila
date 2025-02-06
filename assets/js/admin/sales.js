@@ -1,5 +1,24 @@
 $(document).ready(function(){
 
+    $(document).on('click', '.editBtn', function() {
+        const id = $(this).data('id');
+        const payment_method = $(this).data('payment-method');
+        const payment_status = $(this).data('payment-status');
+        const status = $(this).data('status');
+
+        $("#edit-id").val(id);
+        $("#edit-payment-method").val(payment_method.toUpperCase()).change();
+        $("#edit-payment-status").val(payment_status.toUpperCase()).change();
+        $("#edit-status").val(status.toUpperCase()).change();
+
+        $("#edit-modal").show();
+    });
+
+    $(document).on('click', '.deleteBtn', function() {
+        const id = $(this).data('id');
+        deleteSale(id);
+    });
+
     fetchSales();
 
     $("#online-sales").hide();
@@ -47,11 +66,11 @@ $('#add-physical-form').on('submit', function(event) {
         }
     });
 
-    // Validate fields before submitting
-    if (!customer_name|| products.length === 0 || total_amount === 0) {
-        alert("Please fill out all fields correctly.");
-        return;
-    }
+    // // Validate fields before submitting
+    // if (!customer_name|| products.length === 0 || total_amount === 0) {
+    //     alert("Please fill out all fields correctly.");
+    //     return;
+    // }
 
     const date = $('#physical-order-date').val();
     const payment_method = $('#physical-payment').val();

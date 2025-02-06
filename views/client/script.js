@@ -84,9 +84,9 @@ function isUserLoggedIn() {
 // }
 
 // Call the function to check the login status when the page loads
-window.onload = function() {
-    toggleAccountView();
-};
+// window.onload = function() {
+//     toggleAccountView();
+// };
 
 // Example of setting a user as logged in (you can remove or modify this as per your logic)
 document.getElementById('account-link').addEventListener('click', function() {

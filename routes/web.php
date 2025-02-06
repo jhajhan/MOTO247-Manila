@@ -95,9 +95,16 @@ switch ($uri) {
         } elseif ($method == 'PUT') {
             $data = json_decode(file_get_contents('php://input'), true);
             $action = $data['action'] == 'edit_details' ? 'editProfileInfo' : 'editPassword';
-            handleController('client/profile', 'Profile', $action, $data, $sessionManager);
+            
+            // Pass only $sessionManager to editPassword method
+            if ($action == 'editPassword') {
+                handleController('client/profile', 'Profile', $action, $sessionManager);
+            } else {
+                handleController('client/profile', 'Profile', $action, $data, $sessionManager);
+            }
         }
         break;
+        
 
     case '/get-store-info':
         handleController('client/store', 'Store', 'getStoreInfo');

@@ -155,7 +155,7 @@
             <p>Scan the QR Code below to pay via GCash.</p>
 
             <div class="payment-info">
-                <img src="/views/client/files/qr_placeholder.jpg" alt="GCash QR Code"> 
+                <img src="/views/client/files/moto247_qr.JPG" alt="GCash QR Code"> 
                 <p><strong>Step 1:</strong> Open your GCash app and scan the QR code. 
                 <br><strong>Step 2:</strong> Input the total amount: <span class="total-price">₱289</span> 
                 <br><strong>Step 3:</strong> Send the payment and take a screenshot. 
@@ -164,6 +164,31 @@
             </div>
         </div>
     </div>
+
+    <!-- Cash on Delivery Modal -->
+    <div class="modal" id="codModal">
+        <div class="modal-content">
+            <span class="icon-close" onclick="closeModal('codModal')"><ion-icon name="close"></ion-icon></span>
+            <h2>Order Placed Successfully!</h2>
+            <p>Your order has been placed via <strong>Cash on Delivery</strong>.</p>
+            
+            <div class="cod-info">
+                <p>Ano pwedeng ilagay dito?</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cash on Delivery Modal -->
+    <div class="modal" id="errorPaymentModal">
+        <div class="modal-content">
+            <span class="icon-close" onclick="closeModal('errorPaymentModal')"><ion-icon name="close"></ion-icon></span>
+            <h2>Error!</h2>
+            <p>Please select a payment method first</p>
+
+            <button class="normal" onclick="closeModal('errorPaymentModal')"> OK</button>
+        </div>
+    </div>
+
 
     <script>
         // document.getElementById('checkout-btn').addEventListener('click', function() {
@@ -183,7 +208,6 @@
         // });
 
 
-
         // QR CODE PAYMENT MODAL POP UP
         function openPaymentModal() {
             document.getElementById("paymentModal").style.display = "block";
@@ -194,10 +218,32 @@
             document.getElementById("paymentModal").style.display = "none";
         }
 
+        // COD PAYMENT MODAL POP UP
+        function openCODModal() {
+            document.getElementById("codModal").style.display = "block";
+        }
+
+        // Function to close the COD Modal
+        function closeModal() {
+            document.getElementById("codModal").style.display = "none";
+        }
+
         // Attach event listener to the "Place Order" button
         document.getElementById("check-out-btn").addEventListener("click", function(event) {
             event.preventDefault(); // Prevents default form submission behavior
-            openPaymentModal(); // Opens the modal
+
+                // Get the selected payment method
+            let selectedPayment = document.querySelector(".payment-button.selected");
+
+            if (selectedPayment) {
+                if (selectedPayment.textContent.trim() === "Gcash") {
+                    openPaymentModal(); // Open modal if GCash is selected
+                } else {
+                    openCODModal();
+                }
+            } else {
+                alert("Please select a payment method first!"); // Notify user if no payment is selected
+            }
         });
 
         function selectDelivery(selectedButton) {
@@ -219,7 +265,6 @@
             // Add 'selected' class to the clicked button
             selectedButton.classList.add("selected");
         }
-
     </script>
 
     <script src = "/assets/js/client/add_to_cart.js"></script>

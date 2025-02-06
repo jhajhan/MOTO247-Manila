@@ -1016,6 +1016,10 @@ footer .copyright{
     position: fixed;
 }
 
+.profile-sidebar h3{
+    padding-bottom: 30px;
+}
+
 .profile-pic {
     width: 100px;
     height: 100px;
@@ -1649,35 +1653,204 @@ button {
     font-size: 13px;
 }
 
-/* Media Query */
+/* COD Modal */
+#codModal .modal{
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-/* For mobile devices */
-@media (max-width: 480px) {
+#codModal .modal-content{
+    margin: 0 auto;
+    border: 1px solid #888;
+    background-color: #fff;
+    width: 40%;
+    max-width: 600px; /* Adjusted for responsiveness */
+    border-radius: 12px;
+    text-align: center;
+    padding: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -43%);
+}
 
+#codModal .modal-content h2{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 23px;
 }
-  
-/* For tablets */
-@media (min-width: 481px) and (max-width: 768px) {
-    #navbar, #icons{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-    }
+
+#codModal .modal-content p{
+    line-height: 1.9;
+    font-size: 13px;
+    padding-top: 10px;
 }
-  
-  /* For small laptops */
-@media (min-width: 769px) and (max-width: 1024px) {
-    
+
+.cod-info img{
+    width: 40%;
+    max-width: 250px;
+    height: auto;
+    border: 5px solid #192C44;
+    margin: 0;
 }
-  
-/* For large screens */
-@media (min-width: 1025px) and (max-width: 1440px) {
-   
+
+#codModal .modal-content .icon-close{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 40px;
+    height: 40px;
+    background: #192C44;
+    font-size: 1.3em;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
 }
-  
-/* For extra-large screens */
-@media (min-width: 1441px) {
-  
+
+#codModal .modal-content .icon-close:hover{
+    background: #444;
 }
-  
+
+
+/* Track Order Page */
+
+.container{
+    width: auto;
+    max-width: 100%;
+    padding: 20px;
+    margin: 0 60px;
+    background: #D7E7EB;
+    position: relative;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.container h1{
+    color: #192C44;
+    margin-bottom: 20px;
+}
+
+.container form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 0 30px;
+}
+
+.container label {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    color: #555;
+}
+
+.container input[type="text"] {
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    transition: border-color 0.3s;
+}
+
+.container input[type="text"]:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+.container button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.container button:hover {
+    background-color: #0056b3;
+}
+
+#track{
+    overflow-x: auto;
+    padding-bottom: 90px;
+}
+
+#track table{
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    white-space: nowrap;
+    margin-top: 30px;
+}
+
+#track table img{
+    width: 70px;
+}
+
+#track table td:nth-child(1),
+#track table td:nth-child(4),
+#track table td:nth-child(5),
+#track table td:nth-child(6),
+#track table td:nth-child(7){
+    width: 150px;
+    text-align: center;
+}
+
+#track table td:nth-child(2){
+    width: 150px;
+    text-align: center;
+}
+
+#track table td:nth-child(3){
+    width: 250px;
+    text-align: center;
+}
+
+#track table td:nth-child(5) input{
+    width: 70px;
+    padding: 10px 5px 10px 15px;
+}
+
+#track table thead{
+    border: 1px solid #e2e9e1;
+    border-left: none;
+    border-right: none;
+}
+
+#track table thead td{
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    padding: 18px 0;
+}
+
+#track table tbody tr td{
+    padding-top: 15px;
+}
+
+#track table tbody td{
+    font-size: 13px;
+}

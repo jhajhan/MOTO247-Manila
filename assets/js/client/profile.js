@@ -13,6 +13,7 @@ function fetchProfile() {
             $("#edit-phone").val(response.phone_number);
             $("#edit-address").val(response.address);
             $("#edit-registered").val(response.created_at);
+            $("#profile-username").text(response.username);
         }
     })
 }

@@ -1,3 +1,8 @@
+// Global variables to store selected values
+var selectedPaymentMethod = '';
+var selectedDeliveryMethod = '';
+
+
 $(document).ready(function() {
     // Fetch cart items when the page loads
     fetchCart();
@@ -8,10 +13,18 @@ $(document).ready(function() {
     
         // Hide the sticky bar
         $('#sticky-bar').hide();
-     
-       
-    
     })
+
+
+
+    $(".payment-button").on("click", function() {
+        selectPayment(this);  // Pass the clicked button to the selectPayment function
+    });
+
+     // Event listener for selecting a delivery method
+     $(".delivery-button").on("click", function() {
+        selectDelivery(this);  // Pass the clicked button to the selectDelivery function
+    });
 
     
 
@@ -184,15 +197,18 @@ $(document).ready(function() {
             const productQuantity = $(this).find('.qty').val();
             const image = $(this).find('img').attr('src');
 
-            cartData.push({
-                cart_id: cartId,  // Pass the cart ID
-                prod_id: productId,  // Pass the product ID
-                name: productName,
-                price: productPrice,
-                prod_qty: productQuantity,
-                isSelected: isSelected,
-                image: image
-            });
+            // Only push the item if it is selected
+            if (isSelected) {
+                cartData.push({
+                    cart_id: cartId,  // Pass the cart ID
+                    prod_id: productId,  // Pass the product ID
+                    name: productName,
+                    price: productPrice,
+                    prod_qty: productQuantity,
+                    isSelected: isSelected,
+                    image: image
+                });
+            }
         });
 
         return cartData;
@@ -256,7 +272,11 @@ $(document).ready(function() {
 
 function placeOrder(cart, total_amount) {
 
-    console.log(cart);
+    if (selectedDeliveryMethod == '' || selectedPaymentMethod == '') {
+        alert('Select delivery option and/or payment method.');
+        return;
+    }
+
 
     if (cart.length === 0) {
         alert('Your cart is empty. Please add items before placing an order.');
@@ -274,9 +294,17 @@ function placeOrder(cart, total_amount) {
         url: '/place-order',
         method: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify({cart, total_amount, payment_method}),
+        data: JSON.stringify({cart, total_amount, payment_method, selectedDeliveryMethod, selectedPaymentMethod}),
         success: function() {
-
+            if (selectedPaymentMethod == 'gcash') {
+                $("#paymentModal").show();
+            } else {
+                $("#checkout").hide();
+                
+                $('#sticky-bar').show();
+                $("#cart").show();
+                fetchCart();
+            }
         }
     })
 }
@@ -301,5 +329,48 @@ function updateTotalCartAmount() {
     // Update the total in the sticky bar
     $(".total span").html(`Total (${productCount} item${productCount !== 1 ? 's' : ''}): <strong>₱${total.toFixed(2)}</strong>`);
 }
+
+function selectPayment(selectedButton) {
+    // Remove 'selected' class from all payment buttons
+    $(".payment-button").removeClass("selected");
+
+    // Add 'selected' class to the clicked button
+    $(selectedButton).addClass("selected");
+
+    // Get the value of the selected button (using data-value attribute)
+    selectedPaymentMethod = $(selectedButton).data("value");
+
+    // Log or use the selected payment method
+    console.log("Selected payment method:", selectedPaymentMethod);}
+
+
+function selectDelivery(selectedButton) {
+    // Remove 'selected' class from all delivery buttons
+    $(".delivery-button").removeClass("selected");
+
+    // Add 'selected' class to the clicked button
+    $(selectedButton).addClass("selected");
+
+    // Get the value of the selected button (using data-value attribute)
+    selectedDeliveryMethod = $(selectedButton).data("value");
+
+    // Log or use the selected delivery method
+    console.log("Selected delivery method:", selectedDeliveryMethod);
+
+    // Optionally, you can display the selected value in the UI
+    // For example, display it in a div or another element
+    // $('#selectedDeliveryDisplay').text(selectedDeliveryMethod);
+}
+
+$(".icon-close").on('click', function(){
+    $("#checkout").hide();
+    
+    $("#cart").show();
+    $('#sticky-bar').show();
+fetchCart();
+})
+
+
+
 
 

@@ -26,22 +26,23 @@ class Checkout {
 
         $cart = $data['cart'];
         $total_amount = $data['total_amount'];
-        $payment_method = $data['payment_method'];
+        $payment_method = $data['selectedPaymentMethod'];
         $date = date('Y-m-d');
         $payment_status = 'pending';
         $status = 'pending';
+        $delivery_option = $data['selectedDeliveryMethod'];
         $type = 'Online';
 
         // Insert the order
-        $order_query = "INSERT INTO `order` (user_id, date_ordered, payment_method, payment_status, status, type, total_amount) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $order_query = "INSERT INTO `order` (user_id, date_ordered, payment_method, payment_status, status, type, total_amount, delivery_option) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($order_query);
         if ($stmt === false) {
             echo json_encode(['error' => 'Error preparing order query']);
             return;
         }
 
-        $stmt->bind_param('isssssi', $user_id, $date, $payment_method, $payment_status, $status, $type, $total_amount);
+        $stmt->bind_param('isssssis', $user_id, $date, $payment_method, $payment_status, $status, $type, $total_amount, $delivery_option);
         if (!$stmt->execute()) {
             echo json_encode(['error' => 'Error inserting order: ' . $stmt->error]);
             return;
@@ -66,10 +67,18 @@ class Checkout {
             $stmt->bind_param('iiid', $order_id, $product_id, $product_qty, $total_per_product);
             if (!$stmt->execute()) {
                 echo json_encode(['error' => 'Error inserting order item: ' . $stmt->error]);
+
                 return;
             }
+            
+            $delete_query = 'DELETE FROM cart WHERE prod_id = ? AND user_id = ?';
+                $stmt = mysqli_prepare($conn, $delete_query);
+                $stmt->bind_param('ii', $product_id, $user_id);
+                $stmt->execute();
+
         }
 
+        
         // Response to the client
         echo json_encode(['message' => 'Order placed successfully', 'order_id' => $order_id]);
     }

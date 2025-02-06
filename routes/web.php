@@ -82,6 +82,12 @@ switch ($uri) {
             isAjaxRequest() ? handleController('client/addtocart', 'CartManager', 'getCartItems', $authSession, $sessionManager) : require_once __DIR__ . '/../views/client/cart.html';
         }
         break;
+    
+    case '/place-order':
+        $data = json_decode(file_get_contents('php://input'), true);
+        handleController('client/checkout', 'Checkout', 'checkout', $sessionManager, $data);
+
+        break;
 
     case '/profile':
         if ($method == 'GET') {

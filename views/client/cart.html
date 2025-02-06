@@ -83,10 +83,23 @@
             <!-- Delivery Information -->
             <div class="checkout-box full-width">
                 <h3>Delivery Address</h3>
-                <p><strong>Name:</strong> Nikki Manginsay</p>
-                <p><strong>Contact Number:</strong> (+63) 9926293624</p>
-                <p><strong>Address:</strong> Blk 30 Lot 31 Purok 4 Martizano Street, Matro Residence, Central Bicutan, Taguig City, Metro Manila, 1633</p>
+                <p><strong>Name:</strong> <span id="delivery-name"></span></p>
+                <p><strong>Contact Number:</strong> <span id="delivery-contact"></span></p>
+                <p><strong>Address:</strong> <span id="delivery-address"></span></p>
             </div>
+            
+            
+
+            <!--Delivery Options-->
+            <div class="checkout-box delivery-options">
+                <h3>Delivery Options</h3>
+                
+                <div class="delivery-buttons">
+                    <button class="normal delivery-button" data-value = "lalamove" >Lalamove</button>
+                    <button class="normal delivery-button" data-value = "pickup">Pickup</button>
+                    <button class="normal delivery-button" data-value = "standard shipping" >Standard Shipping</button>
+                </div>
+            </div>            
             
             <!-- Products Ordered -->
             <div class="checkout-box full-width">
@@ -105,33 +118,56 @@
                         <!-- Items will be inserted here dynamically -->
                     </tbody>
                 </table>
-                
             </div>
     
-            <!-- Payment Method -->
-            <div class="checkout-box full-width">
-                <h3>Payment Method</h3>
-                <p>Cash on Delivery (COD)</p>
+            <div class="checkout-row">
+                <!-- Payment Method -->
+                <div class="checkout-box payment-method">
+                    <h3>Payment Method</h3>
+                    
+                    <div class="payment-method checkout-buttons">
+                        <button class="normal payment-button" data-value = "gcash">Gcash</button>
+                        <button class="normal payment-button" data-value = "cash">Cash On Delivery</button>
+                    </div>
+                </div>
+        
+                <!-- Order Summary -->
+                <div class="checkout-box order-summary">
+                    <h3>Order Summary</h3>
+                    <p><strong>Cart Subtotal:</strong> ₱253</p>
+                    <p><strong>Total:</strong> ₱253</span></p>
+                </div>
             </div>
-    
-            <!-- Order Summary -->
-            <div class="checkout-box full-width">
-                <h3>Order Summary</h3>
-                <p><strong>Cart Subtotal:</strong> ₱253</p>
-                <p><strong>Shipping Fee:</strong> ₱36</p>
-                <p><strong>Total:</strong> <span class="total-price">₱289</span></p>
-            </div>
-    
+
             <div class="checkout-buttons">
-                <button id = "check-out-btn" class="normal">Place Order</button>
+                <button id = "place-order-btn" class="normal">Place Order</button>
 
                 <a href="/cart">
                     <button class="normal" id="back-to-cart">Back to Cart</button>
                 </a>
-                
+
+                <!-- <button id = "ordered-successfully" class="normal">Place Order</button> -->
             </div>
         </div>
     </section>
+
+    <!-- Payment Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <span class="icon-close" onclick="closeModal()"><ion-icon name="close"></ion-icon></span>
+            <h2>Pay Using Gcash</h2>
+            <p>Scan the QR Code below to pay via GCash.</p>
+
+            <div class="payment-info">
+                <img src="/views/client/files/qr_placeholder.jpg" alt="GCash QR Code"> 
+                <p><strong>Step 1:</strong> Open your GCash app and scan the QR code. 
+                <br><strong>Step 2:</strong> Input the total amount: <span class="total-price">₱289</span> 
+                <br><strong>Step 3:</strong> Send the payment and take a screenshot. 
+                <br><strong>Step 4:</strong> Click the link below and send your payment proof: 
+                <br><a href="https://m.me/yourbusiness" target="_blank">Send via Messenger</a></p>
+            </div>
+        </div>
+    </div>
 
     <script>
         // document.getElementById('checkout-btn').addEventListener('click', function() {
@@ -150,9 +186,48 @@
         //     document.getElementById('sticky-bar').style.display = 'none';  // Hides the entire sticky bar section
         // });
 
+
+
+        // QR CODE PAYMENT MODAL POP UP
+        // function openPaymentModal() {
+        //     document.getElementById("paymentModal").style.display = "block";
+        // }
+
+        // Function to close the Payment Modal
+        function closeModal() {
+            document.getElementById("paymentModal").style.display = "none";
+        }
+
+        // Attach event listener to the "Place Order" button
+        // document.getElementById("check-out-btn").addEventListener("click", function(event) {
+        //     event.preventDefault(); // Prevents default form submission behavior
+        //     openPaymentModal(); // Opens the modal
+        // });
+
+        // function selectDelivery(selectedButton) {
+        //     // Remove 'selected' class from all buttons
+        //     document.querySelectorAll(".delivery-button").forEach(button => {
+        //         button.classList.remove("selected");
+        //     });
+
+        //     // Add 'selected' class to the clicked button
+        //     selectedButton.classList.add("selected");
+        // }
+
+        // function selectPayment(selectedButton) {
+        //     // Remove 'selected' class from all payment buttons
+        //     document.querySelectorAll(".payment-button").forEach(button => {
+        //         button.classList.remove("selected");
+        //     });
+
+        //     // Add 'selected' class to the clicked button
+        //     selectedButton.classList.add("selected");
+        // }
+
     </script>
 
     <script src = "/assets/js/client/add_to_cart.js"></script>
+    <script src = "/assets/js/client/delivery_info.js"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

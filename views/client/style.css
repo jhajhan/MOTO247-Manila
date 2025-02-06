@@ -1195,7 +1195,7 @@ footer .copyright{
     right: 0px;
     width: 40px;
     height: 40px;
-    background: #222;
+    background: #192C44;
     font-size: 1.3em;
     color: #fff;
     display: flex;
@@ -1433,7 +1433,7 @@ footer .copyright{
 
 .checkout-box h3 {
     font-size: 20px;
-    color: #192C44;
+    color: #222;
     margin-bottom: 10px;
     text-transform: uppercase;
     border-bottom: 1px solid #e1e1e1;
@@ -1464,13 +1464,8 @@ footer .copyright{
     font-weight: 700;
     text-transform: uppercase;
     font-size: 13px;
-    background: #D7E7EB;
-}
-
-.total-price {
-    font-size: 18px;
-    font-weight: bold;
-    color: red;
+    background: #108FB6;
+    color: #fff;
 }
 
 /* Checkout Buttons */
@@ -1503,12 +1498,155 @@ button {
 }
 
 #back-to-cart {
-    background: #757575;
-    color: white;
+    background: #aaa;
+    color: #222;
 }
 
 #back-to-cart:hover {
-    background: #616161;
+    background: #192C44;
+    color: #fff;
+}
+
+.checkout-row {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.checkout-box.payment-method,
+.checkout-box.order-summary {
+    width: 48%; /* Adjust as needed */
+    box-sizing: border-box;
+    padding-bottom: 3px;
+}
+
+.checkout-buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-button{
+    width: calc(50% - 10px);
+}
+
+.payment-method button{
+    background: none;
+    color: #222;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: 1px solid #e2e9e1;
+}
+
+.payment-method .checkout-buttons{
+    padding-top: 15px;
+}
+
+.delivery-buttons{
+    display: flex;
+    padding-top: 15px;
+    padding-bottom: 3px;
+}
+
+.delivery-button{
+    margin-right: 20px;
+}
+
+.delivery-buttons button{
+    background: none;
+    color: #222;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: 1px solid #e2e9e1;
+}
+
+.delivery-buttons button:hover,
+.payment-method button:hover{
+    background: #192C44;
+    color: #fff;
+}
+
+.delivery-button.selected,
+.payment-button.selected {
+    background-color: #108FB6;
+    color: white;
+    border-color:#108FB6;
+}
+
+/* Payment Modal */
+#paymentModal .modal{
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#paymentModal .modal-content{
+    margin: 0 auto;
+    border: 1px solid #888;
+    background-color: #fff;
+    width: 40%;
+    max-width: 600px; /* Adjusted for responsiveness */
+    border-radius: 12px;
+    text-align: center;
+    padding: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -43%);
+}
+
+#paymentModal .modal-content h2{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 23px;
+}
+
+#paymentModal .modal-content p{
+    line-height: 1.9;
+    font-size: 13px;
+    padding-top: 10px;
+}
+
+.payment-info img{
+    width: 40%;
+    max-width: 250px;
+    height: auto;
+    border: 5px solid #192C44;
+    margin: 0;
+}
+
+#paymentModal .modal-content .icon-close{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 40px;
+    height: 40px;
+    background: #192C44;
+    font-size: 1.3em;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+#paymentModal .modal-content .icon-close:hover{
+    background: #444;
+}
+
+.total-price{
+    color: #192C44;
+    font-size: 13px;
 }
 
 /* Media Query */

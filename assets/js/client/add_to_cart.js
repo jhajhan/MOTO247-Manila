@@ -1,3 +1,8 @@
+// Global variables to store selected values
+var selectedPaymentMethod = '';
+var selectedDeliveryMethod = '';
+
+
 $(document).ready(function() {
     // Fetch cart items when the page loads
     fetchCart();
@@ -8,10 +13,18 @@ $(document).ready(function() {
     
         // Hide the sticky bar
         $('#sticky-bar').hide();
-     
-       
-    
     })
+
+
+
+    $(".payment-button").on("click", function() {
+        selectPayment(this);  // Pass the clicked button to the selectPayment function
+    });
+
+     // Event listener for selecting a delivery method
+     $(".delivery-button").on("click", function() {
+        selectDelivery(this);  // Pass the clicked button to the selectDelivery function
+    });
 
     
 
@@ -39,7 +52,7 @@ $(document).ready(function() {
                     subtotal += parseFloat(item.price) * parseInt(item.prod_qty);
 
                     cartHTML += `
-                        <tr data-id="${item.id}">
+                        <tr data-id="${item.id}" data-prod-id="${item.prod_id}">
                             <td><input type="checkbox" class="select-product" data-id="${item.id}" ${item.isSelected ? 'checked' : ''}></td>
                             <td><img src="${item.image}" alt="" width="50"></td>
                             <td>${item.name}</td>
@@ -158,6 +171,10 @@ $(document).ready(function() {
             <p><strong>Address:</strong> Blk 30 Lot 31 Purok 4 Martizano Street, Matro Residence, Central Bicutan, Taguig City, Metro Manila, 1633</p>
         `;
         $(".checkout-box .delivery-info").html(deliveryInfo);
+
+        $("#place-order-btn").on('click', function(){
+            placeOrder(cartData, total);
+        })
     
         // Show the modal and hide the cart
         $("#checkout").show();
@@ -172,21 +189,26 @@ $(document).ready(function() {
         let cartData = [];
 
         $('#cart-items tr').each(function() {
-            const productId = $(this).data('id');
+            const cartId = $(this).data('id');  // Cart ID (unique to each cart item)
+            const productId = $(this).data('prod-id');  // Product ID (unique to the product)
             const isSelected = $(this).find('.select-product').prop('checked');
             const productName = $(this).find('td:nth-child(3)').text();
             const productPrice = $(this).find('td:nth-child(4)').text().replace('₱', '');
             const productQuantity = $(this).find('.qty').val();
             const image = $(this).find('img').attr('src');
 
-            cartData.push({
-                id: productId,
-                name: productName,
-                price: productPrice,
-                prod_qty: productQuantity,
-                isSelected: isSelected,
-                image: image
-            });
+            // Only push the item if it is selected
+            if (isSelected) {
+                cartData.push({
+                    cart_id: cartId,  // Pass the cart ID
+                    prod_id: productId,  // Pass the product ID
+                    name: productName,
+                    price: productPrice,
+                    prod_qty: productQuantity,
+                    isSelected: isSelected,
+                    image: image
+                });
+            }
         });
 
         return cartData;
@@ -248,7 +270,44 @@ $(document).ready(function() {
 // checkout button
 
 
+function placeOrder(cart, total_amount) {
 
+    if (selectedDeliveryMethod == '' || selectedPaymentMethod == '') {
+        alert('Select delivery option and/or payment method.');
+        return;
+    }
+
+
+    if (cart.length === 0) {
+        alert('Your cart is empty. Please add items before placing an order.');
+        return; // Stop the function if the cart is empty
+    }
+
+    // Loop through the cart to verify items (for debugging)
+    cart.forEach(item => {
+        console.log(`Product ID: ${item.id}, Quantity: ${item.prod_qty}`);
+    });
+
+    payment_method = 'gcash';
+
+    $.ajax({
+        url: '/place-order',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({cart, total_amount, payment_method, selectedDeliveryMethod, selectedPaymentMethod}),
+        success: function() {
+            if (selectedPaymentMethod == 'gcash') {
+                $("#paymentModal").show();
+            } else {
+                $("#checkout").hide();
+                
+                $('#sticky-bar').show();
+                $("#cart").show();
+                fetchCart();
+            }
+        }
+    })
+}
 
 
 // Handle product selection checkbox
@@ -270,5 +329,48 @@ function updateTotalCartAmount() {
     // Update the total in the sticky bar
     $(".total span").html(`Total (${productCount} item${productCount !== 1 ? 's' : ''}): <strong>₱${total.toFixed(2)}</strong>`);
 }
+
+function selectPayment(selectedButton) {
+    // Remove 'selected' class from all payment buttons
+    $(".payment-button").removeClass("selected");
+
+    // Add 'selected' class to the clicked button
+    $(selectedButton).addClass("selected");
+
+    // Get the value of the selected button (using data-value attribute)
+    selectedPaymentMethod = $(selectedButton).data("value");
+
+    // Log or use the selected payment method
+    console.log("Selected payment method:", selectedPaymentMethod);}
+
+
+function selectDelivery(selectedButton) {
+    // Remove 'selected' class from all delivery buttons
+    $(".delivery-button").removeClass("selected");
+
+    // Add 'selected' class to the clicked button
+    $(selectedButton).addClass("selected");
+
+    // Get the value of the selected button (using data-value attribute)
+    selectedDeliveryMethod = $(selectedButton).data("value");
+
+    // Log or use the selected delivery method
+    console.log("Selected delivery method:", selectedDeliveryMethod);
+
+    // Optionally, you can display the selected value in the UI
+    // For example, display it in a div or another element
+    // $('#selectedDeliveryDisplay').text(selectedDeliveryMethod);
+}
+
+$(".icon-close").on('click', function(){
+    $("#checkout").hide();
+    
+    $("#cart").show();
+    $('#sticky-bar').show();
+fetchCart();
+})
+
+
+
 
 

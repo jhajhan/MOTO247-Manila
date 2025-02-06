@@ -110,7 +110,7 @@
     
                     <div class="user">
                         <img src="/assets/img/jali.jpg" alt="">
-                        <span class="user-name">Bini Sheena</span>
+                        <span id = 'admin-name' class="user-name">Bini Sheena</span>
                     </div>
                 </div>
                 <!-------------------------------------------end of top bar-------------------->
@@ -396,6 +396,8 @@
                                         <th>Customer ID</th>
                                         <th>Customer Name</th>
                                         <th>Phone Number</th>
+                                        <th>Address</th>
+                                        <th>Delivery Option</th>
                                         <th>Product/Service</th>
                                         <th>Order Date</th>
                                         <th>Payment Method</th>
@@ -451,10 +453,12 @@
                             <table id="physical-sales-table">
                                 <thead>
                                     <tr>
-                                        <th>Order ID</th>
+                                    <th>Order ID</th>
                                         <th>Customer ID</th>
                                         <th>Customer Name</th>
                                         <th>Phone Number</th>
+                                        <th>Address</th>
+                                        <th>Delivery Option</th>
                                         <th>Product/Service</th>
                                         <th>Order Date</th>
                                         <th>Payment Method</th>

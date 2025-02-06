@@ -95,11 +95,11 @@
                 <h3>Delivery Options</h3>
                 
                 <div class="delivery-buttons">
-                    <button class="normal delivery-button">Lalamove</button>
-                    <button class="normal delivery-button">Pickup</button>
-                    <button class="normal delivery-button">Standard Shipping</button>
+                    <button class="normal delivery-button" onclick="selectDelivery(this)">Lalamove</button>
+                    <button class="normal delivery-button" onclick="selectDelivery(this)">Pickup</button>
+                    <button class="normal delivery-button" onclick="selectDelivery(this)">Standard Shipping</button>
                 </div>
-            </div>
+            </div>            
             
             <!-- Products Ordered -->
             <div class="checkout-box full-width">
@@ -126,8 +126,8 @@
                     <h3>Payment Method</h3>
                     
                     <div class="payment-method checkout-buttons">
-                        <button id = "check-out-btn" class="normal payment-button">Gcash</button>
-                        <button class="normal payment-button">Cash On Delivery</button>
+                        <button class="normal payment-button" onclick="selectPayment(this)">Gcash</button>
+                        <button class="normal payment-button" onclick="selectPayment(this)">Cash On Delivery</button>
                     </div>
                 </div>
         
@@ -140,7 +140,7 @@
             </div>
 
             <div class="checkout-buttons">
-                <button id = "place-order-btn" class="normal">Place Order</button>
+                <button id = "check-out-btn" class="normal">Place Order</button>
 
                 <a href="/cart">
                     <button class="normal" id="back-to-cart">Back to Cart</button>
@@ -203,6 +203,27 @@
             event.preventDefault(); // Prevents default form submission behavior
             openPaymentModal(); // Opens the modal
         });
+
+        function selectDelivery(selectedButton) {
+            // Remove 'selected' class from all buttons
+            document.querySelectorAll(".delivery-button").forEach(button => {
+                button.classList.remove("selected");
+            });
+
+            // Add 'selected' class to the clicked button
+            selectedButton.classList.add("selected");
+        }
+
+        function selectPayment(selectedButton) {
+            // Remove 'selected' class from all payment buttons
+            document.querySelectorAll(".payment-button").forEach(button => {
+                button.classList.remove("selected");
+            });
+
+            // Add 'selected' class to the clicked button
+            selectedButton.classList.add("selected");
+        }
+
     </script>
 
     <script src = "/assets/js/client/add_to_cart.js"></script>

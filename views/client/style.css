@@ -1461,14 +1461,12 @@ footer .copyright{
 }
 
 #checkout table th {
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     font-size: 13px;
-    background: #192C44;
+    background: #108FB6;
     color: #fff;
 }
-
-
 
 /* Checkout Buttons */
 .checkout-buttons {
@@ -1500,8 +1498,8 @@ button {
 }
 
 #back-to-cart {
-    background: #108FB6;
-    color: #fff;
+    background: #aaa;
+    color: #222;
 }
 
 #back-to-cart:hover {
@@ -1565,6 +1563,13 @@ button {
 .payment-method button:hover{
     background: #192C44;
     color: #fff;
+}
+
+.delivery-button.selected,
+.payment-button.selected {
+    background-color: #108FB6;
+    color: white;
+    border-color:#108FB6;
 }
 
 /* Payment Modal */

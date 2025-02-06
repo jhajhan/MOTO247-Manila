@@ -141,24 +141,46 @@ body{
 
 /* Home Page*/
 #hero{
-    background-image: url("files/Temporary_Hero\ Section.png");
+    background-image: url("/views/client/files/homepage_bg.png");
     height: 90vh;
     width: 100%;
     background-size: cover;
-    background-position: top 25% right 0;
+    background-position: top 90% right 0;
     padding: 0 80px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+#hero p{
+    color: #fff;
+    padding: 20px;
+    width: 30%;
+    text-align: justify;
+    font-weight: 250;
 }
 
 #hero h4{
     padding-bottom: 15px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 300;
+    padding-bottom: 15px;
+    margin-left: 20px;
 }
 
 #hero h1{
-    color: #108FB6;
+    color: #fff;
+}
+
+#hero h2{
+    color: #fff;
+    font-size: 65px;
+    margin-left: 20px;
+    padding-bottom: 18px;
 }
 
 #hero button{
@@ -168,7 +190,7 @@ body{
     font-weight: bold;
     text-transform: uppercase;
     color: #fff;
-    background-color: #192C44;
+    background-color: #108FB6;
     border: none;
     border-radius: 10px;
     text-align: center;
@@ -176,6 +198,7 @@ body{
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-left: 20px;
 }
 
 #hero button:hover {
@@ -388,7 +411,7 @@ footer{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    border-top: 3px solid #192C44;
+    border-top: 3px solid #e1e1e1;
 }
 
 footer .right-footer{
@@ -485,6 +508,26 @@ footer .copyright{
     align-items: center;
     flex-direction: column;
     min-height: 100vh;
+}
+
+#services h1 {
+    margin-top: 100px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 50px;
+    color: #192C44;
+}
+
+#service-header{
+    width: 100%;
+    height: 40vh;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 14px;
 }
 
 .service-container {
@@ -1577,7 +1620,8 @@ button {
 }
 
 /* Payment Modal */
-#paymentModal .modal{
+#paymentModal .modal,
+#thankYouModal .modal{
     display: none;
     position: fixed;
     z-index: 1000;
@@ -1591,7 +1635,8 @@ button {
     align-items: center;
 }
 
-#paymentModal .modal-content{
+#paymentModal .modal-content,
+#thankYouModal .modal-content{
     margin: 0 auto;
     border: 1px solid #888;
     background-color: #fff;
@@ -1606,13 +1651,15 @@ button {
     transform: translate(-50%, -43%);
 }
 
-#paymentModal .modal-content h2{
+#paymentModal .modal-content h2,
+#thankYouModal .modal-content h2{
     padding-bottom: 10px;
     border-bottom: 1px solid #ddd;
     font-size: 23px;
 }
 
-#paymentModal .modal-content p{
+#paymentModal .modal-content p,
+#thankYouModal .modal-content p{
     line-height: 1.9;
     font-size: 13px;
     padding-top: 10px;
@@ -1626,7 +1673,8 @@ button {
     margin: 0;
 }
 
-#paymentModal .modal-content .icon-close{
+#paymentModal .modal-content .icon-close,
+#thankYouModal .modal-content .icon-close{
     position: absolute;
     top: 0px;
     right: 0px;
@@ -1644,7 +1692,8 @@ button {
     z-index: 1;
 }
 
-#paymentModal .modal-content .icon-close:hover{
+#paymentModal .modal-content .icon-close:hover,
+#thankYouModal .modal-content .icon-close:hover{
     background: #444;
 }
 

@@ -104,12 +104,12 @@ document.querySelector('form[action="#"]').addEventListener('submit', function(e
     event.preventDefault(); // Prevent the form from submitting for now
     
     // Simulate successful registration (you can replace this with your actual registration logic)
-    let registrationSuccess = true;  // Set this flag based on actual registration result
+    // let registrationSuccess = true;  // Set this flag based on actual registration result
     
-    if (registrationSuccess) {
-        // Show the verification modal
-        document.getElementById('verificationModal').style.display = 'block';
-    }
+    // if (registrationSuccess) {
+    //     // Show the verification modal
+    //     document.getElementById('verificationModal').style.display = 'block';
+    // }
 });
 
 // Close the modal when the close icon is clicked

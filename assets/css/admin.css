@@ -952,7 +952,7 @@ canvas {
 }
 
 .product-table .editBtn,
-.product-table .deleteBtn {
+.product-table .deleteProductsBtn {
     padding: 5px 10px;
     border: none;
     border-radius: 3px;
@@ -970,11 +970,11 @@ canvas {
     background-color: var(--eerie);
 }
 
-.product-table .deleteBtn {
+.product-table .deleteProductsBtn {
     background-color: var(--charcoal);
 }
 
-.product-table .deleteBtn:hover {
+.product-table .deleteProductsBtn:hover {
     background-color: var(--eerie);
 }
 
@@ -1387,6 +1387,25 @@ canvas {
 }
 
 .sales-table .actions button:hover {
+    background-color: var(--eerie);
+}
+
+.sales-table .deleteSalesBtn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: 1px solid var(--charcoal);
+}
+
+
+.sales-table .deleteSalesBtn {
+    background-color: var(--charcoal);
+}
+
+.sales-table .deleteSalesBtn:hover {
     background-color: var(--eerie);
 }
 
@@ -2422,3 +2441,6 @@ h3 {
     from { opacity: 1; }
     to { opacity: 0; }
 }
+
+
+

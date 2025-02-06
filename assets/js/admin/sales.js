@@ -14,12 +14,7 @@ $(document).ready(function(){
         $("#edit-modal").show();
     });
 
-    $(document).on('click', '#deleteBtnP', function() {
-        const id = $(this).data('id');
-        deleteSale(id);
-    });
-
-    $(document).on('click', '#deleteBtnO', function() {
+    $(document).on('click', '.deleteSalesBtn', function() {
         const id = $(this).data('id');
         deleteSale(id);
     });
@@ -301,8 +296,7 @@ function fetchSales (filters = {}) {
                     <td>${sale.payment_status}</td>
                     <td>${sale.status}</td>
                     <td>${sale.total}</td>
-                    <td><button id = 'editPSales' class = 'editBtn' data-id = ${sale.order_id}  data-payment-method = ${sale.payment_method} data-payment-status = ${sale.payment_status} data-status = ${sale.status}>Edit</button>    
-                    <button id = "deleteBtnP" class = 'deleteBtn' data-id = ${sale.order_id}>Delete</button></td>
+                    <td><button id = 'editPSales' class = 'editBtn' data-id = ${sale.order_id}  data-payment-method = ${sale.payment_method} data-payment-status = ${sale.payment_status} data-status = ${sale.status}>Edit</button>    <button class = 'deleteSalesBtn' data-id = ${sale.order_id}>Delete</button></td>
                     `
                 );
 
@@ -335,8 +329,7 @@ function fetchSales (filters = {}) {
                     <td>${sale.payment_status}</td>
                     <td>${sale.status}</td>
                     <td>${sale.total}</td>
-                    <td><button id = 'editOSales' class = 'editBtn' data-id = ${sale.order_id} data-payment-method = ${sale.payment_method} data-payment-status = ${sale.payment_status} data-status = ${sale.status}>Edit</button>  
-                    <button id = "deleteBtnO" class = 'deleteBtn' data-id = ${sale.order_id}>Delete</button></td>
+                    <td><button id = 'editOSales' class = 'editBtn' data-id = ${sale.order_id} data-payment-method = ${sale.payment_method} data-payment-status = ${sale.payment_status} data-status = ${sale.status}>Edit</button>  <button class = 'deleteSalesBtn' data-id = ${sale.order_id}>Delete</button></td>
                     `
                 );
 
@@ -378,15 +371,10 @@ function fetchSales (filters = {}) {
                 
             // });
 
-            // $("#deleteBtnP").on('click', function() {
-            //     const id = $(this).data('id');
-            //     deleteSale(id);
-            // });
-
-            // $("#deleteBtnO").on('click', function() {
-            //     const id = $(this).data('id');
-            //     deleteSale(id);
-            // });
+            $(".deleteSalesBtn").on('click', function() {
+                const id = $(this).data('id');
+                deleteSale(id);
+            });
 
 
         }

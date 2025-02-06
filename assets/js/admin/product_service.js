@@ -88,7 +88,7 @@
                             <td>${product.unit_price}</td>
                             <td>${product.stock}</td>
                             <td><button class="editBtn" data-id="${product.prod_id}" data-name = "${product.name}" data-type = "${product.type}", data-price = "${product.price}" data-unit-price = "${product.unit_price}" data-stock = "${product.stock}" data-desc = "${product.description}">Edit</button>  
-                            <button id = "deleteBtnSales" class="deleteBtn" data-id="${product.prod_id}">Delete</button></td>
+                            <button id = "deleteBtnSales" class="deleteProductsBtn" data-id="${product.prod_id}">Delete</button></td>
                         </tr>
                     `); //  
 
@@ -122,10 +122,10 @@
 
                 });
 
-                // $(document).on("click", "#deleteBtnSales", function() {
-                //     const id = $(this).data('id');
-                //     deleteProduct(id);
-                // });
+            $("#productServiceTableBody").on("click", ".deleteProductsBtn", function() {
+                const id = $(this).data('id');
+                deleteProduct(id);
+            });
 
             },
             error: function(error) {

@@ -83,10 +83,12 @@
             <!-- Delivery Information -->
             <div class="checkout-box full-width">
                 <h3>Delivery Address</h3>
-                <p><strong>Name:</strong> Nikki Manginsay</p>
-                <p><strong>Contact Number:</strong> (+63) 9926293624</p>
-                <p><strong>Address:</strong> Blk 30 Lot 31 Purok 4 Martizano Street, Matro Residence, Central Bicutan, Taguig City, Metro Manila, 1633</p>
+                <p><strong>Name:</strong> <span id="delivery-name"></span></p>
+                <p><strong>Contact Number:</strong> <span id="delivery-contact"></span></p>
+                <p><strong>Address:</strong> <span id="delivery-address"></span></p>
             </div>
+            
+            
 
             <!--Delivery Options-->
             <div class="checkout-box delivery-options">
@@ -144,7 +146,7 @@
                     <button class="normal" id="back-to-cart">Back to Cart</button>
                 </a>
 
-                <button id = "ordered-successfully" class="normal">Place Order</button>
+                <!-- <button id = "ordered-successfully" class="normal">Place Order</button> -->
             </div>
         </div>
     </section>
@@ -204,6 +206,7 @@
     </script>
 
     <script src = "/assets/js/client/add_to_cart.js"></script>
+    <script src = "/assets/js/client/delivery_info.js"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

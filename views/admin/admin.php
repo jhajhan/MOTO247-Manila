@@ -863,6 +863,13 @@
     <script src= '/assets/js/admin/sales.js'></script>
     <script src= '/assets/js/admin/reports_analytics.js'></script>
     <script src= '/assets/js/admin/settings.js'></script>
+    <!-- Include AlertifyJS CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css">
+
+    <!-- Include AlertifyJS JS -->
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
 
     <!------------------------------------ ionicons ---------------------------->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

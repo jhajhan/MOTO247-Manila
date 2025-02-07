@@ -205,7 +205,7 @@ $('#edit-payment-form').on('submit', function(event) {
 });
 
 
-
+/*
 $("#admin-sign-out").on("click", function (event) {
     event.preventDefault();
 
@@ -228,8 +228,38 @@ $("#admin-sign-out").on("click", function (event) {
             },
         });
     }
-});
+});*/
 
+$("#admin-sign-out").on("click", function (event) {
+    event.preventDefault();
+
+    alertify.confirm(
+        'LogOut confirmation', // Title of the confirmation box
+        'Are you sure you want to log out?', // Message inside the confirmation box
+        function() { // On confirm
+            $.ajax({
+                url: "/logout",
+                method: "POST",
+                contentType: "application/json", // Ensure JSON response is handled correctly
+                success: function (response) {
+                    console.log(response); // Debugging: Check if response is received
+                    if (response.status === "success") {
+                        window.location.href = response.redirect; // Redirect on success
+                    } else {
+                        alertify.alert(response.message || "Logout failed."); // Show alert if logout fails
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX Error:", status, error); // Debugging
+                    alertify.alert("An error occurred. Please try again."); // Show error alert
+                },
+            });
+        },
+        function() { // On cancel
+            alertify.message('Logout cancelled'); // Optional message for cancel action
+        }
+    );
+});
 
 
     

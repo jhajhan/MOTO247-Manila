@@ -285,8 +285,8 @@ function removeAdmin(id) {
 
 function removeAdmin(id) {
     alertify.confirm(
-        'Remove Admin Confirmation', // Title of the confirmation box
-        'Are you sure you want to remove this admin?', // Message inside the confirmation box
+        'Remove Admin Confirmation', 
+        'Are you sure you want to remove this admin?', 
         function() { // On confirm
             $.ajax({
                 url: '/admin/settings',
@@ -294,8 +294,9 @@ function removeAdmin(id) {
                 contentType: 'application/json',
                 data: JSON.stringify({ id }),
                 success: function(response) {
-                    alertify.alert('Success', response.message); // Show success message
-                    fetchSettings(); // Refresh settings
+                    alertify.alert('Success', response.message, function() {
+                        fetchSettings(); // Now it refreshes after closing the alert
+                    });
                 },
                 error: function(xhr, status, error) {
                     console.error("AJAX Error:", status, error);
@@ -303,11 +304,12 @@ function removeAdmin(id) {
                 }
             });
         },
-        function() { // On cancel
-            alertify.message('Action cancelled'); // Optional cancel message
+        function() { 
+            alertify.message('Action cancelled'); 
         }
     );
 }
+
 
 
 $('#database-backup-form').on('submit', function(event) {

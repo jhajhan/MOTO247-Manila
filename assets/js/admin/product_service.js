@@ -82,7 +82,7 @@ function fetchProducts(filters = {}) {
                         <td>${product.price}</td>
                         <td>${product.unit_price}</td>
                         <td>${product.stock}</td>
-                        <td><button class="editBtn" data-id="${product.prod_id}" data-name = "${product.name}" data-type = "${product.type}", data-price = "${product.price}" data-unit-price = "${product.unit_price}" data-stock = "${product.stock}" data-desc = "${product.description}">Edit</button>  <button class="deleteBtn" data-id="${product.prod_id}">Delete</button></td>
+                        <td><button class="editBtn" data-id="${product.prod_id}" data-name = "${product.name}" data-type = "${product.type}", data-price = "${product.price}" data-unit-price = "${product.unit_price}" data-stock = "${product.stock}" data-desc = "${product.description}">Edit</button>  <button class="deleteProductsBtn" data-id="${product.prod_id}">Delete</button></td>
                     </tr>
                 `); //  
 
@@ -116,7 +116,7 @@ function fetchProducts(filters = {}) {
 
             });
 
-            $("#productServiceTableBody").on("click", ".deleteBtn", function() {
+            $("#productServiceTableBody").on("click", ".deleteProductsBtn", function() {
                 const id = $(this).data('id');
                 deleteProduct(id);
             });

@@ -423,6 +423,7 @@ function deleteSale(id) {
     }
 }*/
 
+/*comment ko 'to hehehhe*/
 function deleteSale(id) {
     alertify.confirm(
         'Confirm Deletion',

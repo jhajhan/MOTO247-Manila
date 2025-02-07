@@ -272,6 +272,7 @@ function deleteProduct (id) {
     }
 }*/
 
+/*ito heehehehhe comment din*/
 function deleteProduct(id) {
     alertify.confirm(
         'Confirm Deletion',

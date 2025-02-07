@@ -253,8 +253,9 @@ function editProduct () {
 
 }
 
+/*
 function deleteProduct (id) {
-    if (confirm('Are you sure you want to delete this item?')) {
+    if (confirm('Are you sure you want to delete this product/service?')) {
         $.ajax ({
             url: "/admin/product-service",
             method: "DELETE",
@@ -269,6 +270,29 @@ function deleteProduct (id) {
 
         })
     }
+}*/
+
+function deleteProduct(id) {
+    alertify.confirm(
+        'Confirm Deletion',
+        'Are you sure you want to delete this product/service?',
+        function() {
+            $.ajax({
+                url: '/admin/product-service',
+                method: 'DELETE',
+                data: JSON.stringify({id}),
+                success: function(data) {
+                    fetchProducts();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        },
+        function() {
+            alertify.error('Deletion canceled');
+        }
+    ).set('labels', { ok: 'Yes', cancel: 'No' });
 }
 
 $('#cancelBtn').on('click', function(){

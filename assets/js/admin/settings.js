@@ -264,7 +264,7 @@ $("#admin-sign-out").on("click", function (event) {
 
     
 
-
+/*
 function removeAdmin(id) {
 
     if (!confirm('Are you sure you want to remove this admin?')) {
@@ -281,7 +281,34 @@ function removeAdmin(id) {
         }
 
     })
+}*/
+
+function removeAdmin(id) {
+    alertify.confirm(
+        'Remove Admin Confirmation', // Title of the confirmation box
+        'Are you sure you want to remove this admin?', // Message inside the confirmation box
+        function() { // On confirm
+            $.ajax({
+                url: '/admin/settings',
+                method: 'DELETE',
+                contentType: 'application/json',
+                data: JSON.stringify({ id }),
+                success: function(response) {
+                    alertify.alert('Success', response.message); // Show success message
+                    fetchSettings(); // Refresh settings
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error:", status, error);
+                    alertify.alert('Error', 'An error occurred. Please try again.');
+                }
+            });
+        },
+        function() { // On cancel
+            alertify.message('Action cancelled'); // Optional cancel message
+        }
+    );
 }
+
 
 $('#database-backup-form').on('submit', function(event) {
     event.preventDefault();

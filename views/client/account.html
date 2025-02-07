@@ -103,7 +103,7 @@
                                 <label>Confirm Password</label>
                             </div>
                             <div class="remember-forgot">
-                                <label><input type="checkbox">I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="policy-link">Privacy Policy</a>.</label>
+                                <label><input type="checkbox">I agree to the <a href="#" id="terms-link">Terms of Service</a> and <a href="#" id="policy-link">Privacy Policy</a>.</label>
                             </div>
                         </div>
                             
@@ -126,7 +126,6 @@
             <ul class="settings-menu">
                 <li><a data-section="edit-profile">Edit Profile</a></li>
                 <li><a data-section="password-settings">Password Settings</a></li>
-                <li><a data-section="display-settings">Display & Accessibility</a></li>
                 <li><a id = "sign-out-client"  class="last-setting-menu" >Sign Out</a></li>
             </ul>
         </div>
@@ -201,6 +200,42 @@
           <p>We've sent a verification link to your email.<br>Please check your inbox and click the link to verify your account.</p>
         </div>
     </div>
+
+    <div class="modal" id="policy-link">
+        <div class="modal-content">
+            <span class="icon-close" onclick="closeModal()"><ion-icon name="close"></ion-icon></span>
+            <h2>Privacy Policy</h2>
+            <p>At MOTO247 Manila, we value your privacy and are committed to safeguarding your personal information when you use our website. This Privacy Policy explains how we collect, use, share, and protect your data.</p>
+            
+            <h3>Information We Collect</h3>
+            <p>When you visit our website, we may collect certain types of information, including your name, email address, phone number, and billing or shipping details when you make a purchase. Additionally, we collect payment details, which are securely processed by our payment partners. We may also gather technical data, such as your IP address, browser type, and device information, to enhance security and analyze website traffic. Communication data, such as emails, inquiries, and customer service interactions, may also be recorded to improve our support services.</p>
+            
+            <h3>How We Use Your Information</h3>
+            <p>We use the information we collect to process and fulfill orders and service bookings, communicate with you regarding purchases, inquiries, or promotions, and enhance your overall customer experience. Your data also helps us improve our website and services, prevent fraud, and comply with legal obligations.</p>
+            
+            <h3>Sharing Your Information</h3>
+            <p>While we do not sell or rent your personal information, we may share it with third-party service providers who assist with payment processing, shipping, and website hosting. In cases where required by law or to protect our rights, we may disclose your information to legal authorities. If our business undergoes a merger or acquisition, your data may be transferred to the new entity.</p>
+            
+            <h3>Security Measures</h3>
+            <p>We take security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction. However, as no method of transmission over the internet is completely secure, we encourage users to take precautions when sharing sensitive information online.</p>
+            
+            <h3>Your Rights</h3>
+            <p>As a user, you have rights over your personal data, including the ability to access, update, or request deletion of your information. You may also opt out of marketing communications or request a copy of the data we hold about you by contacting us at [Insert Contact Email].</p>
+            
+            <h3>Cookies and Third-Party Links</h3>
+            <p>Our website may use cookies to improve your browsing experience. You can manage your cookie preferences through your browser settings. Additionally, our website may contain links to third-party sites, and while we strive to provide safe links, we are not responsible for the privacy practices of those websites. We encourage you to review their privacy policies separately.</p>
+            
+            <h3>Updates to This Policy</h3>
+            <p>We may update this Privacy Policy from time to time, and any changes will be posted on this page with the updated effective date.</p>
+            
+            <h3>Contact Information</h3>
+            <p>If you have any questions about our Privacy Policy, please reach out to us at:</p>
+            <p><strong>MOTO247 Manila</strong><br>
+            1955 Abad Santos Ave. Tondo, Manila<br>
+            Email: rich.caluag07@gmail.com<br>
+            Phone: 0915 801 5865 / 0995 380 1900</p>
+        </div>
+    </div>    
 
     <script src="/views/client/script.js"></script>
     <script src="/assets/js/authentication/authentication.js"></script>

@@ -320,6 +320,10 @@ body{
     font-size: 25px;
 }
 
+#product1 h2{
+    padding-top: 30px;
+}
+
 .subtitle{
     padding: 7px;
     font-size: 23px;
@@ -497,7 +501,7 @@ footer .copyright{
 #about-head img{
     width: 550px;
     height: auto;
-    border: 3px solid #192C44;
+    border: 5px solid #192C44;
 }
 
 #about-head div{
@@ -518,7 +522,8 @@ footer .copyright{
 }
 
 #services h1,
-#cart h1{
+#cart h1,
+#track h1{
     margin-top: 100px;
     align-items: center;
     justify-content: center;

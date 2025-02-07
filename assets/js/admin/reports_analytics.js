@@ -374,24 +374,26 @@ function displaySalesComparison(salesComparison) {
 
 
 function displayTopSelling(topProducts, topServices) {
+    // Determine the maximum length between products and services
+    const maxLength = Math.max(topProducts.length, topServices.length);
 
-        // Populate the table rows dynamically
-        let tableContent = '';
-        for (let i = 0; i < topProducts.length; i++) {
-            const product = topProducts[i];
-            const service = topServices[i];
+    let tableContent = '';
+    for (let i = 0; i < maxLength; i++) {
+        const product = topProducts[i] || { name: '-', quantity: '-' };  // Default if undefined
+        const service = topServices[i] || { name: '-', quantity: '-' };  // Default if undefined
 
-            tableContent += `
-                <tr>
-                    <td>${product.name}</td>
-                    <td>${product.quantity}</td>
-                    <td>${service.name}</td>
-                    <td>${service.quantity}</td>
-                </tr>
-            `;
-        }
+        tableContent += `
+            <tr>
+                <td>${product.name}</td>
+                <td>${product.quantity}</td>
+                <td>${service.name}</td>
+                <td>${service.quantity}</td>
+            </tr>
+        `;
+    }
 
-        // Append the rows to the table
-        $('#topSellingTable tbody').html(tableContent);
+    // Append the rows to the table
+    $('#topSellingTable tbody').html(tableContent);
 }
+
 

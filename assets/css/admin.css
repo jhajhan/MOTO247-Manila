@@ -1567,7 +1567,7 @@ canvas {
 
 #product-dropdown-container select {
     flex: 1;  /* Make the dropdown take up available space */
-    width: 48%;  /* Makes the dropdown fill the container */
+    width: 40%;  /* Makes the dropdown fill the container */
     margin-right: 5px;
 }
 
